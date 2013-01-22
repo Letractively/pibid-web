@@ -5,19 +5,16 @@
 package br.ufra.modelo;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Supervisores.findByTelefoneResidencial", query = "SELECT s FROM Supervisores s WHERE s.telefoneResidencial = :telefoneResidencial"),
     @NamedQuery(name = "Supervisores.findByTelefoneCelular", query = "SELECT s FROM Supervisores s WHERE s.telefoneCelular = :telefoneCelular"),
     @NamedQuery(name = "Supervisores.findByEndereco", query = "SELECT s FROM Supervisores s WHERE s.endereco = :endereco"),
-    @NamedQuery(name = "Supervisores.findBySituacao", query = "SELECT s FROM Supervisores s WHERE s.situacao = :situacao")})
+    @NamedQuery(name = "Supervisores.findBySituacao", query = "SELECT s FROM Supervisores s WHERE s.situacao = :situacao"),
+    @NamedQuery(name = "Supervisores.findByStatus", query = "SELECT s FROM Supervisores s WHERE s.status = :status")})
 public class Supervisores implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,9 +54,9 @@ public class Supervisores implements Serializable {
     @Column(name = "endereco")
     private String endereco;
     @Column(name = "situacao")
-    private Boolean situacao;
-    @ManyToMany(mappedBy = "supervisoresList")
-    private List<Projetos> projetosList;
+    private String situacao;
+    @Column(name = "status")
+    private Integer status;
 
     public Supervisores() {
     }
@@ -123,21 +121,20 @@ public class Supervisores implements Serializable {
         this.endereco = endereco;
     }
 
-    public Boolean getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(Boolean situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
 
-    @XmlTransient
-    public List<Projetos> getProjetosList() {
-        return projetosList;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setProjetosList(List<Projetos> projetosList) {
-        this.projetosList = projetosList;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
@@ -162,7 +159,7 @@ public class Supervisores implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return "br.ufra.modelo.Supervisores[ id=" + id + " ]";
     }
     
 }

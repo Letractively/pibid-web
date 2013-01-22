@@ -5,19 +5,16 @@
 package br.ufra.modelo;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ProfessoresColaboradores.findByTelefoneCelular", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.telefoneCelular = :telefoneCelular"),
     @NamedQuery(name = "ProfessoresColaboradores.findByEndereco", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.endereco = :endereco"),
     @NamedQuery(name = "ProfessoresColaboradores.findByInstituicao", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.instituicao = :instituicao"),
-    @NamedQuery(name = "ProfessoresColaboradores.findBySituacao", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.situacao = :situacao")})
+    @NamedQuery(name = "ProfessoresColaboradores.findBySituacao", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.situacao = :situacao"),
+    @NamedQuery(name = "ProfessoresColaboradores.findByStatus", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.status = :status")})
 public class ProfessoresColaboradores implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -61,9 +59,10 @@ public class ProfessoresColaboradores implements Serializable {
     private String instituicao;
     @Basic(optional = false)
     @Column(name = "situacao")
-    private boolean situacao;
-    @ManyToMany(mappedBy = "professoresColaboradoresList")
-    private List<Projetos> projetosList;
+    private String situacao;
+    @Basic(optional = false)
+    @Column(name = "status")
+    private String status;
 
     public ProfessoresColaboradores() {
     }
@@ -72,10 +71,11 @@ public class ProfessoresColaboradores implements Serializable {
         this.id = id;
     }
 
-    public ProfessoresColaboradores(Integer id, String nome, boolean situacao) {
+    public ProfessoresColaboradores(Integer id, String nome, String situacao, String status) {
         this.id = id;
         this.nome = nome;
         this.situacao = situacao;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -142,21 +142,20 @@ public class ProfessoresColaboradores implements Serializable {
         this.instituicao = instituicao;
     }
 
-    public boolean getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(boolean situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
 
-    @XmlTransient
-    public List<Projetos> getProjetosList() {
-        return projetosList;
+    public String getStatus() {
+        return status;
     }
 
-    public void setProjetosList(List<Projetos> projetosList) {
-        this.projetosList = projetosList;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -181,7 +180,7 @@ public class ProfessoresColaboradores implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return "br.ufra.modelo.ProfessoresColaboradores[ id=" + id + " ]";
     }
     
 }

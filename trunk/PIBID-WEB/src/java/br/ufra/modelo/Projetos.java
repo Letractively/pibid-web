@@ -90,22 +90,7 @@ public class Projetos implements Serializable {
     @Basic(optional = false)
     @Column(name = "situacao")
     private boolean situacao;
-    @JoinTable(name = "projetos_has_supervisores", joinColumns = {
-        @JoinColumn(name = "projetos_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "supervisores_ID", referencedColumnName = "ID")})
-    @ManyToMany
-    private List<Supervisores> supervisoresList;
-    @JoinTable(name = "projetos_has_bolsistas", joinColumns = {
-        @JoinColumn(name = "projetos_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "bolsistas_matricula", referencedColumnName = "matricula")})
-    @ManyToMany
-    private List<Bolsistas> bolsistasList;
-    @JoinTable(name = "projetos_has_professores_colaboradores", joinColumns = {
-        @JoinColumn(name = "projetos_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "professores_colaboradores_ID", referencedColumnName = "ID")})
-    @ManyToMany
-    private List<ProfessoresColaboradores> professoresColaboradoresList;
-    @JoinTable(name = "projetos_has_escolas_parceiras", joinColumns = {
+    @JoinTable(name = "projetos_escolas_parceiras", joinColumns = {
         @JoinColumn(name = "projetos_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "escolas_parceiras_ID", referencedColumnName = "ID")})
     @ManyToMany
@@ -254,33 +239,6 @@ public class Projetos implements Serializable {
     }
 
     @XmlTransient
-    public List<Supervisores> getSupervisoresList() {
-        return supervisoresList;
-    }
-
-    public void setSupervisoresList(List<Supervisores> supervisoresList) {
-        this.supervisoresList = supervisoresList;
-    }
-
-    @XmlTransient
-    public List<Bolsistas> getBolsistasList() {
-        return bolsistasList;
-    }
-
-    public void setBolsistasList(List<Bolsistas> bolsistasList) {
-        this.bolsistasList = bolsistasList;
-    }
-
-    @XmlTransient
-    public List<ProfessoresColaboradores> getProfessoresColaboradoresList() {
-        return professoresColaboradoresList;
-    }
-
-    public void setProfessoresColaboradoresList(List<ProfessoresColaboradores> professoresColaboradoresList) {
-        this.professoresColaboradoresList = professoresColaboradoresList;
-    }
-
-    @XmlTransient
     public List<EscolasParceiras> getEscolasParceirasList() {
         return escolasParceirasList;
     }
@@ -320,7 +278,7 @@ public class Projetos implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return "br.ufra.modelo.Projetos[ id=" + id + " ]";
     }
     
 }

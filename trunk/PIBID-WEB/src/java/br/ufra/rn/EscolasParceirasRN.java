@@ -33,11 +33,11 @@ public class EscolasParceirasRN {
         return dao.obter(EscolasParceiras.class,id);
     }
 
-//    public List listarAtivos(String x) {
-//        return dao.obterTodosAtivo(Bolsistas.class, x);
-//    }
-//
-//    public List listarAtivos(String ativo, String status) {
-//        return dao.obterTodosAtivoLivre(Bolsistas.class, ativo, status);
-//    }
+    public List listarAtivos(String x) {
+        return dao.obterTodosAtivo(EscolasParceiras.class, x);
+    }
+
+    public List listarAtivos(String ativo, String status) {
+        return dao.obterTodosAtivoLivre(EscolasParceiras.class, ativo, status);
+    }
 }

@@ -5,17 +5,14 @@
 package br.ufra.modelo;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,7 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Bolsistas.findByTelefoneResidencial", query = "SELECT b FROM Bolsistas b WHERE b.telefoneResidencial = :telefoneResidencial"),
     @NamedQuery(name = "Bolsistas.findByTelefoneCelular", query = "SELECT b FROM Bolsistas b WHERE b.telefoneCelular = :telefoneCelular"),
     @NamedQuery(name = "Bolsistas.findByEndereco", query = "SELECT b FROM Bolsistas b WHERE b.endereco = :endereco"),
-    @NamedQuery(name = "Bolsistas.findBySituacao", query = "SELECT b FROM Bolsistas b WHERE b.situacao = :situacao")})
+    @NamedQuery(name = "Bolsistas.findBySituacao", query = "SELECT b FROM Bolsistas b WHERE b.situacao = :situacao"),
+    @NamedQuery(name = "Bolsistas.findByStatus", query = "SELECT b FROM Bolsistas b WHERE b.status = :status")})
 public class Bolsistas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,9 +53,10 @@ public class Bolsistas implements Serializable {
     private String endereco;
     @Basic(optional = false)
     @Column(name = "situacao")
-    private boolean situacao;
-    @ManyToMany(mappedBy = "bolsistasList")
-    private List<Projetos> projetosList;
+    private String situacao;
+    @Basic(optional = false)
+    @Column(name = "status")
+    private int status;
 
     public Bolsistas() {
     }
@@ -66,10 +65,11 @@ public class Bolsistas implements Serializable {
         this.matricula = matricula;
     }
 
-    public Bolsistas(String matricula, String nome, boolean situacao) {
+    public Bolsistas(String matricula, String nome, String situacao, int status) {
         this.matricula = matricula;
         this.nome = nome;
         this.situacao = situacao;
+        this.status = status;
     }
 
     public String getMatricula() {
@@ -128,21 +128,20 @@ public class Bolsistas implements Serializable {
         this.endereco = endereco;
     }
 
-    public boolean getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(boolean situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
 
-    @XmlTransient
-    public List<Projetos> getProjetosList() {
-        return projetosList;
+    public int getStatus() {
+        return status;
     }
 
-    public void setProjetosList(List<Projetos> projetosList) {
-        this.projetosList = projetosList;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override
@@ -167,7 +166,7 @@ public class Bolsistas implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf(matricula);
+        return "br.ufra.modelo.Bolsistas[ matricula=" + matricula + " ]";
     }
     
 }

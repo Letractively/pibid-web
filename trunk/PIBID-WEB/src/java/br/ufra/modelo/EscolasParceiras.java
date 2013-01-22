@@ -216,7 +216,7 @@ public class EscolasParceiras implements Serializable {
 
     @Override
     public String toString() {
-       return String.valueOf(id);
+        return "br.ufra.modelo.EscolasParceiras[ id=" + id + " ]";
     }
     
 }

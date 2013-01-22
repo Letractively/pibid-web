@@ -3,12 +3,15 @@
   <persistence-unit name="WPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <non-jta-data-source>pibid</non-jta-data-source>
-    <class>br.ufra.modelo.Projetos</class>
     <class>br.ufra.modelo.EscolasParceiras</class>
-    <class>br.ufra.modelo.Supervisores</class>
+    <class>br.ufra.modelo.Projetos</class>
     <class>br.ufra.modelo.Bolsistas</class>
+    <class>br.ufra.modelo.ProjetosBolsistas</class>
     <class>br.ufra.modelo.ProfessoresColaboradores</class>
+    <class>br.ufra.modelo.ProjetosProfessoresColaboradores</class>
     <class>br.ufra.modelo.Atividades</class>
+    <class>br.ufra.modelo.Supervisores</class>
+    <class>br.ufra.modelo.ProjetosSupervisores</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
