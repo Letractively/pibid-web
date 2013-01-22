@@ -119,6 +119,12 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
         return (List<T>) q.setParameter("ativo", temp).getResultList();
     }
 
+    public List<T> obterTodosAtivo(Class<T> classe, boolean temp) {
+        String query = classe.getSimpleName() + ".findByAtivo";
+        final Query q = em.createNamedQuery(query);
+        return (List<T>) q.setParameter("situacao", temp).getResultList();
+    }
+
     public List<T> obterTodosAtivoLivre(Class<T> classe, String ativo, String status) {
         String query = classe.getSimpleName() + ".findByStatus";
         final Query q = em.createNamedQuery(query);
