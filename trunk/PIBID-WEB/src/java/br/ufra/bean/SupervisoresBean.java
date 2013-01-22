@@ -8,17 +8,21 @@ import br.ufra.modelo.Supervisores;
 import br.ufra.rn.SupervisoresRN;
 import java.util.List;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 /**
  *
  * @author marcos
  */
+@ManagedBean
+@RequestScoped
 public class SupervisoresBean {
-    
+
     private Supervisores supervisores = new Supervisores();
     private SupervisoresRN rn = new SupervisoresRN();
-    private List<Supervisores>lista;
+    private List<Supervisores> lista;
 
     public Supervisores getSupervisores() {
         return supervisores;

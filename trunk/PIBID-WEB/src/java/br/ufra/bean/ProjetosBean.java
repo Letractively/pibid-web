@@ -8,13 +8,18 @@ import br.ufra.modelo.Projetos;
 import br.ufra.rn.ProjetosRN;
 import java.util.List;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 /**
  *
  * @author marcos
  */
+@ManagedBean
+@RequestScoped
 public class ProjetosBean {
+
     private Projetos projetos = new Projetos();
     private ProjetosRN rn = new ProjetosRN();
     private List<Projetos> lista;

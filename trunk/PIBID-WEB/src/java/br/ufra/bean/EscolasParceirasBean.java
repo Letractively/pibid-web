@@ -8,12 +8,16 @@ import br.ufra.modelo.EscolasParceiras;
 import br.ufra.rn.EscolasParceirasRN;
 import java.util.List;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 /**
  *
  * @author marcos
  */
+@ManagedBean
+@RequestScoped
 public class EscolasParceirasBean {
     
     private EscolasParceiras escolasParceiras = new EscolasParceiras();
