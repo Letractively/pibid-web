@@ -14,14 +14,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author victorperes
+ * @author marcos
  */
 @Entity
 @Table(name = "bolsistas")
@@ -40,32 +38,22 @@ public class Bolsistas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "matricula")
     private String matricula;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
     @Column(name = "nome")
     private String nome;
-    @Size(max = 45)
     @Column(name = "email_principal")
     private String emailPrincipal;
-    @Size(max = 45)
     @Column(name = "email_secundario")
     private String emailSecundario;
-    @Size(max = 45)
     @Column(name = "telefone_residencial")
     private String telefoneResidencial;
-    @Size(max = 45)
     @Column(name = "telefone_celular")
     private String telefoneCelular;
-    @Size(max = 45)
     @Column(name = "endereco")
     private String endereco;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "situacao")
     private boolean situacao;
     @ManyToMany(mappedBy = "bolsistasList")
@@ -179,7 +167,7 @@ public class Bolsistas implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Bolsistas[ matricula=" + matricula + " ]";
+        return String.valueOf(matricula);
     }
     
 }

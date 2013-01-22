@@ -16,13 +16,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author victorperes
+ * @author marcos
  */
 @Entity
 @Table(name = "supervisores")
@@ -44,22 +43,16 @@ public class Supervisores implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Size(max = 45)
     @Column(name = "nome")
     private String nome;
-    @Size(max = 45)
     @Column(name = "email_principal")
     private String emailPrincipal;
-    @Size(max = 45)
     @Column(name = "email_secundario")
     private String emailSecundario;
-    @Size(max = 45)
     @Column(name = "telefone_residencial")
     private String telefoneResidencial;
-    @Size(max = 45)
     @Column(name = "telefone_celular")
     private String telefoneCelular;
-    @Size(max = 45)
     @Column(name = "endereco")
     private String endereco;
     @Column(name = "situacao")
@@ -169,7 +162,7 @@ public class Supervisores implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Supervisores[ id=" + id + " ]";
+        return String.valueOf(id);
     }
     
 }

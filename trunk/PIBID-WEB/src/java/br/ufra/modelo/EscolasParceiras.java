@@ -16,14 +16,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author victorperes
+ * @author marcos
  */
 @Entity
 @Table(name = "escolas_parceiras")
@@ -49,42 +47,29 @@ public class EscolasParceiras implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Size(max = 45)
     @Column(name = "endereco")
     private String endereco;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "esfera")
     private String esfera;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "nome_diretor")
     private String nomeDiretor;
-    @Size(max = 45)
     @Column(name = "nome_vice_diretor_manha")
     private String nomeViceDiretorManha;
-    @Size(max = 45)
     @Column(name = "nome_vice_diretor_tarde")
     private String nomeViceDiretorTarde;
-    @Size(max = 45)
     @Column(name = "nome_vice_diretor_noite")
     private String nomeViceDiretorNoite;
-    @Size(max = 45)
     @Column(name = "telefone_escola")
     private String telefoneEscola;
-    @Size(max = 45)
     @Column(name = "email_escola")
     private String emailEscola;
-    @Size(max = 45)
     @Column(name = "email_direcao")
     private String emailDirecao;
-    @Size(max = 45)
     @Column(name = "email_vice_direcao")
     private String emailViceDirecao;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "situacao")
     private boolean situacao;
     @ManyToMany(mappedBy = "escolasParceirasList")
@@ -231,7 +216,7 @@ public class EscolasParceiras implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.EscolasParceiras[ id=" + id + " ]";
+       return String.valueOf(id);
     }
     
 }

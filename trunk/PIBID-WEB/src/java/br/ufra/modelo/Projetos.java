@@ -23,14 +23,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author victorperes
+ * @author marcos
  */
 @Entity
 @Table(name = "projetos")
@@ -60,50 +58,36 @@ public class Projetos implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Size(max = 45)
     @Column(name = "nome")
     private String nome;
-    @Size(max = 45)
     @Column(name = "titulo_projeto")
     private String tituloProjeto;
     @Column(name = "data_conclusao")
     @Temporal(TemporalType.DATE)
     private Date dataConclusao;
-    @Size(max = 45)
     @Column(name = "curso")
     private String curso;
-    @Size(max = 45)
     @Column(name = "nome_coordenador")
     private String nomeCoordenador;
-    @Size(max = 45)
     @Column(name = "telefone_residencial_coordenador")
     private String telefoneResidencialCoordenador;
-    @Size(max = 45)
     @Column(name = "telefone_celular_coordenador")
     private String telefoneCelularCoordenador;
-    @Size(max = 45)
     @Column(name = "email_principal_coordenador")
     private String emailPrincipalCoordenador;
-    @Size(max = 45)
     @Column(name = "email_secundario_coordenador")
     private String emailSecundarioCoordenador;
-    @Size(max = 45)
     @Column(name = "curriculo_lattes_coordenador")
     private String curriculoLattesCoordenador;
-    @Size(max = 45)
     @Column(name = "apresentacao_proposta")
     private String apresentacaoProposta;
-    @Size(max = 45)
     @Column(name = "acoes_previstas")
     private String acoesPrevistas;
-    @Size(max = 45)
     @Column(name = "resultados_pretendidos")
     private String resultadosPretendidos;
-    @Size(max = 45)
     @Column(name = "cronograma")
     private String cronograma;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "situacao")
     private boolean situacao;
     @JoinTable(name = "projetos_has_supervisores", joinColumns = {
@@ -336,7 +320,7 @@ public class Projetos implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Projetos[ id=" + id + " ]";
+        return String.valueOf(id);
     }
     
 }

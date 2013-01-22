@@ -16,14 +16,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author victorperes
+ * @author marcos
  */
 @Entity
 @Table(name = "professores_colaboradores")
@@ -47,30 +45,21 @@ public class ProfessoresColaboradores implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "nome")
     private String nome;
-    @Size(max = 45)
     @Column(name = "email_principal")
     private String emailPrincipal;
-    @Size(max = 45)
     @Column(name = "email_secundario")
     private String emailSecundario;
-    @Size(max = 45)
     @Column(name = "telefone_residencial")
     private String telefoneResidencial;
-    @Size(max = 45)
     @Column(name = "telefone_celular")
     private String telefoneCelular;
-    @Size(max = 45)
     @Column(name = "endereco")
     private String endereco;
-    @Size(max = 45)
     @Column(name = "instituicao")
     private String instituicao;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "situacao")
     private boolean situacao;
     @ManyToMany(mappedBy = "professoresColaboradoresList")
@@ -192,7 +181,7 @@ public class ProfessoresColaboradores implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.ProfessoresColaboradores[ id=" + id + " ]";
+        return String.valueOf(id);
     }
     
 }

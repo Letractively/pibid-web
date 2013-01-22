@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufra.dao;
+package br.ufra.definicao;
 
-import br.ufra.dao.definicao.InterfaceDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -87,6 +86,7 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
         }
     }
 
+    @Override
     public T obter(Class<T> classe, Object id) {
         if (id == null) {
             return null;
@@ -95,6 +95,19 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
         final Query q = em.createNamedQuery(query);
         try {
             return (T) q.setParameter("id", id).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public T obter(Class<T> classe, String matricula) {
+        if (matricula == null) {
+            return null;
+        }
+        String query = classe.getSimpleName() + ".findByMatricula";
+        final Query q = em.createNamedQuery(query);
+        try {
+            return (T) q.setParameter("matricula", matricula).getSingleResult();
         } catch (Exception e) {
             return null;
         }

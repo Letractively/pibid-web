@@ -1,4 +1,4 @@
-package br.ufra.dao;
+package br.ufra.definicao;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
