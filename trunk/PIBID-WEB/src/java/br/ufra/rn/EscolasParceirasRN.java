@@ -37,7 +37,5 @@ public class EscolasParceirasRN {
         return dao.obterTodosAtivo(EscolasParceiras.class, x);
     }
 
-    public List listarAtivos(String ativo, String status) {
-        return dao.obterTodosAtivoLivre(EscolasParceiras.class, ativo, status);
-    }
+ 
 }

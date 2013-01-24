@@ -35,7 +35,5 @@ public class SupervisoresRN {
         return dao.obterTodosAtivo(Supervisores.class, x);
     }
 
-    public List listarAtivos(String ativo, String status) {
-        return dao.obterTodosAtivoLivre(Supervisores.class, ativo, status);
-    }
+
 }

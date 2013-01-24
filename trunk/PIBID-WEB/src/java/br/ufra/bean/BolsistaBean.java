@@ -6,11 +6,13 @@ package br.ufra.bean;
 
 import br.ufra.modelo.Bolsistas;
 import br.ufra.rn.BolsistaRN;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -26,37 +28,78 @@ public class BolsistaBean {
     private Bolsistas bolsista = new Bolsistas();
     private BolsistaRN rn = new BolsistaRN();
     private List<Bolsistas> bolsistas;
-    
+    ArrayList<String> situacao = new ArrayList<String>();
+
     public BolsistaBean() {
     }
-    
+
     public String salvar() {
-        
+        bolsista.setStatus(0);
+        rn.salvar(bolsista);
         FacesMessage msg = new FacesMessage("Cadastrado com Sucesso",
                 "Cadastrado :" + bolsista.getNome());
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        return "/cadastro/cargos/lista-cargos.xhtml";
+        return "/sistema/cadastro/bolsista/lista.xhtml";
     }
-    
+
     public Bolsistas getBolsista() {
         return bolsista;
     }
-    
+
     public void setBolsista(Bolsistas bolsista) {
         this.bolsista = bolsista;
     }
-    
-   // public List<Bolsistas> getBolsistas() {
-        
-   //     return bolsistaRN.listarAtivos(true);
-   // }
-    
+
+    public List<Bolsistas> getBolsistas() {
+        return rn.listarAtivos("ativo");
+
+        //return bolsistaRN.listarAtivos(true);
+    }
+
+    public List<Bolsistas> getBolsistasInativos() {
+        return rn.listarAtivos("inativo");
+
+        //return bolsistaRN.listarAtivos(true);
+    }
+
     public void setBolsistas(List<Bolsistas> bolsistas) {
         this.bolsistas = bolsistas;
     }
-    
+
     public String novo() {
         bolsista = rn.novo();
-        return "/cadastro/cargos/novo-cargos.xhtml";
+        return "/sistema/cadastro/bolsista/novo.xhtml";
+    }
+
+    public String irInativo() {
+        bolsista = rn.novo();
+        return "/sistema/cadastro/bolsista/lista-inativo.xhtml";
+    }
+
+    public String alterar() {
+        return "/sistema/cadastro/bolsista/novo.xhtml";
+    }
+
+    public String irInativar() {
+        return "/sistema/cadastro/bolsista/lista-inativo.xhtml";
+    }
+
+    public String cancelar() {
+        return "/sistema/cadastro/bolsista/lista.xhtml";
+    }
+
+    public ArrayList<String> getSituacao() {
+        situacao.add("Ativo");
+        situacao.add("Inativo");
+        return situacao;
+    }
+    private SelectItem[] situacoes;
+
+    public SelectItem[] getSituacoes() {
+        situacoes = new SelectItem[3];
+        situacoes[0] = new SelectItem("Selecione");
+        situacoes[1] = new SelectItem("Ativo");
+        situacoes[2] = new SelectItem("Inativo");
+        return situacoes;
     }
 }

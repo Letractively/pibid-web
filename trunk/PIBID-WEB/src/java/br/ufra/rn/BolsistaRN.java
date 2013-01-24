@@ -32,11 +32,11 @@ public class BolsistaRN {
         return dao.obter(Bolsistas.class,matricula);
     }
 
-    public List listarAtivos(boolean x) {
+    public List listarAtivos(String x) {
         return dao.obterTodosAtivo(Bolsistas.class, x);
     }
 
-    public List listarAtivos(String ativo, String status) {
+    public List listarAtivos(String ativo, int status) {
         return dao.obterTodosAtivoLivre(Bolsistas.class, ativo, status);
     }
 }

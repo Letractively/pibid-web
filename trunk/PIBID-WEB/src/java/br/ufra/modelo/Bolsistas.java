@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Bolsistas.findByTelefoneResidencial", query = "SELECT b FROM Bolsistas b WHERE b.telefoneResidencial = :telefoneResidencial"),
     @NamedQuery(name = "Bolsistas.findByTelefoneCelular", query = "SELECT b FROM Bolsistas b WHERE b.telefoneCelular = :telefoneCelular"),
     @NamedQuery(name = "Bolsistas.findByEndereco", query = "SELECT b FROM Bolsistas b WHERE b.endereco = :endereco"),
-    @NamedQuery(name = "Bolsistas.findBySituacao", query = "SELECT b FROM Bolsistas b WHERE b.situacao = :situacao"),
+    @NamedQuery(name = "Bolsistas.findByAtivo", query = "SELECT b FROM Bolsistas b WHERE b.situacao = :situacao"),
     @NamedQuery(name = "Bolsistas.findByStatus", query = "SELECT b FROM Bolsistas b WHERE b.status = :status")})
 public class Bolsistas implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -36,7 +36,5 @@ public class ProfessoresColaboradoresRN {
         return dao.obterTodosAtivo(ProfessoresColaboradores.class, x);
     }
 
-    public List listarAtivos(String ativo, String status) {
-        return dao.obterTodosAtivoLivre(ProfessoresColaboradores.class, ativo, status);
-    }
+  
 }

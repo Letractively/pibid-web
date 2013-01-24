@@ -36,7 +36,5 @@ public class AtividadesRN {
         return dao.obterTodosAtivo(Atividades.class, x);
     }
 
-    public List listarAtivos(String ativo, String status) {
-        return dao.obterTodosAtivoLivre(Atividades.class, ativo, status);
-    }
+
 }

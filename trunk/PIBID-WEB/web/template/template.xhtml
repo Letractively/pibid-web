@@ -31,10 +31,8 @@
 
         <p:layout fullPage="true">
 
-            <p:layoutUnit position="north" size="100" header="Top" resizable="true" closable="true" collapsible="true">  
-                <h:outputText value="North unit content." />  
+            <p:layoutUnit position="north" size="100"  >  
                 <div align="right" style="width: 100%">
-
                     <p:graphicImage width="750" url="/imagens/PanelFINALteste.png" />
                 </div>
             </p:layoutUnit>  
@@ -44,7 +42,7 @@
                           >
                 <p:menubar>  
                     <p:submenu label="Cadastro" icon="ui-icon-document">  
-                        <p:menuitem value="Bolsistas" url="#" />  
+                        <p:menuitem value="Bolsistas" url="/faces/sistema/cadastro/bolsista/lista.xhtml" />  
                         <p:menuitem value="Escolas Parceiras" url="#" />  
                         <p:menuitem value="Supervisores" url="#" />  
                         <p:submenu label="Colaboradores" icon="ui-icon-contact">  
@@ -53,7 +51,7 @@
                         </p:submenu> 
                     </p:submenu>  
                     <p:menuitem value="Projetos" url="#" />  
-                 
+
 
                 </p:menubar>  
                 <ui:insert name="content"  />
