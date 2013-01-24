@@ -15,7 +15,7 @@
                     <p:commandButton 
                         id="cbcancelar"
                         ajax="false" 
-                        action="#{bolsistaBean.cancelar}" 
+                        action="#{supervisoresBean.cancelar}" 
                         value="Cancelar"/>
                 </h:form>
 
@@ -24,7 +24,7 @@
 
                     <h:inputHidden 
                         id="ihcardapioid"
-                        value="#{bolsistaBean.bolsista.matricula}" 
+                        value="#{supervisoresBean.supervisores.id}" 
                         />
                     <p:panel
                         id="pprincipal"
@@ -36,13 +36,13 @@
 
                             <h:outputLabel
                                 id="olmatricula"
-                                for="matriculaBolsista"
-                                value="Matricula: * "/>
+                                for="itmatricula"
+                                value="Código: * "/>
                             <p:inputText
                                 id="matriculaBolsista"
-                                value="#{bolsistaBean.bolsista.matricula}"
-                                label="Matricula"
-                                required="true"
+                                value="#{supervisoresBean.supervisores.id}"
+                                label="Código"
+                                disabled="true"
                                 style="width: 200px"/>
                             <p:message id="erroMatriculaBolsista" for="matriculaBolsista"/>
 
@@ -51,12 +51,12 @@
                                 for="itnome"
                                 value="Nome: * "/>
                             <p:inputText
-                                id="itnome"
-                                value="#{bolsistaBean.bolsista.nome}"
+                                id="nomeCargo"
+                                value="#{supervisoresBean.supervisores.nome}"
                                 label="Nome"
                                 required="true"
                                 style="width: 200px"/>
-                            <p:message id="erroNome" for="itnome"/>
+                            <p:message id="erroNomeCargo" for="nomeCargo"/>
 
                             <h:outputLabel
                                 id="olemailprinc"
@@ -64,7 +64,7 @@
                                 value="Email principal: * "/>
                             <p:inputText
                                 id="itemailprinc"
-                                value="#{bolsistaBean.bolsista.emailPrincipal}"
+                                value="#{supervisoresBean.supervisores.emailPrincipal}"
                                 label="Email Principal"
                                 required="true"
                                 style="width: 200px"/>
@@ -77,7 +77,7 @@
                                 value="Email secundário: "/>
                             <p:inputText
                                 id="itemailsec"
-                                value="#{bolsistaBean.bolsista.emailSecundario}"
+                                value="#{supervisoresBean.supervisores.emailSecundario}"
                                 label="Email Secundário"
                                 style="width: 200px"/>
                             <p:message id="erroEmailsec" for="itemailsec"/>
@@ -88,7 +88,7 @@
                                 value="Telefone Residencial: "/>
                             <p:inputText
                                 id="ittelefoneres"
-                                value="#{bolsistaBean.bolsista.telefoneResidencial}"
+                                value="#{supervisoresBean.supervisores.telefoneResidencial}"
                                 label="Telefone Residencial"
                                 style="width: 200px"/>
                             <p:message id="errotelefoneres" for="ittelefoneres"/>
@@ -99,7 +99,7 @@
                                 value="Telefone Celular: "/>
                             <p:inputText
                                 id="ittelefonecel"
-                                value="#{bolsistaBean.bolsista.telefoneCelular}"
+                                value="#{supervisoresBean.supervisores.telefoneCelular}"
                                 label="Telefone Celular"
                                 style="width: 200px"/>
                             <p:message id="errotelefonecel" for="ittelefonecel"/>
@@ -110,7 +110,7 @@
                                 value="Endereço: "/>
                             <p:inputText
                                 id="itendereco"
-                                value="#{bolsistaBean.bolsista.endereco}"
+                                value="#{supervisoresBean.supervisores.endereco}"
                                 label="Endereço"
                                 style="width: 200px"/>
                             <p:message id="erroendereco" for="itendereco"/>
@@ -120,10 +120,10 @@
                                 for="somsituacao"
                                 value="Situação: "/>
                             <p:selectOneMenu
-                                id="somsituacao" value="#{bolsistaBean.bolsista.situacao}"
-                                label="#{bolsistaBean.situacao.toString}"
+                                id="somsituacao" value="#{supervisoresBean.supervisores.situacao}"
+                                label="#{supervisoresBean.situacao.toString}"
                                 style="width: 200px">
-                                <f:selectItems value="#{bolsistaBean.situacao}"/>
+                                <f:selectItems value="#{supervisoresBean.situacao}"/>
                             </p:selectOneMenu>
                             <p:message id="errosituacao" for="somsituacao"/>
 
@@ -132,7 +132,7 @@
                                 ajax="false" 
                                 id="cbsalvar"
                                 value="Salvar" 
-                                action="#{bolsistaBean.salvar}"
+                                action="#{supervisoresBean.salvar}"
                                 update="Cargo">
 
 

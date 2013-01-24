@@ -6,11 +6,13 @@ package br.ufra.bean;
 
 import br.ufra.modelo.Supervisores;
 import br.ufra.rn.SupervisoresRN;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -23,6 +25,7 @@ public class SupervisoresBean {
     private Supervisores supervisores = new Supervisores();
     private SupervisoresRN rn = new SupervisoresRN();
     private List<Supervisores> lista;
+    ArrayList<String> situacao = new ArrayList<String>();
 
     public Supervisores getSupervisores() {
         return supervisores;
@@ -42,18 +45,19 @@ public class SupervisoresBean {
 
     public String novo() {
         supervisores = rn.novo();
-        return "/sistema/supervisores/novo-supervisor.xhtml";
+        return "/sistema/supervisores/novo.xhtml";
     }
 
     public String alterar() {
-        return "/sistema/supervisores/novo-supervisor.xhtml";
+        return "/sistema/supervisores/novo.xhtml";
     }
 
     public String listar() {
-        return "/sistema/supervisores/lista-supervisores.xhtml";
+        return "/sistema/supervisores/lista.xhtml";
     }
 
     public String salvar() {
+        supervisores.setStatus(0);
         if (rn.salvar(supervisores)) {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
@@ -69,5 +73,20 @@ public class SupervisoresBean {
         }
 
         return novo();
+    }
+
+    public ArrayList<String> getSituacao() {
+        situacao.add("Ativo");
+        situacao.add("Inativo");
+        return situacao;
+    }
+    private SelectItem[] situacoes;
+
+    public SelectItem[] getSituacoes() {
+        situacoes = new SelectItem[3];
+        situacoes[0] = new SelectItem("Selecione");
+        situacoes[1] = new SelectItem("Ativo");
+        situacoes[2] = new SelectItem("Inativo");
+        return situacoes;
     }
 }

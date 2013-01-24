@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="/template/template.xhtml">
+
+            <ui:define name="content">
+
+                <h:form id="fsupervisores">
+
+                    <p:panel header="Bolsistas">
+                        <p:dataTable   value="#{supervisoresBean.lista}" var="supervisores"
+                                       paginator="true" rows="10"
+                                       paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                       rowsPerPageTemplate="5,10,15">  
+
+                            <p:column >
+                                <f:facet name="header">  
+                                    <h:outputText value="Código" />  
+                                </f:facet>  
+                                <h:outputLabel value="#{supervisores.id}"/>
+                            </p:column>
+
+                            <p:column filterBy="#{supervisores.nome}" headerText="Nome">
+                                <f:facet name="header">  
+                                    <h:outputText value="Nome" />  
+                                </f:facet>  
+                                <h:outputLabel value="#{supervisores.nome}"/>
+                            </p:column>
+
+                            <p:column filterBy="#{supervisores.situacao}" filterOptions="#{supervisoresBean.situacoes}"  
+                                      filterMatchMode="exact" headerText="Nome">
+                                <f:facet name="header">  
+                                    <h:outputText value="Nome" />  
+                                </f:facet>  
+                                <h:outputLabel value="#{supervisores.situacao}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">  
+                                    <h:outputText value="Opções"/>  
+                                </f:facet>  
+                                <p:commandButton 
+                                    ajax="false" 
+                                    action="#{supervisoresBean.alterar}" 
+                                    value="Alterar">
+                                    <f:setPropertyActionListener 
+                                        target="#{supervisoresBean.supervisores}" 
+                                        value="#{supervisores}"/>
+                                </p:commandButton>
+
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                    <h3>
+                        <div align="center">
+                            <p:commandButton 
+                                ajax="false" 
+                                action="#{supervisoresBean.novo()}" 
+                                value="Incluir"/>
+                        </div>
+                    </h3>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
