@@ -28,4 +28,15 @@
         <welcome-file>faces/sistema/publico/index.xhtml</welcome-file>
     </welcome-file-list>
 
+    <filter>
+        <filter-name>autenticacao</filter-name>
+        <filter-class>filtro.Autenticacao</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>autenticacao</filter-name>
+        <url-pattern>/faces/sistema/cadastro/*</url-pattern>
+    </filter-mapping>
+     
+     
+
 </web-app>

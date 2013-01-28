@@ -5,7 +5,9 @@
 package br.ufra.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,6 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Supervisores.findBySituacao", query = "SELECT s FROM Supervisores s WHERE s.situacao = :situacao"),
     @NamedQuery(name = "Supervisores.findByStatus", query = "SELECT s FROM Supervisores s WHERE s.status = :status")})
 public class Supervisores implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "supervisores")
+    private List<ProjetosSupervisores> projetosSupervisoresList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -160,6 +166,15 @@ public class Supervisores implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.Supervisores[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public List<ProjetosSupervisores> getProjetosSupervisoresList() {
+        return projetosSupervisoresList;
+    }
+
+    public void setProjetosSupervisoresList(List<ProjetosSupervisores> projetosSupervisoresList) {
+        this.projetosSupervisoresList = projetosSupervisoresList;
     }
     
 }

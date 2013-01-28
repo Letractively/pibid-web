@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,6 +32,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProjetosSupervisores.findByDataInicio", query = "SELECT p FROM ProjetosSupervisores p WHERE p.dataInicio = :dataInicio"),
     @NamedQuery(name = "ProjetosSupervisores.findByDataFim", query = "SELECT p FROM ProjetosSupervisores p WHERE p.dataFim = :dataFim")})
 public class ProjetosSupervisores implements Serializable {
+    @JoinColumn(name = "supervisores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Supervisores supervisores;
+    @JoinColumn(name = "projetos_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Projetos projetos;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProjetosSupervisoresPK projetosSupervisoresPK;
@@ -98,6 +106,22 @@ public class ProjetosSupervisores implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.ProjetosSupervisores[ projetosSupervisoresPK=" + projetosSupervisoresPK + " ]";
+    }
+
+    public Supervisores getSupervisores() {
+        return supervisores;
+    }
+
+    public void setSupervisores(Supervisores supervisores) {
+        this.supervisores = supervisores;
+    }
+
+    public Projetos getProjetos() {
+        return projetos;
+    }
+
+    public void setProjetos(Projetos projetos) {
+        this.projetos = projetos;
     }
     
 }

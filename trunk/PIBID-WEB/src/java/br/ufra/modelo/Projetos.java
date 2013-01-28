@@ -52,6 +52,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Projetos.findByCronograma", query = "SELECT p FROM Projetos p WHERE p.cronograma = :cronograma"),
     @NamedQuery(name = "Projetos.findBySituacao", query = "SELECT p FROM Projetos p WHERE p.situacao = :situacao")})
 public class Projetos implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<ProjetosEscolasParceiras> projetosEscolasParceirasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<ProjetosSupervisores> projetosSupervisoresList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<ProjetosBolsistas> projetosBolsistasList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -279,6 +287,42 @@ public class Projetos implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.Projetos[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public List<ProjetosProfessoresColaboradores> getProjetosProfessoresColaboradoresList() {
+        return projetosProfessoresColaboradoresList;
+    }
+
+    public void setProjetosProfessoresColaboradoresList(List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList) {
+        this.projetosProfessoresColaboradoresList = projetosProfessoresColaboradoresList;
+    }
+
+    @XmlTransient
+    public List<ProjetosEscolasParceiras> getProjetosEscolasParceirasList() {
+        return projetosEscolasParceirasList;
+    }
+
+    public void setProjetosEscolasParceirasList(List<ProjetosEscolasParceiras> projetosEscolasParceirasList) {
+        this.projetosEscolasParceirasList = projetosEscolasParceirasList;
+    }
+
+    @XmlTransient
+    public List<ProjetosSupervisores> getProjetosSupervisoresList() {
+        return projetosSupervisoresList;
+    }
+
+    public void setProjetosSupervisoresList(List<ProjetosSupervisores> projetosSupervisoresList) {
+        this.projetosSupervisoresList = projetosSupervisoresList;
+    }
+
+    @XmlTransient
+    public List<ProjetosBolsistas> getProjetosBolsistasList() {
+        return projetosBolsistasList;
+    }
+
+    public void setProjetosBolsistasList(List<ProjetosBolsistas> projetosBolsistasList) {
+        this.projetosBolsistasList = projetosBolsistasList;
     }
     
 }

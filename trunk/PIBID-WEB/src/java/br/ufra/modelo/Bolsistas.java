@@ -5,14 +5,18 @@
 package br.ufra.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Bolsistas.findByAtivo", query = "SELECT b FROM Bolsistas b WHERE b.situacao = :situacao"),
     @NamedQuery(name = "Bolsistas.findByStatus", query = "SELECT b FROM Bolsistas b WHERE b.status = :status")})
 public class Bolsistas implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bolsistas")
+    private List<ProjetosBolsistas> projetosBolsistasList;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -167,6 +173,15 @@ public class Bolsistas implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.Bolsistas[ matricula=" + matricula + " ]";
+    }
+
+    @XmlTransient
+    public List<ProjetosBolsistas> getProjetosBolsistasList() {
+        return projetosBolsistasList;
+    }
+
+    public void setProjetosBolsistasList(List<ProjetosBolsistas> projetosBolsistasList) {
+        this.projetosBolsistasList = projetosBolsistasList;
     }
     
 }

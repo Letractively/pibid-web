@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,6 +32,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProjetosProfessoresColaboradores.findByDataInicio", query = "SELECT p FROM ProjetosProfessoresColaboradores p WHERE p.dataInicio = :dataInicio"),
     @NamedQuery(name = "ProjetosProfessoresColaboradores.findByDataFim", query = "SELECT p FROM ProjetosProfessoresColaboradores p WHERE p.dataFim = :dataFim")})
 public class ProjetosProfessoresColaboradores implements Serializable {
+    @JoinColumn(name = "professores_colaboradores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private ProfessoresColaboradores professoresColaboradores;
+    @JoinColumn(name = "projetos_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Projetos projetos;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProjetosProfessoresColaboradoresPK projetosProfessoresColaboradoresPK;
@@ -98,6 +106,22 @@ public class ProjetosProfessoresColaboradores implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.ProjetosProfessoresColaboradores[ projetosProfessoresColaboradoresPK=" + projetosProfessoresColaboradoresPK + " ]";
+    }
+
+    public ProfessoresColaboradores getProfessoresColaboradores() {
+        return professoresColaboradores;
+    }
+
+    public void setProfessoresColaboradores(ProfessoresColaboradores professoresColaboradores) {
+        this.professoresColaboradores = professoresColaboradores;
+    }
+
+    public Projetos getProjetos() {
+        return projetos;
+    }
+
+    public void setProjetos(Projetos projetos) {
+        this.projetos = projetos;
     }
     
 }

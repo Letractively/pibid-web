@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,6 +32,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProjetosBolsistas.findByDataEntrada", query = "SELECT p FROM ProjetosBolsistas p WHERE p.dataEntrada = :dataEntrada"),
     @NamedQuery(name = "ProjetosBolsistas.findByDataSaida", query = "SELECT p FROM ProjetosBolsistas p WHERE p.dataSaida = :dataSaida")})
 public class ProjetosBolsistas implements Serializable {
+    @JoinColumn(name = "bolsistas_matricula", referencedColumnName = "matricula", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Bolsistas bolsistas;
+    @JoinColumn(name = "projetos_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Projetos projetos;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProjetosBolsistasPK projetosBolsistasPK;
@@ -98,6 +106,22 @@ public class ProjetosBolsistas implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.ProjetosBolsistas[ projetosBolsistasPK=" + projetosBolsistasPK + " ]";
+    }
+
+    public Bolsistas getBolsistas() {
+        return bolsistas;
+    }
+
+    public void setBolsistas(Bolsistas bolsistas) {
+        this.bolsistas = bolsistas;
+    }
+
+    public Projetos getProjetos() {
+        return projetos;
+    }
+
+    public void setProjetos(Projetos projetos) {
+        this.projetos = projetos;
     }
     
 }

@@ -7,6 +7,7 @@ package br.ufra.modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -41,6 +45,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "EscolasParceiras.findByEmailViceDirecao", query = "SELECT e FROM EscolasParceiras e WHERE e.emailViceDirecao = :emailViceDirecao"),
     @NamedQuery(name = "EscolasParceiras.findBySituacao", query = "SELECT e FROM EscolasParceiras e WHERE e.situacao = :situacao")})
 public class EscolasParceiras implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "nome")
+    private String nome;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "escolasParceiras")
+    private List<ProjetosEscolasParceiras> projetosEscolasParceirasList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -217,6 +228,23 @@ public class EscolasParceiras implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.EscolasParceiras[ id=" + id + " ]";
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @XmlTransient
+    public List<ProjetosEscolasParceiras> getProjetosEscolasParceirasList() {
+        return projetosEscolasParceirasList;
+    }
+
+    public void setProjetosEscolasParceirasList(List<ProjetosEscolasParceiras> projetosEscolasParceirasList) {
+        this.projetosEscolasParceirasList = projetosEscolasParceirasList;
     }
     
 }

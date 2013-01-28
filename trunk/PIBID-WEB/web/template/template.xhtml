@@ -40,7 +40,7 @@
 
             <p:layoutUnit position="center"
                           >
-                <p:menubar>  
+                <p:menubar rendered="#{usuarioBean.usuario!=null}">  
                     <p:submenu label="Cadastro" icon="ui-icon-document">  
                         <p:menuitem value="Bolsistas" url="/faces/sistema/cadastro/bolsista/lista.xhtml" />  
                         <p:menuitem value="Escolas Parceiras" url="#" />  
@@ -51,12 +51,12 @@
                         </p:submenu> 
                     </p:submenu>  
                     <p:menuitem value="Projetos" url="#" />  
-
+                    <p:menuitem value="Sair" ajax="false" icon="ui-icon-contact" url="/faces/sistema/publico/sair-sistema.xhtml"  />  
 
                 </p:menubar>  
                 <ui:insert name="content"  />
 
-            </p:layoutUnit>
+            </p:layoutUnit>  
 
         </p:layout>
 
