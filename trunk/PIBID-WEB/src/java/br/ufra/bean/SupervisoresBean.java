@@ -45,15 +45,19 @@ public class SupervisoresBean {
 
     public String novo() {
         supervisores = rn.novo();
-        return "/sistema/supervisores/novo.xhtml";
+        return "/sistema/cadastro/supervisor/novo.xhtml";
     }
 
     public String alterar() {
-        return "/sistema/supervisores/novo.xhtml";
+        return "/sistema/cadastro/supervisor/novo.xhtml";
     }
 
     public String listar() {
-        return "/sistema/supervisores/lista.xhtml";
+        return "/sistema/cadastro/supervisor/lista.xhtml";
+    }
+    
+        public String cancelar() {
+        return "/sistema/cadastro/supervisor/lista.xhtml";
     }
 
     public String salvar() {

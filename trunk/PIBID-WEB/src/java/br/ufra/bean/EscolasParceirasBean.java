@@ -49,11 +49,11 @@ public class EscolasParceirasBean {
     }
 
     public String alterar() {
-        return "/sistema/cadastro/escolasparceiros/novo-parceiro.xhtml";
+        return "/sistema/cadastro/escolasparceiros/novo.xhtml";
     }
 
     public String listar() {
-        return "/sistema/cadastro/escolasparceiros/lista-parceiros.xhtml";
+        return "/sistema/cadastro/escolasparceiros/lista.xhtml";
     }
 
     public String cancelar() {
@@ -67,7 +67,7 @@ public class EscolasParceirasBean {
                     FacesMessage.SEVERITY_INFO,
                     "Operação realizada com sucesso!",
                     null));
-            return "/sistema/cadastro/bolsista/escolasparceiros/lista.xhtml";
+            return "/sistema/cadastro/escolasparceiros/lista.xhtml";
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
