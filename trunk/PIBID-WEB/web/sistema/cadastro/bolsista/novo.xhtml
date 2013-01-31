@@ -82,14 +82,19 @@
                                 style="width: 200px"/>
                             <p:message id="erroEmailsec" for="itemailsec"/>
 
+                         
+                      
+                            
+                            
                             <h:outputLabel
                                 id="oltelefoneres"
                                 for="ittelefoneres"
                                 value="Telefone Residencial: "/>
-                            <p:inputText
+                            <p:inputMask
                                 id="ittelefoneres"
                                 value="#{bolsistaBean.bolsista.telefoneResidencial}"
                                 label="Telefone Residencial"
+                                mask="(99) 9999-9999"
                                 style="width: 200px"/>
                             <p:message id="errotelefoneres" for="ittelefoneres"/>
 
@@ -97,10 +102,11 @@
                                 id="oltelefonecel"
                                 for="ittelefonecel"
                                 value="Telefone Celular: "/>
-                            <p:inputText
+                            <p:inputMask
                                 id="ittelefonecel"
                                 value="#{bolsistaBean.bolsista.telefoneCelular}"
                                 label="Telefone Celular"
+                                mask="(99) 9999-9999"
                                 style="width: 200px"/>
                             <p:message id="errotelefonecel" for="ittelefonecel"/>
 
