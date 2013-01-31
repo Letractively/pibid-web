@@ -82,7 +82,7 @@ public class EscolasParceiras implements Serializable {
     private String emailViceDirecao;
     @Basic(optional = false)
     @Column(name = "situacao")
-    private boolean situacao;
+    private String situacao;
     @ManyToMany(mappedBy = "escolasParceirasList")
     private List<Projetos> projetosList;
 
@@ -93,7 +93,7 @@ public class EscolasParceiras implements Serializable {
         this.id = id;
     }
 
-    public EscolasParceiras(Integer id, String esfera, String nomeDiretor, boolean situacao) {
+    public EscolasParceiras(Integer id, String esfera, String nomeDiretor, String situacao) {
         this.id = id;
         this.esfera = esfera;
         this.nomeDiretor = nomeDiretor;
@@ -188,11 +188,11 @@ public class EscolasParceiras implements Serializable {
         this.emailViceDirecao = emailViceDirecao;
     }
 
-    public boolean getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(boolean situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
 

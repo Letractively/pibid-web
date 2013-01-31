@@ -39,4 +39,8 @@ public class BolsistaRN {
     public List listarAtivos(String ativo, int status) {
         return dao.obterTodosAtivoLivre(Bolsistas.class, ativo, status);
     }
+    
+     public List listarTodos() {
+        return dao.obterTodos(Bolsistas.class);
+    }
 }

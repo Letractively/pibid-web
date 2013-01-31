@@ -51,7 +51,7 @@ public class BolsistaBean {
     }
 
     public List<Bolsistas> getBolsistas() {
-        return rn.listarAtivos("ativo");
+        return rn.listarTodos();
 
         //return bolsistaRN.listarAtivos(true);
     }
@@ -98,10 +98,12 @@ public class BolsistaBean {
     private SelectItem[] situacoes;
 
     public SelectItem[] getSituacoes() {
+
+
         situacoes = new SelectItem[3];
-        situacoes[0] = new SelectItem("Selecione");
-        situacoes[1] = new SelectItem("Ativo");
-        situacoes[2] = new SelectItem("Inativo");
+        situacoes[0] = new SelectItem("", "Selecione");
+        situacoes[1] = new SelectItem("Ativo", "Ativo");
+        situacoes[2] = new SelectItem("Inativo", "Inativo");
         return situacoes;
     }
 }

@@ -50,7 +50,7 @@ public class UsuarioBean implements Serializable {
             usuario = rn.login(user, pass);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
             logout = usuario.getLogin();
-            return "/faces/sistema/home.xhtml";
+            return "/faces/sistema/liberado/home.xhtml";
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Usuário ou senha inválidos", ""));  
       //      FacesMessage message = new FacesMessage("Usuário ou senha inválidos");

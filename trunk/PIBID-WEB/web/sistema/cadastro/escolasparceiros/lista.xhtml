@@ -8,33 +8,39 @@
 
     <body>
 
-        <ui:composition template="/template/template.xhtml">
+        <ui:composition template="/sistema/template/template.xhtml">
 
             <ui:define name="content">
 
-                <h:form id="fbolsista">
+                <h:form id="fescolaParceira">
 
                     <p:panel header="Bolsistas">
-                        <p:dataTable   value="#{bolsistaBean.bolsistas}" var="bolsista"
+                        <p:dataTable   value="#{escolasParceirasBean.lista}" var="escolaParceiras"
                                        paginator="true" rows="10"
                                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                        rowsPerPageTemplate="5,10,15">  
 
-                            <p:column filterBy="#{bolsista.matricula}">
+                            <p:column filterBy="#{escolaParceiras.id}">
                                 <f:facet name="header">  
-                                    <h:outputText value="Matricula" />  
+                                    <h:outputText value="Cod" />  
                                 </f:facet>  
-                                <h:outputLabel value="#{bolsista.matricula}"/>
+                                <h:outputLabel value="#{escolaParceiras.id}"/>
                             </p:column>
-                            
-                            <p:column filterBy="#{bolsista.nome}" headerText="Nome">
+
+                            <p:column filterBy="#{escolaParceiras.nome}" headerText="Nome">
                                 <f:facet name="header">  
                                     <h:outputText value="Nome" />  
                                 </f:facet>  
-                                <h:outputLabel value="#{bolsista.nome}"/>
+                                <h:outputLabel value="#{escolaParceiras.nome}"/>
                             </p:column>
 
-   
+                            <p:column filterBy="#{escolaParceiras.situacao}" filterOptions="#{escolasParceirasBean.situacoes}"  
+                                      filterMatchMode="exact" headerText="Situação">
+                                <f:facet name="header">  
+                                    <h:outputText value="Situação" />  
+                                </f:facet>  
+                                <h:outputLabel value="#{escolaParceiras.situacao}"/>
+                            </p:column>
 
                             <p:column>
                                 <f:facet name="header">  
@@ -42,19 +48,13 @@
                                 </f:facet>  
                                 <p:commandButton 
                                     ajax="false" 
-                                    action="#{bolsistaBean.alterar}" 
+                                    action="#{escolasParceirasBean.alterar}" 
                                     value="Alterar">
                                     <f:setPropertyActionListener 
-                                        target="#{bolsistaBean.bolsista}" 
-                                        value="#{bolsista}"/>
+                                        target="#{escolasParceirasBean.escolasParceiras}" 
+                                        value="#{escolaParceiras}"/>
                                 </p:commandButton>
-                                <p:commandButton ajax="false" 
-                                                 value="Desativar" 
-                                                 action="#{bolsistaBean.irInativar}">
-                                    <f:setPropertyActionListener 
-                                        target="#{bolsistaBean.bolsista}" 
-                                        value="#{bolsista}"/>
-                                </p:commandButton>
+
                             </p:column>
                         </p:dataTable>
                     </p:panel>
@@ -62,12 +62,9 @@
                         <div align="center">
                             <p:commandButton 
                                 ajax="false" 
-                                action="#{bolsistaBean.novo()}" 
+                                action="#{escolasParceirasBean.novo()}" 
                                 value="Incluir"/>
-                            <p:commandButton 
-                                ajax="false" 
-                                action="#{bolsistaBean.irInativo}" 
-                                value="Lista de Bolsista Desativados"/>
+
                         </div>
                     </h3>
                 </h:form>

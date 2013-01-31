@@ -14,7 +14,7 @@ import java.util.List;
  * @author marcos
  */
 public class EscolasParceirasRN {
-   
+
     private final EscolasParceirasDAO dao = new EscolasParceirasDAO();
 
     public EscolasParceiras novo() {
@@ -30,12 +30,14 @@ public class EscolasParceirasRN {
     }
 
     public EscolasParceiras buscar(Integer id) {
-        return dao.obter(EscolasParceiras.class,id);
+        return dao.obter(EscolasParceiras.class, id);
     }
 
     public List listarAtivos(String x) {
         return dao.obterTodosAtivo(EscolasParceiras.class, x);
     }
 
- 
+    public List<EscolasParceiras> listarTodos() {
+        return dao.obterTodos(EscolasParceiras.class);
+    }
 }
