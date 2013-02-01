@@ -32,12 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProjetosSupervisores.findByDataInicio", query = "SELECT p FROM ProjetosSupervisores p WHERE p.dataInicio = :dataInicio"),
     @NamedQuery(name = "ProjetosSupervisores.findByDataFim", query = "SELECT p FROM ProjetosSupervisores p WHERE p.dataFim = :dataFim")})
 public class ProjetosSupervisores implements Serializable {
-    @JoinColumn(name = "supervisores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Supervisores supervisores;
-    @JoinColumn(name = "projetos_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Projetos projetos;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProjetosSupervisoresPK projetosSupervisoresPK;
@@ -47,6 +41,12 @@ public class ProjetosSupervisores implements Serializable {
     @Column(name = "data_fim")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataFim;
+    @JoinColumn(name = "supervisores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Supervisores supervisores;
+    @JoinColumn(name = "projetos_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Projetos projetos;
 
     public ProjetosSupervisores() {
     }
@@ -83,6 +83,22 @@ public class ProjetosSupervisores implements Serializable {
         this.dataFim = dataFim;
     }
 
+    public Supervisores getSupervisores() {
+        return supervisores;
+    }
+
+    public void setSupervisores(Supervisores supervisores) {
+        this.supervisores = supervisores;
+    }
+
+    public Projetos getProjetos() {
+        return projetos;
+    }
+
+    public void setProjetos(Projetos projetos) {
+        this.projetos = projetos;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -106,22 +122,6 @@ public class ProjetosSupervisores implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.ProjetosSupervisores[ projetosSupervisoresPK=" + projetosSupervisoresPK + " ]";
-    }
-
-    public Supervisores getSupervisores() {
-        return supervisores;
-    }
-
-    public void setSupervisores(Supervisores supervisores) {
-        this.supervisores = supervisores;
-    }
-
-    public Projetos getProjetos() {
-        return projetos;
-    }
-
-    public void setProjetos(Projetos projetos) {
-        this.projetos = projetos;
     }
     
 }

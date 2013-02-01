@@ -21,7 +21,7 @@ public class ConnectionFactory {
             if (conn == null || conn.isClosed()) {
                 System.out.println("<<<<<<<<<<<<<<<<<<CONEXAO BD RELATORIOS>>>>>>>>>>>>>>>>>>>");
                 conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/pibid", "root", "");
+                        "jdbc:mysql://localhost:3306/pibid", "root", "12345");
                   //      "jdbc:mysql://localhost:3306/lacibufr_pibid", "lacibufr_root", "831645");
                 return conn;
             }

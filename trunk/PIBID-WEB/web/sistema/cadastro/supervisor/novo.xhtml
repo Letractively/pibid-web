@@ -21,7 +21,7 @@
 
                 <h:form id="Cargo">
 
-
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
                     <h:inputHidden 
                         id="ihcardapioid"
                         value="#{supervisoresBean.supervisores.id}" 
@@ -133,7 +133,7 @@
                                 id="cbsalvar"
                                 value="Salvar" 
                                 action="#{supervisoresBean.salvar}"
-                                update="Cargo">
+                                update="growl">
 
 
                             </p:commandButton>

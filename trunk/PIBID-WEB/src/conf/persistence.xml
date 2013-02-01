@@ -3,17 +3,16 @@
   <persistence-unit name="WPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <non-jta-data-source>pibid</non-jta-data-source>
-    <class>br.ufra.modelo.EscolasParceiras</class>
-    <class>br.ufra.modelo.Projetos</class>
-    <class>br.ufra.modelo.Bolsistas</class>
-    <class>br.ufra.modelo.ProjetosBolsistas</class>
-    <class>br.ufra.modelo.ProfessoresColaboradores</class>
-    <class>br.ufra.modelo.ProjetosProfessoresColaboradores</class>
     <class>br.ufra.modelo.Atividades</class>
-    <class>br.ufra.modelo.Supervisores</class>
-    <class>br.ufra.modelo.ProjetosSupervisores</class>
+    <class>br.ufra.modelo.Bolsistas</class>
+    <class>br.ufra.modelo.EscolasParceiras</class>
     <class>br.ufra.modelo.Papel</class>
-    <class>br.ufra.modelo.ProjetosEscolasParceiras</class>
+    <class>br.ufra.modelo.ProfessoresColaboradores</class>
+    <class>br.ufra.modelo.Projetos</class>
+    <class>br.ufra.modelo.ProjetosBolsistas</class>
+    <class>br.ufra.modelo.ProjetosProfessoresColaboradores</class>
+    <class>br.ufra.modelo.ProjetosSupervisores</class>
+    <class>br.ufra.modelo.Supervisores</class>
     <class>br.ufra.modelo.Usuario</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
@@ -25,7 +24,7 @@
       <property name="hibernate.c3p0.max_statements" value="50"/>
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
       <property name="hibernate.connection.username" value="root"/>
-      <property name="hibernate.connection.password" value=""/>
+      <property name="hibernate.connection.password" value="12345"/>
       <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/pibid"/>
     </properties>
   </persistence-unit>

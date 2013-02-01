@@ -32,12 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProjetosProfessoresColaboradores.findByDataInicio", query = "SELECT p FROM ProjetosProfessoresColaboradores p WHERE p.dataInicio = :dataInicio"),
     @NamedQuery(name = "ProjetosProfessoresColaboradores.findByDataFim", query = "SELECT p FROM ProjetosProfessoresColaboradores p WHERE p.dataFim = :dataFim")})
 public class ProjetosProfessoresColaboradores implements Serializable {
-    @JoinColumn(name = "professores_colaboradores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private ProfessoresColaboradores professoresColaboradores;
-    @JoinColumn(name = "projetos_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Projetos projetos;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProjetosProfessoresColaboradoresPK projetosProfessoresColaboradoresPK;
@@ -47,6 +41,12 @@ public class ProjetosProfessoresColaboradores implements Serializable {
     @Column(name = "data_fim")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataFim;
+    @JoinColumn(name = "projetos_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Projetos projetos;
+    @JoinColumn(name = "professores_colaboradores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private ProfessoresColaboradores professoresColaboradores;
 
     public ProjetosProfessoresColaboradores() {
     }
@@ -83,6 +83,22 @@ public class ProjetosProfessoresColaboradores implements Serializable {
         this.dataFim = dataFim;
     }
 
+    public Projetos getProjetos() {
+        return projetos;
+    }
+
+    public void setProjetos(Projetos projetos) {
+        this.projetos = projetos;
+    }
+
+    public ProfessoresColaboradores getProfessoresColaboradores() {
+        return professoresColaboradores;
+    }
+
+    public void setProfessoresColaboradores(ProfessoresColaboradores professoresColaboradores) {
+        this.professoresColaboradores = professoresColaboradores;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -106,22 +122,6 @@ public class ProjetosProfessoresColaboradores implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.ProjetosProfessoresColaboradores[ projetosProfessoresColaboradoresPK=" + projetosProfessoresColaboradoresPK + " ]";
-    }
-
-    public ProfessoresColaboradores getProfessoresColaboradores() {
-        return professoresColaboradores;
-    }
-
-    public void setProfessoresColaboradores(ProfessoresColaboradores professoresColaboradores) {
-        this.professoresColaboradores = professoresColaboradores;
-    }
-
-    public Projetos getProjetos() {
-        return projetos;
-    }
-
-    public void setProjetos(Projetos projetos) {
-        this.projetos = projetos;
     }
     
 }

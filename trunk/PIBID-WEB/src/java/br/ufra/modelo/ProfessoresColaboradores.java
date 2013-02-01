@@ -17,6 +17,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "ProfessoresColaboradores.findAll", query = "SELECT p FROM ProfessoresColaboradores p"),
     @NamedQuery(name = "ProfessoresColaboradores.findById", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.id = :id"),
+    @NamedQuery(name = "ProfessoresColaboradores.findByMatricula", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.matricula = :matricula"),
     @NamedQuery(name = "ProfessoresColaboradores.findByNome", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.nome = :nome"),
     @NamedQuery(name = "ProfessoresColaboradores.findByEmailPrincipal", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.emailPrincipal = :emailPrincipal"),
     @NamedQuery(name = "ProfessoresColaboradores.findByEmailSecundario", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.emailSecundario = :emailSecundario"),
@@ -40,8 +43,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ProfessoresColaboradores.findBySituacao", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.situacao = :situacao"),
     @NamedQuery(name = "ProfessoresColaboradores.findByStatus", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.status = :status")})
 public class ProfessoresColaboradores implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "professoresColaboradores")
-    private List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,26 +50,44 @@ public class ProfessoresColaboradores implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "matricula")
+    private String matricula;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "nome")
     private String nome;
+    @Size(max = 45)
     @Column(name = "email_principal")
     private String emailPrincipal;
+    @Size(max = 45)
     @Column(name = "email_secundario")
     private String emailSecundario;
+    @Size(max = 45)
     @Column(name = "telefone_residencial")
     private String telefoneResidencial;
+    @Size(max = 45)
     @Column(name = "telefone_celular")
     private String telefoneCelular;
+    @Size(max = 45)
     @Column(name = "endereco")
     private String endereco;
+    @Size(max = 45)
     @Column(name = "instituicao")
     private String instituicao;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "situacao")
     private String situacao;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "status")
-    private String status;
+    private int status;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "professoresColaboradores")
+    private List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList;
 
     public ProfessoresColaboradores() {
     }
@@ -77,8 +96,9 @@ public class ProfessoresColaboradores implements Serializable {
         this.id = id;
     }
 
-    public ProfessoresColaboradores(Integer id, String nome, String situacao, String status) {
+    public ProfessoresColaboradores(Integer id, String matricula, String nome, String situacao, int status) {
         this.id = id;
+        this.matricula = matricula;
         this.nome = nome;
         this.situacao = situacao;
         this.status = status;
@@ -90,6 +110,14 @@ public class ProfessoresColaboradores implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
     public String getNome() {
@@ -156,12 +184,21 @@ public class ProfessoresColaboradores implements Serializable {
         this.situacao = situacao;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
+    }
+
+    @XmlTransient
+    public List<ProjetosProfessoresColaboradores> getProjetosProfessoresColaboradoresList() {
+        return projetosProfessoresColaboradoresList;
+    }
+
+    public void setProjetosProfessoresColaboradoresList(List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList) {
+        this.projetosProfessoresColaboradoresList = projetosProfessoresColaboradoresList;
     }
 
     @Override
@@ -187,15 +224,6 @@ public class ProfessoresColaboradores implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.ProfessoresColaboradores[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public List<ProjetosProfessoresColaboradores> getProjetosProfessoresColaboradoresList() {
-        return projetosProfessoresColaboradoresList;
-    }
-
-    public void setProjetosProfessoresColaboradoresList(List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList) {
-        this.projetosProfessoresColaboradoresList = projetosProfessoresColaboradoresList;
     }
     
 }

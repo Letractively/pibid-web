@@ -35,5 +35,9 @@ public class SupervisoresRN {
         return dao.obterTodosAtivo(Supervisores.class, x);
     }
 
+    public List listarTodos() {
+        return dao.obterTodos(Supervisores.class);
+    }
+
 
 }

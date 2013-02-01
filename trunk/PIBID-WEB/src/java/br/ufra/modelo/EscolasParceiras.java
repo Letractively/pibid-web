@@ -7,16 +7,16 @@ package br.ufra.modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "EscolasParceiras.findAll", query = "SELECT e FROM EscolasParceiras e"),
     @NamedQuery(name = "EscolasParceiras.findById", query = "SELECT e FROM EscolasParceiras e WHERE e.id = :id"),
+    @NamedQuery(name = "EscolasParceiras.findByNome", query = "SELECT e FROM EscolasParceiras e WHERE e.nome = :nome"),
     @NamedQuery(name = "EscolasParceiras.findByEndereco", query = "SELECT e FROM EscolasParceiras e WHERE e.endereco = :endereco"),
     @NamedQuery(name = "EscolasParceiras.findByEsfera", query = "SELECT e FROM EscolasParceiras e WHERE e.esfera = :esfera"),
     @NamedQuery(name = "EscolasParceiras.findByNomeDiretor", query = "SELECT e FROM EscolasParceiras e WHERE e.nomeDiretor = :nomeDiretor"),
@@ -45,45 +46,60 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "EscolasParceiras.findByEmailViceDirecao", query = "SELECT e FROM EscolasParceiras e WHERE e.emailViceDirecao = :emailViceDirecao"),
     @NamedQuery(name = "EscolasParceiras.findBySituacao", query = "SELECT e FROM EscolasParceiras e WHERE e.situacao = :situacao")})
 public class EscolasParceiras implements Serializable {
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "nome")
-    private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "escolasParceiras")
-    private List<ProjetosEscolasParceiras> projetosEscolasParceirasList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "nome")
+    private String nome;
+    @Size(max = 45)
     @Column(name = "endereco")
     private String endereco;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "esfera")
     private String esfera;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "nome_diretor")
     private String nomeDiretor;
+    @Size(max = 45)
     @Column(name = "nome_vice_diretor_manha")
     private String nomeViceDiretorManha;
+    @Size(max = 45)
     @Column(name = "nome_vice_diretor_tarde")
     private String nomeViceDiretorTarde;
+    @Size(max = 45)
     @Column(name = "nome_vice_diretor_noite")
     private String nomeViceDiretorNoite;
+    @Size(max = 45)
     @Column(name = "telefone_escola")
     private String telefoneEscola;
+    @Size(max = 45)
     @Column(name = "email_escola")
     private String emailEscola;
+    @Size(max = 45)
     @Column(name = "email_direcao")
     private String emailDirecao;
+    @Size(max = 45)
     @Column(name = "email_vice_direcao")
     private String emailViceDirecao;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "situacao")
     private String situacao;
-    @ManyToMany(mappedBy = "escolasParceirasList")
+    @JoinTable(name = "projetos_escolas_parceiras", joinColumns = {
+        @JoinColumn(name = "escolas_parceiras_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "projetos_ID", referencedColumnName = "ID")})
+    @ManyToMany
     private List<Projetos> projetosList;
 
     public EscolasParceiras() {
@@ -93,8 +109,9 @@ public class EscolasParceiras implements Serializable {
         this.id = id;
     }
 
-    public EscolasParceiras(Integer id, String esfera, String nomeDiretor, String situacao) {
+    public EscolasParceiras(Integer id, String nome, String esfera, String nomeDiretor, String situacao) {
         this.id = id;
+        this.nome = nome;
         this.esfera = esfera;
         this.nomeDiretor = nomeDiretor;
         this.situacao = situacao;
@@ -106,6 +123,14 @@ public class EscolasParceiras implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEndereco() {
@@ -228,23 +253,6 @@ public class EscolasParceiras implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.EscolasParceiras[ id=" + id + " ]";
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    @XmlTransient
-    public List<ProjetosEscolasParceiras> getProjetosEscolasParceirasList() {
-        return projetosEscolasParceirasList;
-    }
-
-    public void setProjetosEscolasParceirasList(List<ProjetosEscolasParceiras> projetosEscolasParceirasList) {
-        this.projetosEscolasParceirasList = projetosEscolasParceirasList;
     }
     
 }

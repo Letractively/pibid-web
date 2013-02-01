@@ -14,8 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -52,59 +52,68 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Projetos.findByCronograma", query = "SELECT p FROM Projetos p WHERE p.cronograma = :cronograma"),
     @NamedQuery(name = "Projetos.findBySituacao", query = "SELECT p FROM Projetos p WHERE p.situacao = :situacao")})
 public class Projetos implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
-    private List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
-    private List<ProjetosEscolasParceiras> projetosEscolasParceirasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
-    private List<ProjetosSupervisores> projetosSupervisoresList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
-    private List<ProjetosBolsistas> projetosBolsistasList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 45)
     @Column(name = "nome")
     private String nome;
+    @Size(max = 45)
     @Column(name = "titulo_projeto")
     private String tituloProjeto;
     @Column(name = "data_conclusao")
     @Temporal(TemporalType.DATE)
     private Date dataConclusao;
+    @Size(max = 45)
     @Column(name = "curso")
     private String curso;
+    @Size(max = 45)
     @Column(name = "nome_coordenador")
     private String nomeCoordenador;
+    @Size(max = 45)
     @Column(name = "telefone_residencial_coordenador")
     private String telefoneResidencialCoordenador;
+    @Size(max = 45)
     @Column(name = "telefone_celular_coordenador")
     private String telefoneCelularCoordenador;
+    @Size(max = 45)
     @Column(name = "email_principal_coordenador")
     private String emailPrincipalCoordenador;
+    @Size(max = 45)
     @Column(name = "email_secundario_coordenador")
     private String emailSecundarioCoordenador;
+    @Size(max = 45)
     @Column(name = "curriculo_lattes_coordenador")
     private String curriculoLattesCoordenador;
+    @Size(max = 45)
     @Column(name = "apresentacao_proposta")
     private String apresentacaoProposta;
+    @Size(max = 45)
     @Column(name = "acoes_previstas")
     private String acoesPrevistas;
+    @Size(max = 45)
     @Column(name = "resultados_pretendidos")
     private String resultadosPretendidos;
+    @Size(max = 45)
     @Column(name = "cronograma")
     private String cronograma;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "situacao")
     private boolean situacao;
-    @JoinTable(name = "projetos_escolas_parceiras", joinColumns = {
-        @JoinColumn(name = "projetos_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "escolas_parceiras_ID", referencedColumnName = "ID")})
-    @ManyToMany
+    @ManyToMany(mappedBy = "projetosList")
     private List<EscolasParceiras> escolasParceirasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetosID")
     private List<Atividades> atividadesList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<ProjetosSupervisores> projetosSupervisoresList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<ProjetosBolsistas> projetosBolsistasList;
 
     public Projetos() {
     }
@@ -256,12 +265,39 @@ public class Projetos implements Serializable {
     }
 
     @XmlTransient
+    public List<ProjetosProfessoresColaboradores> getProjetosProfessoresColaboradoresList() {
+        return projetosProfessoresColaboradoresList;
+    }
+
+    public void setProjetosProfessoresColaboradoresList(List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList) {
+        this.projetosProfessoresColaboradoresList = projetosProfessoresColaboradoresList;
+    }
+
+    @XmlTransient
     public List<Atividades> getAtividadesList() {
         return atividadesList;
     }
 
     public void setAtividadesList(List<Atividades> atividadesList) {
         this.atividadesList = atividadesList;
+    }
+
+    @XmlTransient
+    public List<ProjetosSupervisores> getProjetosSupervisoresList() {
+        return projetosSupervisoresList;
+    }
+
+    public void setProjetosSupervisoresList(List<ProjetosSupervisores> projetosSupervisoresList) {
+        this.projetosSupervisoresList = projetosSupervisoresList;
+    }
+
+    @XmlTransient
+    public List<ProjetosBolsistas> getProjetosBolsistasList() {
+        return projetosBolsistasList;
+    }
+
+    public void setProjetosBolsistasList(List<ProjetosBolsistas> projetosBolsistasList) {
+        this.projetosBolsistasList = projetosBolsistasList;
     }
 
     @Override
@@ -287,42 +323,6 @@ public class Projetos implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.Projetos[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public List<ProjetosProfessoresColaboradores> getProjetosProfessoresColaboradoresList() {
-        return projetosProfessoresColaboradoresList;
-    }
-
-    public void setProjetosProfessoresColaboradoresList(List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList) {
-        this.projetosProfessoresColaboradoresList = projetosProfessoresColaboradoresList;
-    }
-
-    @XmlTransient
-    public List<ProjetosEscolasParceiras> getProjetosEscolasParceirasList() {
-        return projetosEscolasParceirasList;
-    }
-
-    public void setProjetosEscolasParceirasList(List<ProjetosEscolasParceiras> projetosEscolasParceirasList) {
-        this.projetosEscolasParceirasList = projetosEscolasParceirasList;
-    }
-
-    @XmlTransient
-    public List<ProjetosSupervisores> getProjetosSupervisoresList() {
-        return projetosSupervisoresList;
-    }
-
-    public void setProjetosSupervisoresList(List<ProjetosSupervisores> projetosSupervisoresList) {
-        this.projetosSupervisoresList = projetosSupervisoresList;
-    }
-
-    @XmlTransient
-    public List<ProjetosBolsistas> getProjetosBolsistasList() {
-        return projetosBolsistasList;
-    }
-
-    public void setProjetosBolsistasList(List<ProjetosBolsistas> projetosBolsistasList) {
-        this.projetosBolsistasList = projetosBolsistasList;
     }
     
 }

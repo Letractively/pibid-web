@@ -15,6 +15,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,35 +36,47 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Bolsistas.findByTelefoneResidencial", query = "SELECT b FROM Bolsistas b WHERE b.telefoneResidencial = :telefoneResidencial"),
     @NamedQuery(name = "Bolsistas.findByTelefoneCelular", query = "SELECT b FROM Bolsistas b WHERE b.telefoneCelular = :telefoneCelular"),
     @NamedQuery(name = "Bolsistas.findByEndereco", query = "SELECT b FROM Bolsistas b WHERE b.endereco = :endereco"),
-    @NamedQuery(name = "Bolsistas.findByAtivo", query = "SELECT b FROM Bolsistas b WHERE b.situacao = :situacao"),
+    @NamedQuery(name = "Bolsistas.findBySituacao", query = "SELECT b FROM Bolsistas b WHERE b.situacao = :situacao"),
     @NamedQuery(name = "Bolsistas.findByStatus", query = "SELECT b FROM Bolsistas b WHERE b.status = :status")})
 public class Bolsistas implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bolsistas")
-    private List<ProjetosBolsistas> projetosBolsistasList;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "matricula")
     private String matricula;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "nome")
     private String nome;
+    @Size(max = 255)
     @Column(name = "email_principal")
     private String emailPrincipal;
+    @Size(max = 255)
     @Column(name = "email_secundario")
     private String emailSecundario;
+    @Size(max = 255)
     @Column(name = "telefone_residencial")
     private String telefoneResidencial;
+    @Size(max = 255)
     @Column(name = "telefone_celular")
     private String telefoneCelular;
+    @Size(max = 255)
     @Column(name = "endereco")
     private String endereco;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "situacao")
     private String situacao;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "status")
     private int status;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bolsistas")
+    private List<ProjetosBolsistas> projetosBolsistasList;
 
     public Bolsistas() {
     }
@@ -150,6 +164,15 @@ public class Bolsistas implements Serializable {
         this.status = status;
     }
 
+    @XmlTransient
+    public List<ProjetosBolsistas> getProjetosBolsistasList() {
+        return projetosBolsistasList;
+    }
+
+    public void setProjetosBolsistasList(List<ProjetosBolsistas> projetosBolsistasList) {
+        this.projetosBolsistasList = projetosBolsistasList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -173,15 +196,6 @@ public class Bolsistas implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.Bolsistas[ matricula=" + matricula + " ]";
-    }
-
-    @XmlTransient
-    public List<ProjetosBolsistas> getProjetosBolsistasList() {
-        return projetosBolsistasList;
-    }
-
-    public void setProjetosBolsistasList(List<ProjetosBolsistas> projetosBolsistasList) {
-        this.projetosBolsistasList = projetosBolsistasList;
     }
     
 }

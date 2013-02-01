@@ -36,6 +36,7 @@ public class SupervisoresBean {
     }
 
     public List<Supervisores> getLista() {
+        lista = rn.listarTodos();
         return lista;
     }
 
@@ -55,28 +56,29 @@ public class SupervisoresBean {
     public String listar() {
         return "/sistema/cadastro/supervisor/lista.xhtml";
     }
-    
-        public String cancelar() {
+
+    public String cancelar() {
         return "/sistema/cadastro/supervisor/lista.xhtml";
     }
 
     public String salvar() {
-        supervisores.setStatus(0);
+        supervisores.setStatus(0);//O supervisor está cadastrado porém não está em nenhum projeto
         if (rn.salvar(supervisores)) {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operação realizada com sucesso!",
                     null));
+            return "/sistema/cadastro/supervisor/lista.xhtml";
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_ERROR,
                     "Ocorreu um erro inesperado ao tentar salvar dados.",
                     null));
+            return "/sistema/cadastro/supervisor/novo.xhtml";
         }
 
-        return novo();
     }
 
     public ArrayList<String> getSituacao() {

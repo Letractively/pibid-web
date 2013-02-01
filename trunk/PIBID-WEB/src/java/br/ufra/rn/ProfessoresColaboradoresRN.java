@@ -36,5 +36,9 @@ public class ProfessoresColaboradoresRN {
         return dao.obterTodosAtivo(ProfessoresColaboradores.class, x);
     }
 
+    public List listarTodos() {
+        return dao.obterTodos(ProfessoresColaboradores.class);
+    }
+
   
 }

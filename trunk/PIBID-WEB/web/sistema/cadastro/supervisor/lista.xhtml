@@ -13,7 +13,7 @@
             <ui:define name="content">
 
                 <h:form id="fsupervisores">
-
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
                     <p:panel header="Supervisores">
                         <p:dataTable   value="#{supervisoresBean.lista}" var="supervisores"
                                        paginator="true" rows="10"

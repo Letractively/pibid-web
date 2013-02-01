@@ -33,7 +33,7 @@
 
             <p:layoutUnit position="north" size="150"  >  
                 <div align="center" style="width: 100%">
-                    <p:graphicImage width="1200" url="/resources/img/painel_tcc.png" />
+                    <p:graphicImage width="1200" url="/resources/img/logopibid.jpg" />
                 </div>
             </p:layoutUnit>  
 
@@ -41,12 +41,15 @@
             <p:layoutUnit position="center"
                           >
                 <p:menubar rendered="#{usuarioBean.usuario!=null}">  
+
+                    <p:menuitem value="Início" url="/faces/sistema/liberado/home.xhtml" />
+
                     <p:submenu label="Cadastro" icon="ui-icon-document">  
                         <p:menuitem value="Bolsistas" url="/faces/sistema/cadastro/bolsista/lista.xhtml" />  
                         <p:menuitem value="Escolas Parceiras" url="/faces/sistema/cadastro/escolasparceiros/lista.xhtml" />  
                         <p:menuitem value="Supervisores" url="/faces/sistema/cadastro/supervisor/lista.xhtml" />  
                         <p:submenu label="Colaboradores" icon="ui-icon-contact">  
-                            <p:menuitem value="Professores" url="#" />  
+                            <p:menuitem value="Professores" url="/faces/sistema/cadastro/colaboradores/lista.xhtml" />  
                             <p:menuitem value="Alunos" url="#" />  
                         </p:submenu> 
                     </p:submenu>  

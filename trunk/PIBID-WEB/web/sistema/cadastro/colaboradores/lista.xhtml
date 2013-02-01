@@ -8,38 +8,38 @@
 
     <body>
 
-        <ui:composition template="/template/template.xhtml">
+        <ui:composition template="/sistema/template/template.xhtml">
 
             <ui:define name="content">
 
                 <h:form id="fbolsista">
-
-                    <p:panel header="Colaboradores">
-                        <p:dataTable   value="#{bolsistaBean.bolsistas}" var="bolsista"
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <p:panel header="Professores Colaboradores">
+                        <p:dataTable   value="#{profColaboradoresBean.lista}" var="prfclb"
                                        paginator="true" rows="10"
                                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                        rowsPerPageTemplate="5,10,15">  
 
-                            <p:column filterBy="#{bolsista.matricula}">
+                            <p:column filterBy="#{prfclb.matricula}">
                                 <f:facet name="header">  
                                     <h:outputText value="Matricula" />  
                                 </f:facet>  
-                                <h:outputLabel value="#{bolsista.matricula}"/>
+                                <h:outputLabel value="#{prfclb.matricula}"/>
                             </p:column>
 
-                            <p:column filterBy="#{bolsista.nome}" headerText="Nome">
+                            <p:column filterBy="#{prfclb.nome}" headerText="Nome">
                                 <f:facet name="header">  
                                     <h:outputText value="Nome" />  
                                 </f:facet>  
-                                <h:outputLabel value="#{bolsista.nome}"/>
+                                <h:outputLabel value="#{prfclb.nome}"/>
                             </p:column>
 
-                            <p:column filterBy="#{bolsista.situacao}" filterOptions="#{bolsistaBean.situacoes}"  
+                            <p:column filterBy="#{prfclb.situacao}" filterOptions="#{profColaboradoresBean.situacoes}"  
                                       filterMatchMode="exact" headerText="Situação">
                                 <f:facet name="header">  
                                     <h:outputText value="Situação" />  
                                 </f:facet>  
-                                <h:outputLabel value="#{bolsista.situacao}"/>
+                                <h:outputLabel value="#{prfclb.situacao}"/>
                             </p:column>
 
                             <p:column>
@@ -48,11 +48,11 @@
                                 </f:facet>  
                                 <p:commandButton 
                                     ajax="false" 
-                                    action="#{bolsistaBean.alterar}" 
+                                    action="#{profColaboradoresBean.alterar}" 
                                     value="Alterar">
                                     <f:setPropertyActionListener 
-                                        target="#{bolsistaBean.bolsista}" 
-                                        value="#{bolsista}"/>
+                                        target="#{profColaboradoresBean.professoresColaboradores}" 
+                                        value="#{prfclb}"/>
                                 </p:commandButton>
 
                             </p:column>
@@ -62,7 +62,7 @@
                         <div align="center">
                             <p:commandButton 
                                 ajax="false" 
-                                action="#{bolsistaBean.novo()}" 
+                                action="#{profColaboradoresBean.novo()}" 
                                 value="Incluir"/>
                         </div>
                     </h3>

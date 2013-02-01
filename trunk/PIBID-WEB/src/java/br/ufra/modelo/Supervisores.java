@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -39,30 +40,37 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Supervisores.findBySituacao", query = "SELECT s FROM Supervisores s WHERE s.situacao = :situacao"),
     @NamedQuery(name = "Supervisores.findByStatus", query = "SELECT s FROM Supervisores s WHERE s.status = :status")})
 public class Supervisores implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "supervisores")
-    private List<ProjetosSupervisores> projetosSupervisoresList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 45)
     @Column(name = "nome")
     private String nome;
+    @Size(max = 45)
     @Column(name = "email_principal")
     private String emailPrincipal;
+    @Size(max = 45)
     @Column(name = "email_secundario")
     private String emailSecundario;
+    @Size(max = 45)
     @Column(name = "telefone_residencial")
     private String telefoneResidencial;
+    @Size(max = 45)
     @Column(name = "telefone_celular")
     private String telefoneCelular;
+    @Size(max = 45)
     @Column(name = "endereco")
     private String endereco;
+    @Size(max = 45)
     @Column(name = "situacao")
     private String situacao;
     @Column(name = "status")
     private Integer status;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "supervisores")
+    private List<ProjetosSupervisores> projetosSupervisoresList;
 
     public Supervisores() {
     }
@@ -143,6 +151,15 @@ public class Supervisores implements Serializable {
         this.status = status;
     }
 
+    @XmlTransient
+    public List<ProjetosSupervisores> getProjetosSupervisoresList() {
+        return projetosSupervisoresList;
+    }
+
+    public void setProjetosSupervisoresList(List<ProjetosSupervisores> projetosSupervisoresList) {
+        this.projetosSupervisoresList = projetosSupervisoresList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -166,15 +183,6 @@ public class Supervisores implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.modelo.Supervisores[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public List<ProjetosSupervisores> getProjetosSupervisoresList() {
-        return projetosSupervisoresList;
-    }
-
-    public void setProjetosSupervisoresList(List<ProjetosSupervisores> projetosSupervisoresList) {
-        this.projetosSupervisoresList = projetosSupervisoresList;
     }
     
 }

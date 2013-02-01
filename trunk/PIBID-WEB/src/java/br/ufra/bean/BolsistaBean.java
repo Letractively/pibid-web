@@ -69,7 +69,7 @@ public class BolsistaBean {
     public String novo() {
         System.out.println("Novo Bolsista");
         bolsista = rn.novo();
-        System.out.println("Novo Bolsista 2");
+        System.out.println("Novo Bolsista 2"+bolsista);
         return "/sistema/cadastro/bolsista/novo.xhtml";
     }
 

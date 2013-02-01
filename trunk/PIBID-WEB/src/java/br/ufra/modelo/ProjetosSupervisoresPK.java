@@ -8,6 +8,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -16,9 +17,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ProjetosSupervisoresPK implements Serializable {
     @Basic(optional = false)
+    @NotNull
     @Column(name = "projetos_ID")
     private int projetosID;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "supervisores_ID")
     private int supervisoresID;
 
