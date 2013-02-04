@@ -24,13 +24,18 @@ public class ProjetosProfessoresColaboradoresPK implements Serializable {
     @NotNull
     @Column(name = "professores_colaboradores_ID")
     private int professorescolaboradoresID;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "alunos_colaboradores_ID")
+    private int alunoscolaboradoresID;
 
     public ProjetosProfessoresColaboradoresPK() {
     }
 
-    public ProjetosProfessoresColaboradoresPK(int projetosID, int professorescolaboradoresID) {
+    public ProjetosProfessoresColaboradoresPK(int projetosID, int professorescolaboradoresID, int alunoscolaboradoresID) {
         this.projetosID = projetosID;
         this.professorescolaboradoresID = professorescolaboradoresID;
+        this.alunoscolaboradoresID = alunoscolaboradoresID;
     }
 
     public int getProjetosID() {
@@ -49,11 +54,20 @@ public class ProjetosProfessoresColaboradoresPK implements Serializable {
         this.professorescolaboradoresID = professorescolaboradoresID;
     }
 
+    public int getAlunoscolaboradoresID() {
+        return alunoscolaboradoresID;
+    }
+
+    public void setAlunoscolaboradoresID(int alunoscolaboradoresID) {
+        this.alunoscolaboradoresID = alunoscolaboradoresID;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) projetosID;
         hash += (int) professorescolaboradoresID;
+        hash += (int) alunoscolaboradoresID;
         return hash;
     }
 
@@ -70,12 +84,15 @@ public class ProjetosProfessoresColaboradoresPK implements Serializable {
         if (this.professorescolaboradoresID != other.professorescolaboradoresID) {
             return false;
         }
+        if (this.alunoscolaboradoresID != other.alunoscolaboradoresID) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.ProjetosProfessoresColaboradoresPK[ projetosID=" + projetosID + ", professorescolaboradoresID=" + professorescolaboradoresID + " ]";
+        return "br.ufra.modelo.ProjetosProfessoresColaboradoresPK[ projetosID=" + projetosID + ", professorescolaboradoresID=" + professorescolaboradoresID + ", alunoscolaboradoresID=" + alunoscolaboradoresID + " ]";
     }
     
 }

@@ -30,7 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProjetosProfessoresColaboradores.findByProjetosID", query = "SELECT p FROM ProjetosProfessoresColaboradores p WHERE p.projetosProfessoresColaboradoresPK.projetosID = :projetosID"),
     @NamedQuery(name = "ProjetosProfessoresColaboradores.findByProfessorescolaboradoresID", query = "SELECT p FROM ProjetosProfessoresColaboradores p WHERE p.projetosProfessoresColaboradoresPK.professorescolaboradoresID = :professorescolaboradoresID"),
     @NamedQuery(name = "ProjetosProfessoresColaboradores.findByDataInicio", query = "SELECT p FROM ProjetosProfessoresColaboradores p WHERE p.dataInicio = :dataInicio"),
-    @NamedQuery(name = "ProjetosProfessoresColaboradores.findByDataFim", query = "SELECT p FROM ProjetosProfessoresColaboradores p WHERE p.dataFim = :dataFim")})
+    @NamedQuery(name = "ProjetosProfessoresColaboradores.findByDataFim", query = "SELECT p FROM ProjetosProfessoresColaboradores p WHERE p.dataFim = :dataFim"),
+    @NamedQuery(name = "ProjetosProfessoresColaboradores.findByAlunoscolaboradoresID", query = "SELECT p FROM ProjetosProfessoresColaboradores p WHERE p.projetosProfessoresColaboradoresPK.alunoscolaboradoresID = :alunoscolaboradoresID")})
 public class ProjetosProfessoresColaboradores implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -41,12 +42,15 @@ public class ProjetosProfessoresColaboradores implements Serializable {
     @Column(name = "data_fim")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataFim;
-    @JoinColumn(name = "projetos_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @JoinColumn(name = "alunos_colaboradores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Projetos projetos;
+    private AlunosColaboradores alunosColaboradores;
     @JoinColumn(name = "professores_colaboradores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private ProfessoresColaboradores professoresColaboradores;
+    @JoinColumn(name = "projetos_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Projetos projetos;
 
     public ProjetosProfessoresColaboradores() {
     }
@@ -55,8 +59,8 @@ public class ProjetosProfessoresColaboradores implements Serializable {
         this.projetosProfessoresColaboradoresPK = projetosProfessoresColaboradoresPK;
     }
 
-    public ProjetosProfessoresColaboradores(int projetosID, int professorescolaboradoresID) {
-        this.projetosProfessoresColaboradoresPK = new ProjetosProfessoresColaboradoresPK(projetosID, professorescolaboradoresID);
+    public ProjetosProfessoresColaboradores(int projetosID, int professorescolaboradoresID, int alunoscolaboradoresID) {
+        this.projetosProfessoresColaboradoresPK = new ProjetosProfessoresColaboradoresPK(projetosID, professorescolaboradoresID, alunoscolaboradoresID);
     }
 
     public ProjetosProfessoresColaboradoresPK getProjetosProfessoresColaboradoresPK() {
@@ -83,12 +87,12 @@ public class ProjetosProfessoresColaboradores implements Serializable {
         this.dataFim = dataFim;
     }
 
-    public Projetos getProjetos() {
-        return projetos;
+    public AlunosColaboradores getAlunosColaboradores() {
+        return alunosColaboradores;
     }
 
-    public void setProjetos(Projetos projetos) {
-        this.projetos = projetos;
+    public void setAlunosColaboradores(AlunosColaboradores alunosColaboradores) {
+        this.alunosColaboradores = alunosColaboradores;
     }
 
     public ProfessoresColaboradores getProfessoresColaboradores() {
@@ -97,6 +101,14 @@ public class ProjetosProfessoresColaboradores implements Serializable {
 
     public void setProfessoresColaboradores(ProfessoresColaboradores professoresColaboradores) {
         this.professoresColaboradores = professoresColaboradores;
+    }
+
+    public Projetos getProjetos() {
+        return projetos;
+    }
+
+    public void setProjetos(Projetos projetos) {
+        this.projetos = projetos;
     }
 
     @Override

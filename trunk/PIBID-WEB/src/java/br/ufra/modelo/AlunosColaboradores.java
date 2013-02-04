@@ -23,27 +23,33 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author marcos
  */
 @Entity
-@Table(name = "professores_colaboradores")
+@Table(name = "alunos_colaboradores")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProfessoresColaboradores.findAll", query = "SELECT p FROM ProfessoresColaboradores p"),
-    @NamedQuery(name = "ProfessoresColaboradores.findById", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.id = :id"),
-    @NamedQuery(name = "ProfessoresColaboradores.findByNome", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.nome = :nome"),
-    @NamedQuery(name = "ProfessoresColaboradores.findByEmailPrincipal", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.emailPrincipal = :emailPrincipal"),
-    @NamedQuery(name = "ProfessoresColaboradores.findByEmailSecundario", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.emailSecundario = :emailSecundario"),
-    @NamedQuery(name = "ProfessoresColaboradores.findByTelefoneResidencial", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.telefoneResidencial = :telefoneResidencial"),
-    @NamedQuery(name = "ProfessoresColaboradores.findByTelefoneCelular", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.telefoneCelular = :telefoneCelular"),
-    @NamedQuery(name = "ProfessoresColaboradores.findByEndereco", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.endereco = :endereco"),
-    @NamedQuery(name = "ProfessoresColaboradores.findByInstituicao", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.instituicao = :instituicao"),
-    @NamedQuery(name = "ProfessoresColaboradores.findBySituacao", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.situacao = :situacao"),
-    @NamedQuery(name = "ProfessoresColaboradores.findByStatus", query = "SELECT p FROM ProfessoresColaboradores p WHERE p.status = :status")})
-public class ProfessoresColaboradores implements Serializable {
+    @NamedQuery(name = "AlunosColaboradores.findAll", query = "SELECT a FROM AlunosColaboradores a"),
+    @NamedQuery(name = "AlunosColaboradores.findById", query = "SELECT a FROM AlunosColaboradores a WHERE a.id = :id"),
+    @NamedQuery(name = "AlunosColaboradores.findByMatricula", query = "SELECT a FROM AlunosColaboradores a WHERE a.matricula = :matricula"),
+    @NamedQuery(name = "AlunosColaboradores.findByNome", query = "SELECT a FROM AlunosColaboradores a WHERE a.nome = :nome"),
+    @NamedQuery(name = "AlunosColaboradores.findByEmailPrincipal", query = "SELECT a FROM AlunosColaboradores a WHERE a.emailPrincipal = :emailPrincipal"),
+    @NamedQuery(name = "AlunosColaboradores.findByEmailSecundario", query = "SELECT a FROM AlunosColaboradores a WHERE a.emailSecundario = :emailSecundario"),
+    @NamedQuery(name = "AlunosColaboradores.findByTelefoneResidencial", query = "SELECT a FROM AlunosColaboradores a WHERE a.telefoneResidencial = :telefoneResidencial"),
+    @NamedQuery(name = "AlunosColaboradores.findByTelefoneCelular", query = "SELECT a FROM AlunosColaboradores a WHERE a.telefoneCelular = :telefoneCelular"),
+    @NamedQuery(name = "AlunosColaboradores.findByEndereco", query = "SELECT a FROM AlunosColaboradores a WHERE a.endereco = :endereco"),
+    @NamedQuery(name = "AlunosColaboradores.findByInstituicao", query = "SELECT a FROM AlunosColaboradores a WHERE a.instituicao = :instituicao"),
+    @NamedQuery(name = "AlunosColaboradores.findBySituacao", query = "SELECT a FROM AlunosColaboradores a WHERE a.situacao = :situacao"),
+    @NamedQuery(name = "AlunosColaboradores.findByStatus", query = "SELECT a FROM AlunosColaboradores a WHERE a.status = :status")})
+public class AlunosColaboradores implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "matricula")
+    private String matricula;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -77,15 +83,16 @@ public class ProfessoresColaboradores implements Serializable {
     @Column(name = "status")
     private int status;
 
-    public ProfessoresColaboradores() {
+    public AlunosColaboradores() {
     }
 
-    public ProfessoresColaboradores(Integer id) {
+    public AlunosColaboradores(Integer id) {
         this.id = id;
     }
 
-    public ProfessoresColaboradores(Integer id, String nome, String situacao, int status) {
+    public AlunosColaboradores(Integer id, String matricula, String nome, String situacao, int status) {
         this.id = id;
+        this.matricula = matricula;
         this.nome = nome;
         this.situacao = situacao;
         this.status = status;
@@ -97,6 +104,14 @@ public class ProfessoresColaboradores implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
     public String getNome() {
@@ -181,10 +196,10 @@ public class ProfessoresColaboradores implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProfessoresColaboradores)) {
+        if (!(object instanceof AlunosColaboradores)) {
             return false;
         }
-        ProfessoresColaboradores other = (ProfessoresColaboradores) object;
+        AlunosColaboradores other = (AlunosColaboradores) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -193,7 +208,7 @@ public class ProfessoresColaboradores implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.ProfessoresColaboradores[ id=" + id + " ]";
+        return "br.ufra.modelo.AlunosColaboradores[ id=" + id + " ]";
     }
     
 }

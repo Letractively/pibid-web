@@ -14,32 +14,32 @@
 
                 <h:form id="fbolsista">
                     <p:growl id="growl" showDetail="true" sticky="true" /> 
-                    <p:panel header="Professores Colaboradores">
-                        <p:dataTable   value="#{profColaboradoresBean.lista}" var="prfclb"
+                    <p:panel header="Alunos Colaboradores">
+                        <p:dataTable   value="#{alunosColaboradoresBean.lista}" var="afclb"
                                        paginator="true" rows="10"
                                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                        rowsPerPageTemplate="5,10,15">  
 
-                            <p:column filterBy="#{prfclb.matricula}">
+                            <p:column filterBy="#{afclb.matricula}">
                                 <f:facet name="header">  
                                     <h:outputText value="Matricula" />  
                                 </f:facet>  
-                                <h:outputLabel value="#{prfclb.matricula}"/>
+                                <h:outputLabel value="#{afclb.matricula}"/>
                             </p:column>
 
-                            <p:column filterBy="#{prfclb.nome}" headerText="Nome">
+                            <p:column filterBy="#{afclb.nome}" headerText="Nome">
                                 <f:facet name="header">  
                                     <h:outputText value="Nome" />  
                                 </f:facet>  
-                                <h:outputLabel value="#{prfclb.nome}"/>
+                                <h:outputLabel value="#{afclb.nome}"/>
                             </p:column>
 
-                            <p:column filterBy="#{prfclb.situacao}" filterOptions="#{profColaboradoresBean.situacoes}"  
+                            <p:column filterBy="#{afclb.situacao}" filterOptions="#{alunosColaboradoresBean.situacoes}"  
                                       filterMatchMode="exact" headerText="Situação">
                                 <f:facet name="header">  
                                     <h:outputText value="Situação" />  
                                 </f:facet>  
-                                <h:outputLabel value="#{prfclb.situacao}"/>
+                                <h:outputLabel value="#{afclb.situacao}"/>
                             </p:column>
 
                             <p:column>
@@ -48,10 +48,10 @@
                                 </f:facet>  
                                 <p:commandButton 
                                     ajax="false" 
-                                    action="#{profColaboradoresBean.alterar}" 
+                                    action="#{alunosColaboradoresBean.alterar}" 
                                     value="Alterar">
                                     <f:setPropertyActionListener 
-                                        target="#{profColaboradoresBean.professoresColaboradores}" 
+                                        target="#{alunosColaboradoresBean.alunosColaboradores}" 
                                         value="#{prfclb}"/>
                                 </p:commandButton>
 
@@ -62,7 +62,7 @@
                         <div align="center">
                             <p:commandButton 
                                 ajax="false" 
-                                action="#{profColaboradoresBean.novo()}" 
+                                action="#{alunosColaboradoresBean.novo}" 
                                 value="Incluir"/>
                         </div>
                     </h3>

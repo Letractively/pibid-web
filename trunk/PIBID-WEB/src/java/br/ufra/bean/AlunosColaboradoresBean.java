@@ -4,8 +4,8 @@
  */
 package br.ufra.bean;
 
-import br.ufra.modelo.ProfessoresColaboradores;
-import br.ufra.rn.ProfessoresColaboradoresRN;
+import br.ufra.modelo.AlunosColaboradores;
+import br.ufra.rn.AlunosColaboradoresRN;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -20,45 +20,45 @@ import javax.faces.model.SelectItem;
  */
 @ManagedBean
 @RequestScoped
-public class ProfColaboradoresBean {
+public class AlunosColaboradoresBean {
 
-    private ProfessoresColaboradores professoresColaboradores = new ProfessoresColaboradores();
-    private ProfessoresColaboradoresRN rn = new ProfessoresColaboradoresRN();
-    private List<ProfessoresColaboradores> lista;
+    private AlunosColaboradores alunosColaboradores = new AlunosColaboradores();
+    private AlunosColaboradoresRN rn = new AlunosColaboradoresRN();
+    private List<AlunosColaboradores> lista;
     ArrayList<String> situacao = new ArrayList<String>();
 
-    public ProfessoresColaboradores getProfessoresColaboradores() {
-        return professoresColaboradores;
+    public AlunosColaboradores getAlunosColaboradores() {
+        return alunosColaboradores;
     }
 
-    public void setProfessoresColaboradores(ProfessoresColaboradores professoresColaboradores) {
-        this.professoresColaboradores = professoresColaboradores;
+    public void setAlunosColaboradores(AlunosColaboradores alunosColaboradores) {
+        this.alunosColaboradores = alunosColaboradores;
     }
 
-    public List<ProfessoresColaboradores> getLista() {
+    public List<AlunosColaboradores> getLista() {
         lista = rn.listarTodos();
         return lista;
     }
 
-    public void setLista(List<ProfessoresColaboradores> lista) {
+    public void setLista(List<AlunosColaboradores> lista) {
         this.lista = lista;
     }
 
     public String novo() {
-        professoresColaboradores = rn.novo();
-        return "/sistema/cadastro/colaboradores/professor/novo.xhtml";
+        alunosColaboradores = rn.novo();
+        return "/sistema/cadastro/colaboradores/aluno/novo.xhtml";
     }
 
     public String alterar() {
-        return "/sistema/cadastro/colaboradores/professor/novo.xhtml";
+        return "/sistema/cadastro/colaboradores/aluno/novo.xhtml";
     }
 
     public String listar() {
-        return "/sistema/cadastro/colaboradores/professor/lista.xhtml";
+        return "/sistema/cadastro/colaboradores/aluno/lista.xhtml";
     }
 
     public String cancelar() {
-        return "/sistema/cadastro/colaboradores/professor/lista.xhtml";
+        return "/sistema/cadastro/colaboradores/aluno/lista.xhtml";
     }
 
     public ArrayList<String> getSituacao() {
@@ -68,21 +68,22 @@ public class ProfColaboradoresBean {
     }
 
     public String salvar() {
-        professoresColaboradores.setStatus(0);
-        if (rn.salvar(professoresColaboradores)) {         
+        alunosColaboradores.setStatus(0);
+        if (rn.salvar(alunosColaboradores)) {
+
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operação realizada com sucesso!",
                     null));
-            return "/sistema/cadastro/colaboradores/professor/lista.xhtml";
+            return "/sistema/cadastro/colaboradores/aluno/lista.xhtml";
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_ERROR,
                     "Ocorreu um erro inesperado ao tentar salvar dados.",
                     null));
-            return "/sistema/cadastro/colaboradores/professor/novo.xhtml";
+            return "/sistema/cadastro/colaboradores/aluno/novo.xhtml";
         }
 
     }

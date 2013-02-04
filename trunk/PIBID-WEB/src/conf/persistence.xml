@@ -3,6 +3,7 @@
   <persistence-unit name="WPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <non-jta-data-source>pibid</non-jta-data-source>
+    <class>br.ufra.modelo.AlunosColaboradores</class>
     <class>br.ufra.modelo.Atividades</class>
     <class>br.ufra.modelo.Bolsistas</class>
     <class>br.ufra.modelo.EscolasParceiras</class>

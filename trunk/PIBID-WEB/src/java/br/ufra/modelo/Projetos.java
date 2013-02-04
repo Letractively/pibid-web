@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -104,7 +106,10 @@ public class Projetos implements Serializable {
     @NotNull
     @Column(name = "situacao")
     private boolean situacao;
-    @ManyToMany(mappedBy = "projetosList")
+    @JoinTable(name = "projetos_escolas_parceiras", joinColumns = {
+        @JoinColumn(name = "projetos_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "escolas_parceiras_ID", referencedColumnName = "ID")})
+    @ManyToMany
     private List<EscolasParceiras> escolasParceirasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
     private List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList;
