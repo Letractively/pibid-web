@@ -11,6 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -42,7 +43,7 @@ public class ProjetosBean {
 
     public String novo() {
         projetos = rn.novo();
-        return "/sistema/projeto/novo-projeto.xhtml";
+        return "/sistema/projetos/novo.xhtml";
     }
 
     public String alterar() {
@@ -50,7 +51,10 @@ public class ProjetosBean {
     }
 
     public String listar() {
-        return "/sistema/projeto/lista-projeto.xhtml";
+        return "/sistema/projetos/lista.xhtml";
+    }
+     public String cancelar() {
+        return "/sistema/projetos/lista.xhtml";
     }
 
     public String salvar() {
@@ -69,5 +73,15 @@ public class ProjetosBean {
         }
 
         return novo();
+    }
+    
+       private SelectItem[] situacoes;
+
+    public SelectItem[] getSituacoes() {
+        situacoes = new SelectItem[3];
+        situacoes[0] = new SelectItem("", "Selecione");
+        situacoes[1] = new SelectItem("Ativo", "Ativo");
+        situacoes[2] = new SelectItem("Inativo", "Inativo");
+        return situacoes;
     }
 }
