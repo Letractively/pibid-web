@@ -6,27 +6,20 @@ package br.ufra.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Projetos.findById", query = "SELECT p FROM Projetos p WHERE p.id = :id"),
     @NamedQuery(name = "Projetos.findByNome", query = "SELECT p FROM Projetos p WHERE p.nome = :nome"),
     @NamedQuery(name = "Projetos.findByTituloProjeto", query = "SELECT p FROM Projetos p WHERE p.tituloProjeto = :tituloProjeto"),
+    @NamedQuery(name = "Projetos.findByDataInicio", query = "SELECT p FROM Projetos p WHERE p.dataInicio = :dataInicio"),
     @NamedQuery(name = "Projetos.findByDataConclusao", query = "SELECT p FROM Projetos p WHERE p.dataConclusao = :dataConclusao"),
     @NamedQuery(name = "Projetos.findByCurso", query = "SELECT p FROM Projetos p WHERE p.curso = :curso"),
     @NamedQuery(name = "Projetos.findByNomeCoordenador", query = "SELECT p FROM Projetos p WHERE p.nomeCoordenador = :nomeCoordenador"),
@@ -51,7 +45,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Projetos.findByApresentacaoProposta", query = "SELECT p FROM Projetos p WHERE p.apresentacaoProposta = :apresentacaoProposta"),
     @NamedQuery(name = "Projetos.findByAcoesPrevistas", query = "SELECT p FROM Projetos p WHERE p.acoesPrevistas = :acoesPrevistas"),
     @NamedQuery(name = "Projetos.findByResultadosPretendidos", query = "SELECT p FROM Projetos p WHERE p.resultadosPretendidos = :resultadosPretendidos"),
-    @NamedQuery(name = "Projetos.findByCronograma", query = "SELECT p FROM Projetos p WHERE p.cronograma = :cronograma"),
     @NamedQuery(name = "Projetos.findBySituacao", query = "SELECT p FROM Projetos p WHERE p.situacao = :situacao")})
 public class Projetos implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -60,12 +53,15 @@ public class Projetos implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Size(max = 45)
+    @Size(max = 100)
     @Column(name = "nome")
     private String nome;
     @Size(max = 45)
     @Column(name = "titulo_projeto")
     private String tituloProjeto;
+    @Column(name = "data_inicio")
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
     @Column(name = "data_conclusao")
     @Temporal(TemporalType.DATE)
     private Date dataConclusao;
@@ -90,35 +86,19 @@ public class Projetos implements Serializable {
     @Size(max = 45)
     @Column(name = "curriculo_lattes_coordenador")
     private String curriculoLattesCoordenador;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "apresentacao_proposta")
     private String apresentacaoProposta;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "acoes_previstas")
     private String acoesPrevistas;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "resultados_pretendidos")
     private String resultadosPretendidos;
-    @Size(max = 45)
-    @Column(name = "cronograma")
-    private String cronograma;
     @Basic(optional = false)
     @NotNull
     @Column(name = "situacao")
     private boolean situacao;
-    @JoinTable(name = "projetos_escolas_parceiras", joinColumns = {
-        @JoinColumn(name = "projetos_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "escolas_parceiras_ID", referencedColumnName = "ID")})
-    @ManyToMany
-    private List<EscolasParceiras> escolasParceirasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
-    private List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetosID")
-    private List<Atividades> atividadesList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
-    private List<ProjetosSupervisores> projetosSupervisoresList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
-    private List<ProjetosBolsistas> projetosBolsistasList;
 
     public Projetos() {
     }
@@ -154,6 +134,14 @@ public class Projetos implements Serializable {
 
     public void setTituloProjeto(String tituloProjeto) {
         this.tituloProjeto = tituloProjeto;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
     public Date getDataConclusao() {
@@ -244,65 +232,12 @@ public class Projetos implements Serializable {
         this.resultadosPretendidos = resultadosPretendidos;
     }
 
-    public String getCronograma() {
-        return cronograma;
-    }
-
-    public void setCronograma(String cronograma) {
-        this.cronograma = cronograma;
-    }
-
     public boolean getSituacao() {
         return situacao;
     }
 
     public void setSituacao(boolean situacao) {
         this.situacao = situacao;
-    }
-
-    @XmlTransient
-    public List<EscolasParceiras> getEscolasParceirasList() {
-        return escolasParceirasList;
-    }
-
-    public void setEscolasParceirasList(List<EscolasParceiras> escolasParceirasList) {
-        this.escolasParceirasList = escolasParceirasList;
-    }
-
-    @XmlTransient
-    public List<ProjetosProfessoresColaboradores> getProjetosProfessoresColaboradoresList() {
-        return projetosProfessoresColaboradoresList;
-    }
-
-    public void setProjetosProfessoresColaboradoresList(List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList) {
-        this.projetosProfessoresColaboradoresList = projetosProfessoresColaboradoresList;
-    }
-
-    @XmlTransient
-    public List<Atividades> getAtividadesList() {
-        return atividadesList;
-    }
-
-    public void setAtividadesList(List<Atividades> atividadesList) {
-        this.atividadesList = atividadesList;
-    }
-
-    @XmlTransient
-    public List<ProjetosSupervisores> getProjetosSupervisoresList() {
-        return projetosSupervisoresList;
-    }
-
-    public void setProjetosSupervisoresList(List<ProjetosSupervisores> projetosSupervisoresList) {
-        this.projetosSupervisoresList = projetosSupervisoresList;
-    }
-
-    @XmlTransient
-    public List<ProjetosBolsistas> getProjetosBolsistasList() {
-        return projetosBolsistasList;
-    }
-
-    public void setProjetosBolsistasList(List<ProjetosBolsistas> projetosBolsistasList) {
-        this.projetosBolsistasList = projetosBolsistasList;
     }
 
     @Override

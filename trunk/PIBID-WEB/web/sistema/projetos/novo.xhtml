@@ -19,8 +19,8 @@
                         value="Cancelar"/>
                 </h:form>
 
-                <h:form id="Cargo">
-
+                <h:form id="formProjeto">
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
 
                     <p:panel
                         id="pprincipal"
@@ -31,21 +31,9 @@
                             columns="3">  
 
                             <h:outputLabel
-                                id="olmatricula"
-                                for="matriculaBolsista"
-                                value="Matricula: * "/>
-                            <p:inputText
-                                id="matriculaBolsista"
-                                value="#{projetosBean.projetos.id}"
-                                label="Matricula"
-                                required="true"
-                                style="width: 200px"/>
-                            <p:message id="erroMatriculaBolsista" for="matriculaBolsista"/>
-
-                            <h:outputLabel
                                 id="olnome"
                                 for="itnome"
-                                value="Nome: * "/>
+                                value="Nome da Instituição: * "/>
                             <p:inputText
                                 id="itnome"
                                 value="#{projetosBean.projetos.nome}"
@@ -55,17 +43,71 @@
                             <p:message id="erroNome" for="itnome"/>
 
                             <h:outputLabel
+                                id="oltitulo"
+                                for="itemailprinc"
+                                value="Título: * "/>
+                            <p:inputText
+                                id="itemtitulo"
+                                value="#{projetosBean.projetos.tituloProjeto}"
+                                label="Título"
+                                required="true"
+                                style="width: 200px"/>
+                            <p:message id="erroTitulo" for="itemtitulo"/>
+
+                            <h:outputLabel
+                                id="oldatainicial"
+                                for="dataIni"
+                                value="Data Inicio: "/>
+                            <p:inputMask mask="99/99/9999" id="msk_Data" size="15"
+                                         value="#{projetosBean.projetos.dataInicio}"
+                                         required="true" requiredMessage="O campo Data Início é obrigatório.">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                            </p:inputMask>
+                            <p:message id="erroDataIni" for="dataIni"/>
+
+                            <h:outputLabel
+                                id="oldatainicial"
+                                for="dataFim"
+                                value="Data de Conclusão: "/>
+                            <p:inputMask mask="99/99/9999" id="msk_Data" size="15"
+                                         value="#{projetosBean.projetos.dataConclusao}"
+                                         required="true" requiredMessage="O campo Data de Conclusão é obrigatório.">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                            </p:inputMask>
+                            <p:message id="erroDataIni" for="dataFim"/>
+
+                            <h:outputLabel
+                                id="olcurso"
+                                for="itCurso"
+                                value="Curso: "/>
+                            <p:inputText
+                                id="idCurso"
+                                value="#{projetosBean.projetos.curso}"
+                                label="Curso"
+                                />
+                            <p:message id="erroCurso" for="idCurso"/>
+
+                            <h:outputLabel
+                                id="olcoordenador"
+                                for="idCoord"
+                                value="Nome do Coordenador: "/>
+                            <p:inputText
+                                id="idCoord"
+                                value="#{projetosBean.projetos.nomeCoordenador}"
+                                label="Nome do Coordenador"/>
+                            <p:message id="erroCoord" for="idCoord"/>
+
+                            <h:outputLabel
                                 id="olemailprinc"
                                 for="itemailprinc"
                                 value="Email principal: * "/>
                             <p:inputText
                                 id="itemailprinc"
-                                value="#{projetosBean.projetos.emailPrincipal}"
+                                value="#{projetosBean.projetos.emailPrincipalCoordenador}"
                                 label="Email Principal"
                                 required="true"
                                 style="width: 200px"/>
                             <p:message id="erroEmailprinc" for="itemailprinc"/>
-
 
                             <h:outputLabel
                                 id="olemailsec"
@@ -73,22 +115,18 @@
                                 value="Email secundário: "/>
                             <p:inputText
                                 id="itemailsec"
-                                value="#{projetosBean.projetos.emailSecundario}"
+                                value="#{projetosBean.projetos.emailSecundarioCoordenador}"
                                 label="Email Secundário"
                                 style="width: 200px"/>
-                            <p:message id="erroEmailsec" for="itemailsec"/>
+                            <p:message id="erroEmailsec" for="itemailsec"/>                                                              
 
-                         
-                      
-                            
-                            
                             <h:outputLabel
                                 id="oltelefoneres"
                                 for="ittelefoneres"
                                 value="Telefone Residencial: "/>
                             <p:inputMask
                                 id="ittelefoneres"
-                                value="#{projetosBean.projetos.telefoneResidencial}"
+                                value="#{projetosBean.projetos.telefoneResidencialCoordenador}"
                                 label="Telefone Residencial"
                                 mask="(99) 9999-9999"
                                 style="width: 200px"/>
@@ -100,22 +138,52 @@
                                 value="Telefone Celular: "/>
                             <p:inputMask
                                 id="ittelefonecel"
-                                value="#{projetosBean.projetos.telefoneCelular}"
+                                value="#{projetosBean.projetos.telefoneCelularCoordenador}"
                                 label="Telefone Celular"
                                 mask="(99) 9999-9999"
                                 style="width: 200px"/>
                             <p:message id="errotelefonecel" for="ittelefonecel"/>
 
                             <h:outputLabel
-                                id="olendereco"
-                                for="itendereco"
-                                value="Endereço: "/>
+                                id="idlattes"
+                                for="itemlattes"
+                                value="Link Lattes: "/>
                             <p:inputText
-                                id="itendereco"
-                                value="#{projetosBean.projetos.endereco}"
-                                label="Endereço"
+                                id="idcvlattes"
+                                value="#{projetosBean.projetos.curriculoLattesCoordenador}"
+                                label="Currículum Lattes"
                                 style="width: 200px"/>
-                            <p:message id="erroendereco" for="itendereco"/>
+                            <p:message id="erroLattes" for="itemlattes"/>                                                              
+
+                            <h:outputLabel
+                                id="idprop"
+                                for="itemProposta"
+                                value="Proposta: "/>
+                            <p:inputTextarea
+                                id="idProposta"
+                                value="#{projetosBean.projetos.apresentacaoProposta}"
+                                />
+                            <p:message id="erroLattes" for="itemProposta"/>   
+
+                            <h:outputLabel
+                                id="acao"
+                                for="itemAcao"
+                                value="Ações Previstas: "/>
+                            <p:inputTextarea
+                                id="idProposta"
+                                value="#{projetosBean.projetos.acoesPrevistas}"
+                                />
+                            <p:message id="erroAcao" for="itemAcao"/>   
+
+                            <h:outputLabel
+                                id="result"
+                                for="itemResultado"
+                                value="Resultados Pretendidos: "/>
+                            <p:inputTextarea
+                                id="idProposta"
+                                value="#{projetosBean.projetos.resultadosPretendidos}"
+                                />
+                            <p:message id="erroAcao" for="itemResultado"/>   
 
                             <h:outputLabel
                                 id="olsituacao"
@@ -135,7 +203,7 @@
                                 id="cbsalvar"
                                 value="Salvar" 
                                 action="#{projetosBean.salvar}"
-                                update="Cargo">
+                                update="growl">
 
 
                             </p:commandButton>

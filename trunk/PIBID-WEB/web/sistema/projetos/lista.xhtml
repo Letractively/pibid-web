@@ -13,7 +13,7 @@
             <ui:define name="content">
 
                 <h:form id="fprojetos">
-
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
                     <p:panel header="Bolsistas">
                         <p:dataTable   value="#{projetosBean.lista}" var="projetos"
                                        paginator="true" rows="10"
@@ -32,6 +32,13 @@
                                     <h:outputText value="Nome" />  
                                 </f:facet>  
                                 <h:outputLabel value="#{projetos.nome}"/>
+                            </p:column>
+
+                            <p:column filterBy="#{projetos.tituloProjeto}" headerText="Título">
+                                <f:facet name="header">  
+                                    <h:outputText value="Título" />  
+                                </f:facet>  
+                                <h:outputLabel value="#{projetos.tituloProjeto}"/>
                             </p:column>
 
                             <p:column filterBy="#{projetos.situacao}" filterOptions="#{projetosBean.situacoes}"  
@@ -62,7 +69,7 @@
                         <div align="center">
                             <p:commandButton 
                                 ajax="false" 
-                                action="#{projetosBean.novo()}" 
+                                action="#{projetosBean.novo}" 
                                 value="Incluir"/>
                         </div>
                     </h3>
