@@ -2,7 +2,7 @@
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
   <persistence-unit name="WPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <non-jta-data-source>pibid</non-jta-data-source>
+    <non-jta-data-source>rafaelst_pibid</non-jta-data-source>
     <class>br.ufra.modelo.AlunosColaboradores</class>
     <class>br.ufra.modelo.Atividades</class>
     <class>br.ufra.modelo.Bolsistas</class>
@@ -24,9 +24,9 @@
       <property name="hibernate.c3p0.timeout" value="300"/>
       <property name="hibernate.c3p0.max_statements" value="50"/>
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
-      <property name="hibernate.connection.username" value="root"/>
-      <property name="hibernate.connection.password" value="12345"/>
-      <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/pibid"/>
+      <property name="hibernate.connection.username" value="rafaelst_pibid01"/>
+      <property name="hibernate.connection.password" value="pibido1"/>
+      <property name="hibernate.connection.url" value="jdbc:mysql://quati.net:3306/rafaelst_pibid"/>
     </properties>
   </persistence-unit>
 </persistence>
