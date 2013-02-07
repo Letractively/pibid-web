@@ -6,20 +6,25 @@ package br.ufra.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -56,7 +61,9 @@ public class Projetos implements Serializable {
     @Size(max = 100)
     @Column(name = "nome")
     private String nome;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "titulo_projeto")
     private String tituloProjeto;
     @Column(name = "data_inicio")
@@ -99,6 +106,16 @@ public class Projetos implements Serializable {
     @NotNull
     @Column(name = "situacao")
     private int situacao;
+    @ManyToMany(mappedBy = "projetosList")
+    private List<EscolasParceiras> escolasParceirasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetosID")
+    private List<Atividades> atividadesList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<ProjetosSupervisores> projetosSupervisoresList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<ProjetosBolsistas> projetosBolsistasList;
 
     public Projetos() {
     }
@@ -107,8 +124,9 @@ public class Projetos implements Serializable {
         this.id = id;
     }
 
-    public Projetos(Integer id, int situacao) {
+    public Projetos(Integer id, String tituloProjeto, int situacao) {
         this.id = id;
+        this.tituloProjeto = tituloProjeto;
         this.situacao = situacao;
     }
 
@@ -238,6 +256,51 @@ public class Projetos implements Serializable {
 
     public void setSituacao(int situacao) {
         this.situacao = situacao;
+    }
+
+    @XmlTransient
+    public List<EscolasParceiras> getEscolasParceirasList() {
+        return escolasParceirasList;
+    }
+
+    public void setEscolasParceirasList(List<EscolasParceiras> escolasParceirasList) {
+        this.escolasParceirasList = escolasParceirasList;
+    }
+
+    @XmlTransient
+    public List<ProjetosProfessoresColaboradores> getProjetosProfessoresColaboradoresList() {
+        return projetosProfessoresColaboradoresList;
+    }
+
+    public void setProjetosProfessoresColaboradoresList(List<ProjetosProfessoresColaboradores> projetosProfessoresColaboradoresList) {
+        this.projetosProfessoresColaboradoresList = projetosProfessoresColaboradoresList;
+    }
+
+    @XmlTransient
+    public List<Atividades> getAtividadesList() {
+        return atividadesList;
+    }
+
+    public void setAtividadesList(List<Atividades> atividadesList) {
+        this.atividadesList = atividadesList;
+    }
+
+    @XmlTransient
+    public List<ProjetosSupervisores> getProjetosSupervisoresList() {
+        return projetosSupervisoresList;
+    }
+
+    public void setProjetosSupervisoresList(List<ProjetosSupervisores> projetosSupervisoresList) {
+        this.projetosSupervisoresList = projetosSupervisoresList;
+    }
+
+    @XmlTransient
+    public List<ProjetosBolsistas> getProjetosBolsistasList() {
+        return projetosBolsistasList;
+    }
+
+    public void setProjetosBolsistasList(List<ProjetosBolsistas> projetosBolsistasList) {
+        this.projetosBolsistasList = projetosBolsistasList;
     }
 
     @Override
