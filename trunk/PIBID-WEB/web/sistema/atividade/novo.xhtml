@@ -15,20 +15,16 @@
                     <p:commandButton 
                         id="cbcancelar"
                         ajax="false" 
-                        action="#{alunosColaboradoresBean.cancelar}" 
+                        action="#{bolsistaBean.cancelar}" 
                         value="Cancelar"/>
                 </h:form>
 
                 <h:form id="Cargo">
 
-                    <p:growl id="growl" showDetail="true" sticky="true" /> 
-                    <h:inputHidden 
-                        id="ihcardapioid"
-                        value="#{alunosColaboradoresBean.alunosColaboradores.id}" 
-                        />
+
                     <p:panel
                         id="pprincipal"
-                        header="Aluno Colaborador">
+                        header="Bolsista">
 
                         <h:panelGrid 
                             id="pgprincipal"
@@ -40,7 +36,7 @@
                                 value="Matricula: * "/>
                             <p:inputText
                                 id="matriculaBolsista"
-                                value="#{alunosColaboradoresBean.alunosColaboradores.matricula}"
+                                value="#{bolsistaBean.bolsista.matricula}"
                                 label="Matricula"
                                 required="true"
                                 style="width: 200px"/>
@@ -52,7 +48,7 @@
                                 value="Nome: * "/>
                             <p:inputText
                                 id="itnome"
-                                value="#{alunosColaboradoresBean.alunosColaboradores.nome}"
+                                value="#{bolsistaBean.bolsista.nome}"
                                 label="Nome"
                                 required="true"
                                 style="width: 200px"/>
@@ -64,12 +60,11 @@
                                 value="Email principal: * "/>
                             <p:inputText
                                 id="itemailprinc"
-                                value="#{alunosColaboradoresBean.alunosColaboradores.emailPrincipal}"
+                                value="#{bolsistaBean.bolsista.emailPrincipal}"
                                 label="Email Principal"
                                 required="true"
                                 style="width: 200px"/>
                             <p:message id="erroEmailprinc" for="itemailprinc"/>
-
 
                             <h:outputLabel
                                 id="olemailsec"
@@ -77,26 +72,22 @@
                                 value="Email secundário: "/>
                             <p:inputText
                                 id="itemailsec"
-                                value="#{alunosColaboradoresBean.alunosColaboradores.emailSecundario}"
+                                value="#{bolsistaBean.bolsista.emailSecundario}"
                                 label="Email Secundário"
                                 style="width: 200px"/>
-                            <p:message id="erroEmailsec" for="itemailsec"/>
-
-                            <h:outputLabel
-                                id="oltelefoneres"
-                                for="ittelefoneres"
-                                value="Telefone Residencial: "/>
+                            <p:message id="erroEmailsec" for="itemailsec"/>                                                              
+                            
                             <h:outputLabel
                                 id="oltelefoneres"
                                 for="ittelefoneres"
                                 value="Telefone Residencial: "/>
                             <p:inputMask
                                 id="ittelefoneres"
-                                value="#{alunosColaboradoresBean.alunosColaboradores.telefoneResidencial}"
+                                value="#{bolsistaBean.bolsista.telefoneResidencial}"
                                 label="Telefone Residencial"
                                 mask="(99) 9999-9999"
                                 style="width: 200px"/>
-                            <p:message id="errotelefoneres" for="oltelefoneres"/>
+                            <p:message id="errotelefoneres" for="ittelefoneres"/>
 
                             <h:outputLabel
                                 id="oltelefonecel"
@@ -104,11 +95,11 @@
                                 value="Telefone Celular: "/>
                             <p:inputMask
                                 id="ittelefonecel"
-                                value="#{alunosColaboradoresBean.alunosColaboradores.telefoneCelular}"
+                                value="#{bolsistaBean.bolsista.telefoneCelular}"
                                 label="Telefone Celular"
                                 mask="(99) 9999-9999"
                                 style="width: 200px"/>
-                            <p:message id="errotelefonecel" for="oltelefonecel"/>
+                            <p:message id="errotelefonecel" for="ittelefonecel"/>
 
                             <h:outputLabel
                                 id="olendereco"
@@ -116,7 +107,7 @@
                                 value="Endereço: "/>
                             <p:inputText
                                 id="itendereco"
-                                value="#{alunosColaboradoresBean.alunosColaboradores.endereco}"
+                                value="#{bolsistaBean.bolsista.endereco}"
                                 label="Endereço"
                                 style="width: 200px"/>
                             <p:message id="erroendereco" for="itendereco"/>
@@ -126,10 +117,10 @@
                                 for="somsituacao"
                                 value="Situação: "/>
                             <p:selectOneMenu
-                                id="somsituacao" value="#{alunosColaboradoresBean.alunosColaboradores.situacao}"
-                                label="#{alunosColaboradoresBean.situacao.toString}"
+                                id="somsituacao" value="#{bolsistaBean.bolsista.situacao}"
+                                label="#{bolsistaBean.situacao.toString}"
                                 style="width: 200px">
-                                <f:selectItems value="#{alunosColaboradoresBean.situacao}"/>
+                                <f:selectItems value="#{bolsistaBean.situacao}"/>
                             </p:selectOneMenu>
                             <p:message id="errosituacao" for="somsituacao"/>
 
@@ -138,8 +129,9 @@
                                 ajax="false" 
                                 id="cbsalvar"
                                 value="Salvar" 
-                                action="#{alunosColaboradoresBean.salvar}"
-                                update="growl">
+                                action="#{bolsistaBean.salvar}"
+                                update="Cargo">
+
 
                             </p:commandButton>
                         </h:panelGrid>  

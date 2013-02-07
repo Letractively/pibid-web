@@ -102,10 +102,9 @@ public class Projetos implements Serializable {
     @Size(max = 255)
     @Column(name = "resultados_pretendidos")
     private String resultadosPretendidos;
-    @Basic(optional = false)
-    @NotNull
+    @Size(max = 45)
     @Column(name = "situacao")
-    private int situacao;
+    private String situacao;
     @ManyToMany(mappedBy = "projetosList")
     private List<EscolasParceiras> escolasParceirasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
@@ -124,10 +123,9 @@ public class Projetos implements Serializable {
         this.id = id;
     }
 
-    public Projetos(Integer id, String tituloProjeto, int situacao) {
+    public Projetos(Integer id, String tituloProjeto) {
         this.id = id;
         this.tituloProjeto = tituloProjeto;
-        this.situacao = situacao;
     }
 
     public Integer getId() {
@@ -250,11 +248,11 @@ public class Projetos implements Serializable {
         this.resultadosPretendidos = resultadosPretendidos;
     }
 
-    public int getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(int situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
 
@@ -325,7 +323,7 @@ public class Projetos implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.Projetos[ id=" + id + " ]";
+        return "br.ufra.rn.Projetos[ id=" + id + " ]";
     }
     
 }

@@ -223,7 +223,7 @@ public class AlunosColaboradores implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.AlunosColaboradores[ id=" + id + " ]";
+        return "br.ufra.rn.AlunosColaboradores[ id=" + id + " ]";
     }
     
 }

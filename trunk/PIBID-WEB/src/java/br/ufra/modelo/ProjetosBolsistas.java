@@ -121,7 +121,7 @@ public class ProjetosBolsistas implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.ProjetosBolsistas[ projetosBolsistasPK=" + projetosBolsistasPK + " ]";
+        return "br.ufra.rn.ProjetosBolsistas[ projetosBolsistasPK=" + projetosBolsistasPK + " ]";
     }
     
 }

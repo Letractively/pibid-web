@@ -22,6 +22,7 @@ public class ProjetosRN {
 
     public boolean salvar(Projetos x) {
         if (x.getId() == null) {
+            dao.excluir(x);
             return dao.criar(x);
         } else {
             return dao.alterar(x);

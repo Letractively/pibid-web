@@ -36,5 +36,9 @@ public class AtividadesRN {
         return dao.obterTodosAtivo(Atividades.class, x);
     }
 
+    public List listarTodos() {
+        return dao.obterTodos(Atividades.class);
+    }
+
 
 }

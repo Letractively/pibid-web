@@ -46,8 +46,7 @@
                                 <f:facet name="header">  
                                     <h:outputText value="Situação" />  
                                 </f:facet>  
-                                <h:outputLabel rendered="#{projetos.situacao == 1}" value="Ativo"/>
-                                <h:outputLabel rendered="#{projetos.situacao == 0}" value="Inativo"/>
+                                <h:outputLabel value="#{projetos.situacao}"/>
                             </p:column>
 
                             <p:column>

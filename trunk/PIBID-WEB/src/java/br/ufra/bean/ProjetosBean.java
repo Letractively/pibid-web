@@ -87,9 +87,9 @@ public class ProjetosBean {
 
     public SelectItem[] getSituacoes() {
         situacoes = new SelectItem[3];
-        situacoes[0] = new SelectItem("", "Selecione");
-        situacoes[1] = new SelectItem("1", "Ativo");
-        situacoes[2] = new SelectItem("0", "Inativo");
+        situacoes[0] = new SelectItem("selecione", "Selecione");
+        situacoes[1] = new SelectItem("Ativo", "Ativo");
+        situacoes[2] = new SelectItem("Inativo", "Inativo");
         return situacoes;
     }
 }

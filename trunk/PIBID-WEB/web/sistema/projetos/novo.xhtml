@@ -193,10 +193,9 @@
                                 id="somsituacao" value="#{projetosBean.projetos.situacao}"
                                 label="#{projetosBean.situacao.toString}"
                                 style="width: 200px">
-                                <f:selectItem itemLabel="Ativo" itemValue="1"/>
-                                <f:selectItem itemLabel="Inativo" itemValue="0"/>
+                                <f:selectItems value="#{projetosBean.situacao}"/>
                             </p:selectOneMenu>
-                            <p:message id="errosituacao" for="olsituacao"/>
+                            <p:message id="errosituacao" for="somsituacao"/>
 
 
                             <p:commandButton 

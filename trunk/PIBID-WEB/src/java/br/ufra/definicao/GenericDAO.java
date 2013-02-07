@@ -128,6 +128,7 @@ public class GenericDAO<T> implements InterfaceDAO<T> {
         return (List<T>) q.getResultList();
     }
 
+    @Override
     public List<T> obterTodos(Class<T> classe) {
         String query = classe.getSimpleName() + ".findAll";
         Query q = em.createNamedQuery(query);

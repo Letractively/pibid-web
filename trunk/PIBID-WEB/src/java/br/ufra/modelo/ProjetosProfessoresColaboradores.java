@@ -133,7 +133,7 @@ public class ProjetosProfessoresColaboradores implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.ProjetosProfessoresColaboradores[ projetosProfessoresColaboradoresPK=" + projetosProfessoresColaboradoresPK + " ]";
+        return "br.ufra.rn.ProjetosProfessoresColaboradores[ projetosProfessoresColaboradoresPK=" + projetosProfessoresColaboradoresPK + " ]";
     }
     
 }

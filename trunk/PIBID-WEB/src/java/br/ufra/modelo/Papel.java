@@ -107,7 +107,7 @@ public class Papel implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.Papel[ id=" + id + " ]";
+        return "br.ufra.rn.Papel[ id=" + id + " ]";
     }
     
 }

@@ -104,7 +104,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.Usuario[ login=" + login + " ]";
+        return "br.ufra.rn.Usuario[ login=" + login + " ]";
     }
     
 }

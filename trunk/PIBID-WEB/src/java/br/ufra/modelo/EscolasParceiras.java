@@ -252,7 +252,7 @@ public class EscolasParceiras implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.EscolasParceiras[ id=" + id + " ]";
+        return "br.ufra.rn.EscolasParceiras[ id=" + id + " ]";
     }
     
 }

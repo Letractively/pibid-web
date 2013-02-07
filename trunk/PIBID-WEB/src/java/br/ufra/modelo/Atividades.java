@@ -183,7 +183,7 @@ public class Atividades implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.Atividades[ id=" + id + " ]";
+        return "br.ufra.rn.Atividades[ id=" + id + " ]";
     }
     
 }

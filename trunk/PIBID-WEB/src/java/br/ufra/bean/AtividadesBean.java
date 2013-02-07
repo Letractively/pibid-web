@@ -19,7 +19,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @RequestScoped
 public class AtividadesBean {
-    
+
     private Atividades atividades = new Atividades();
     private AtividadesRN rn = new AtividadesRN();
     private List<Atividades> lista;
@@ -39,35 +39,39 @@ public class AtividadesBean {
     public void setLista(List<Atividades> lista) {
         this.lista = lista;
     }
-    
-    public String novo(){
+
+    public String novo() {
         atividades = rn.novo();
-        return "/sistema/atividade/novo-atividade.xhtml";
+        return "/sistema/atividade/novo.xhtml";
     }
-    
-    public String alterar(){
-        return "/sistema/atividade/novo-atividade.xhtml";
+
+    public String alterar() {
+        return "/sistema/atividade/novo.xhtml";
     }
-    
-    public String listar(){
-        return "/sistema/atividade/lista-atividade.xhtml";
+
+    public String listar() {
+        return "/sistema/atividade/lista.xhtml";
     }
-    
-    public String salvar(){
-        if (rn.salvar(atividades)){
+
+    public String cancelar() {
+        return "/sistema/cadastro/bolsista/lista.xhtml";
+    }
+
+    public String salvar() {
+        if (rn.salvar(atividades)) {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operação realizada com sucesso!",
                     null));
-        } else{
+        } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_ERROR,
                     "Ocorreu um erro inesperado ao tentar salvar dados.",
                     null));
         }
-        
+
         return novo();
     }
 }

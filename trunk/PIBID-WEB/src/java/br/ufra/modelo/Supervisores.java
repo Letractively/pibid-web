@@ -182,7 +182,7 @@ public class Supervisores implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.Supervisores[ id=" + id + " ]";
+        return "br.ufra.rn.Supervisores[ id=" + id + " ]";
     }
     
 }

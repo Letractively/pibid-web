@@ -75,7 +75,7 @@ public class ProjetosSupervisoresPK implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.ProjetosSupervisoresPK[ projetosID=" + projetosID + ", supervisoresID=" + supervisoresID + " ]";
+        return "br.ufra.rn.ProjetosSupervisoresPK[ projetosID=" + projetosID + ", supervisoresID=" + supervisoresID + " ]";
     }
     
 }

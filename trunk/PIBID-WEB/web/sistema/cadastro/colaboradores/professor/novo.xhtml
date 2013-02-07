@@ -74,24 +74,30 @@
                                 id="oltelefoneres"
                                 for="ittelefoneres"
                                 value="Telefone Residencial: "/>
-                            <p:inputText
+                            <h:outputLabel
+                                id="oltelefoneres"
+                                for="ittelefoneres"
+                                value="Telefone Residencial: "/>
+                            <p:inputMask
                                 id="ittelefoneres"
                                 value="#{profColaboradoresBean.professoresColaboradores.telefoneResidencial}"
                                 label="Telefone Residencial"
+                                mask="(99) 9999-9999"
                                 style="width: 200px"/>
-                            <p:message id="errotelefoneres" for="ittelefoneres"/>
+                            <p:message id="errotelefoneres" for="oltelefoneres"/>
 
                             <h:outputLabel
                                 id="oltelefonecel"
                                 for="ittelefonecel"
                                 value="Telefone Celular: "/>
-                            <p:inputText
+                            <p:inputMask
                                 id="ittelefonecel"
                                 value="#{profColaboradoresBean.professoresColaboradores.telefoneCelular}"
                                 label="Telefone Celular"
+                                mask="(99) 9999-9999"
                                 style="width: 200px"/>
-                            <p:message id="errotelefonecel" for="ittelefonecel"/>
-
+                            <p:message id="errotelefonecel" for="oltelefonecel"/>
+                            
                             <h:outputLabel
                                 id="olendereco"
                                 for="itendereco"

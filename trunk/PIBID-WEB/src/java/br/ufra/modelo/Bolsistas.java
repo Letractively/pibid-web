@@ -195,7 +195,7 @@ public class Bolsistas implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.modelo.Bolsistas[ matricula=" + matricula + " ]";
+        return "br.ufra.rn.Bolsistas[ matricula=" + matricula + " ]";
     }
     
 }
