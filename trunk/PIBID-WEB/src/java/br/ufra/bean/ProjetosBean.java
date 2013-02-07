@@ -49,7 +49,7 @@ public class ProjetosBean {
     }
 
     public String alterar() {
-        return "/sistema/projetos/novo.xhtml";
+        return "/sistema/projetos/informacao.xhtml";
     }
 
     public String listar() {
@@ -59,20 +59,22 @@ public class ProjetosBean {
         return "/sistema/projetos/lista.xhtml";
     }
 
-    public ArrayList<String> getSituacao() {
-        situacao.add("Ativo");
-        situacao.add("Inativo");
-        return situacao;
+        public List<SelectItem> getSituacao() {
+            List<SelectItem> itens = new ArrayList<SelectItem>();
+            itens.add(new SelectItem(0, "Inativo"));
+            itens.add(new SelectItem(1, "Ativo"));
+        
+        return itens;
     }
 
     public String salvar() {
-        if (rn.salvar(projetos)) {         
+              if (rn.salvar(projetos)) {         
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operação realizada com sucesso!",
                     null));
-            return "/sistema/projetos/lista.xhtml";
+            return "/sistema/projetos/informacao.xhtml";
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
