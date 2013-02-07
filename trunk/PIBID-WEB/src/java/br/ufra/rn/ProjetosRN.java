@@ -13,7 +13,7 @@ import java.util.List;
  * @author marcos
  */
 public class ProjetosRN {
-   
+
     private final ProjetosDAO dao = new ProjetosDAO();
 
     public Projetos novo() {
@@ -29,12 +29,14 @@ public class ProjetosRN {
     }
 
     public Projetos buscar(Integer id) {
-        return dao.obter(Projetos.class,id);
+        return dao.obter(Projetos.class, id);
     }
 
     public List listarAtivos(String x) {
         return dao.obterTodosAtivo(Projetos.class, x);
     }
 
-
+    public List listarTodos() {
+        return dao.obterTodos(Projetos.class);
+    }
 }

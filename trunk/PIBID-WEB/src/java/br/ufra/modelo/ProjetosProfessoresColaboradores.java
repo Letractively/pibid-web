@@ -45,12 +45,12 @@ public class ProjetosProfessoresColaboradores implements Serializable {
     @JoinColumn(name = "alunos_colaboradores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private AlunosColaboradores alunosColaboradores;
-    @JoinColumn(name = "professores_colaboradores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private ProfessoresColaboradores professoresColaboradores;
     @JoinColumn(name = "projetos_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Projetos projetos;
+    @JoinColumn(name = "professores_colaboradores_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private ProfessoresColaboradores professoresColaboradores;
 
     public ProjetosProfessoresColaboradores() {
     }
@@ -95,20 +95,20 @@ public class ProjetosProfessoresColaboradores implements Serializable {
         this.alunosColaboradores = alunosColaboradores;
     }
 
-    public ProfessoresColaboradores getProfessoresColaboradores() {
-        return professoresColaboradores;
-    }
-
-    public void setProfessoresColaboradores(ProfessoresColaboradores professoresColaboradores) {
-        this.professoresColaboradores = professoresColaboradores;
-    }
-
     public Projetos getProjetos() {
         return projetos;
     }
 
     public void setProjetos(Projetos projetos) {
         this.projetos = projetos;
+    }
+
+    public ProfessoresColaboradores getProfessoresColaboradores() {
+        return professoresColaboradores;
+    }
+
+    public void setProfessoresColaboradores(ProfessoresColaboradores professoresColaboradores) {
+        this.professoresColaboradores = professoresColaboradores;
     }
 
     @Override

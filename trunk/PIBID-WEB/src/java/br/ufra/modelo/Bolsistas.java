@@ -43,7 +43,7 @@ public class Bolsistas implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
+    @Size(min = 1, max = 45)
     @Column(name = "matricula")
     private String matricula;
     @Basic(optional = false)
@@ -51,24 +51,24 @@ public class Bolsistas implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "nome")
     private String nome;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "email_principal")
     private String emailPrincipal;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "email_secundario")
     private String emailSecundario;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "telefone_residencial")
     private String telefoneResidencial;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "telefone_celular")
     private String telefoneCelular;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "endereco")
     private String endereco;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
+    @Size(min = 1, max = 45)
     @Column(name = "situacao")
     private String situacao;
     @Basic(optional = false)

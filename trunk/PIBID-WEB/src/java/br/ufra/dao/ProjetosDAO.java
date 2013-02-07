@@ -13,4 +13,10 @@ import br.ufra.modelo.Projetos;
  */
 public class ProjetosDAO extends GenericDAO<Projetos> {
     
+    public Projetos obter(Projetos p){
+        
+        
+        return p;
+    }
+    
 }

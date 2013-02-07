@@ -14,7 +14,7 @@
 
                 <h:form id="fprojetos">
                     <p:growl id="growl" showDetail="true" sticky="true" /> 
-                    <p:panel header="Bolsistas">
+                    <p:panel header="Projetos">
                         <p:dataTable   value="#{projetosBean.lista}" var="projetos"
                                        paginator="true" rows="10"
                                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
@@ -46,7 +46,8 @@
                                 <f:facet name="header">  
                                     <h:outputText value="Situação" />  
                                 </f:facet>  
-                                <h:outputLabel value="#{projetos.situacao}"/>
+                                <h:outputLabel rendered="#{projetos.situacao == 1}" value="Ativo"/>
+                                <h:outputLabel rendered="#{projetos.situacao == 0}" value="Inativo"/>
                             </p:column>
 
                             <p:column>

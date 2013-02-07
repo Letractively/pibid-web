@@ -98,7 +98,7 @@ public class Projetos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "situacao")
-    private boolean situacao;
+    private int situacao;
 
     public Projetos() {
     }
@@ -107,7 +107,7 @@ public class Projetos implements Serializable {
         this.id = id;
     }
 
-    public Projetos(Integer id, boolean situacao) {
+    public Projetos(Integer id, int situacao) {
         this.id = id;
         this.situacao = situacao;
     }
@@ -232,11 +232,11 @@ public class Projetos implements Serializable {
         this.resultadosPretendidos = resultadosPretendidos;
     }
 
-    public boolean getSituacao() {
+    public int getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(boolean situacao) {
+    public void setSituacao(int situacao) {
         this.situacao = situacao;
     }
 
