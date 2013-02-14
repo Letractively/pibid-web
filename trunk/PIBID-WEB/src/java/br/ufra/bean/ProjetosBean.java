@@ -45,15 +45,19 @@ public class ProjetosBean {
 
     public String novo() {
         projetos = rn.novo();
-        return "/sistema/projetos/novo.xhtml";
+        return "/sistema/projetos/novo.xhtml?faces-redirect=true";
     }
 
     public String alterar() {
         return "/sistema/projetos/informacao.xhtml";
     }
 
+    public String informacao() {
+        return "/sistema/projetos/informacao.xhtml";
+    }
+
     public String listar() {
-        return "/sistema/projetos/lista.xhtml";
+        return "/sistema/projetos/lista.xhtml?faces-redirect=true";
     }
     public String cancelar() {
         return "/sistema/projetos/lista.xhtml";
@@ -74,14 +78,14 @@ public class ProjetosBean {
                     FacesMessage.SEVERITY_INFO,
                     "Operação realizada com sucesso!",
                     null));
-            return "/sistema/projetos/informacao.xhtml";
+            return listar();
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_ERROR,
                     "Ocorreu um erro inesperado ao tentar salvar dados.",
                     null));
-            return "/sistema/projetos/novo.xhtml";
+            return novo();
         }
 
     }
