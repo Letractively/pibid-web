@@ -13,12 +13,12 @@
 
             <ui:define name="content"  >
                  
-                <h:form id="informacoesObra" >
+                <h:form id="informacoesObra"  >
                     <p:growl id="messages" showDetail="true" sticky="true"  />
 
 
                     <p:panel  style ="border-color: transparent; color: transparent; background: transparent ">
-                        <h:outputText value="#{projetosBean.projetos.tituloProjeto}"/>
+
                         <p:commandButton
                             id="cbcancelar"
                             ajax="false"
@@ -29,17 +29,16 @@
                         <p:commandButton
                             id="cbAlterarObra"
                             ajax="false"
-
-                            action="#{projetosBean.alterar()}"
+                            action="#{projetosBean.alterarDados()}"
                             value="Alterar Dados"/>
-                            
+
 
 
                         <p:commandButton
                             id="cbcancelar5"
                             ajax="false"
 
-                            action="#{projetosBean.cancelar()}"
+                            action="#{projetosBean.alterarBolsistas()}"
                             value="Alterar Bolsistas"/>
 
                         <p:commandButton
@@ -77,7 +76,7 @@
                                     <h:panelGrid 
                                         id="pginfolote"
                                         columns="1">
-
+                                        <h:outputText value="#{projetosBean.projetos.tituloProjeto}"/>
 
                                     </h:panelGrid>
 

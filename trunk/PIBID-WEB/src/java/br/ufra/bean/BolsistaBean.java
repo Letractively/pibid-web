@@ -61,6 +61,12 @@ public class BolsistaBean {
 
         //return bolsistaRN.listarAtivos(true);
     }
+    
+        public List<Bolsistas> getBolsistasAtivos() {
+        return rn.listarAtivos("ativo");
+
+        //return bolsistaRN.listarAtivos(true);
+    }
 
     public void setBolsistas(List<Bolsistas> bolsistas) {
         this.bolsistas = bolsistas;

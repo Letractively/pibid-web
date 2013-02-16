@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/sistema/template/template.xhtml">
+
+            <ui:define name="content">
+                <h:form id="fcancelar">
+                    <p:commandButton 
+                        id="cbcancelar"
+                        ajax="false" 
+                        action="#{projetosBean.cancelar}" 
+                        value="Cancelar"/>
+                </h:form>
+                <p:growl id="messages" showDetail="true" sticky="true"  />  
+                <h:form id="alterarMaquina">
+                    <p:panel
+                        id="pprincipal"
+                        header="Máquinas" style="height: 520px">
+                        <h:inputHidden 
+                            id="ihempresa"
+                            value="#{projetosBean.projetos.id}" />
+
+                        <div align="center">
+                            <h:panelGrid 
+                                id="pgprincipal"
+                                columns="1">
+
+                                <br></br>
+                                <br></br>
+
+                                <p:panel
+                                    id="pitens"
+                                    header="Bolsistas">
+
+                                    <p:pickList
+                                        value="#{projetosBean.itens2}"  
+                                        var="item" 
+                                        itemLabel="#{item.nome}"  
+                                        itemValue="#{item}" 
+                                        converter="bolsistaConverter">
+                                        <f:facet 
+                                            name="sourceCaption">Disponíveis</f:facet>  
+                                        <f:facet                                        
+                                            name="targetCaption">Selecionados</f:facet>                                    
+                                    </p:pickList>  
+
+                                    <br></br>
+
+
+                                    <h:outputText value="Data de Movimentação: *" />  
+                                    <p:calendar 
+                                        id="dataMovimentacao" label="Data de Movimentação"
+                                        value="#{projetosBean.dataMaq}" 
+                                        pattern="dd/MM/yyyy" 
+                                        style="width: 200px"
+                                        required="true2"/>
+                                    <p:message id="erroDataMovimentacao" for="dataMovimentacao"/>
+
+
+                                </p:panel></h:panelGrid>
+                            <h:panelGrid id="pgsegundo"
+                                         columns="2">
+
+
+                                <h:outputText value="" />
+
+                                <div align="right">
+                                    <p:commandButton 
+                                        ajax="false" 
+                                        id="cbsalvar"
+                                        value="Salvar"
+                                        action="#{projetosBean.salvarAlteracaoBolsistas()}"
+                                        update="Maquina">
+
+                                    </p:commandButton>
+                               
+                                </div>
+                            </h:panelGrid>  
+
+                        </div>
+
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
