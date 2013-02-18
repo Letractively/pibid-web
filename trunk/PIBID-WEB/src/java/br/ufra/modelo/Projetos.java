@@ -323,7 +323,7 @@ public class Projetos implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.rn.Projetos[ id=" + id + " ]";
+        return String.valueOf(id);
     }
     
 }

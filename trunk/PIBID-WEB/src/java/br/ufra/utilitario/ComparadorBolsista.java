@@ -13,6 +13,7 @@ import br.ufra.modelo.Bolsistas;
 public class ComparadorBolsista implements java.util.Comparator {
 
 
+    @Override
     public int compare(Object o1, Object o2) {
         Bolsistas c1 = (Bolsistas) o1;
         Bolsistas c2 = (Bolsistas) o2;

@@ -15,7 +15,7 @@
                     <p:commandButton 
                         id="cbcancelar"
                         ajax="false" 
-                        action="#{bolsistaBean.cancelar}" 
+                        action="#{atividadesBean.cancelar}" 
                         value="Cancelar"/>
                 </h:form>
 
@@ -24,112 +24,91 @@
 
                     <p:panel
                         id="pprincipal"
-                        header="Bolsista">
+                        header="Atividades">
 
                         <h:panelGrid 
                             id="pgprincipal"
-                            columns="3">  
+                            columns="2">  
 
                             <h:outputLabel
-                                id="olmatricula"
-                                for="matriculaBolsista"
-                                value="Matricula: * "/>
+                                value="Título: * "/>
                             <p:inputText
-                                id="matriculaBolsista"
-                                value="#{bolsistaBean.bolsista.matricula}"
-                                label="Matricula"
+                                id="titulo"
+                                value="#{atividadesBean.atividades.titulo}"
+                                label="Título: "
                                 required="true"
                                 style="width: 200px"/>
-                            <p:message id="erroMatriculaBolsista" for="matriculaBolsista"/>
 
                             <h:outputLabel
-                                id="olnome"
-                                for="itnome"
-                                value="Nome: * "/>
-                            <p:inputText
-                                id="itnome"
-                                value="#{bolsistaBean.bolsista.nome}"
-                                label="Nome"
-                                required="true"
-                                style="width: 200px"/>
-                            <p:message id="erroNome" for="itnome"/>
+                                value="Data Inicio: "/>
+                            <p:inputMask mask="99/99/9999" id="msk_Data1" size="15"
+                                         value="#{atividadesBean.atividades.dataCadastro}"
+                                         required="true" requiredMessage="O campo Data Início é obrigatório.">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                            </p:inputMask>
 
                             <h:outputLabel
-                                id="olemailprinc"
-                                for="itemailprinc"
-                                value="Email principal: * "/>
-                            <p:inputText
-                                id="itemailprinc"
-                                value="#{bolsistaBean.bolsista.emailPrincipal}"
-                                label="Email Principal"
-                                required="true"
-                                style="width: 200px"/>
-                            <p:message id="erroEmailprinc" for="itemailprinc"/>
+                                value="Data Previsão Início: "/>
+                            <p:inputMask mask="99/99/9999" id="msk_Data2" size="15"
+                                         value="#{atividadesBean.atividades.dataPrevisaoInicio}"
+                                         required="true" requiredMessage="O campo Data Início é obrigatório.">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                            </p:inputMask>
 
                             <h:outputLabel
-                                id="olemailsec"
-                                for="itemailsec"
-                                value="Email secundário: "/>
-                            <p:inputText
-                                id="itemailsec"
-                                value="#{bolsistaBean.bolsista.emailSecundario}"
-                                label="Email Secundário"
-                                style="width: 200px"/>
-                            <p:message id="erroEmailsec" for="itemailsec"/>                                                              
-                            
-                            <h:outputLabel
-                                id="oltelefoneres"
-                                for="ittelefoneres"
-                                value="Telefone Residencial: "/>
-                            <p:inputMask
-                                id="ittelefoneres"
-                                value="#{bolsistaBean.bolsista.telefoneResidencial}"
-                                label="Telefone Residencial"
-                                mask="(99) 9999-9999"
-                                style="width: 200px"/>
-                            <p:message id="errotelefoneres" for="ittelefoneres"/>
+                                value="Data Previsão Fim: "/>
+                            <p:inputMask mask="99/99/9999" id="msk_Data3" size="15"
+                                         value="#{atividadesBean.atividades.dataPrevisaoFim}"
+                                         required="true" requiredMessage="O campo Data Início é obrigatório.">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                            </p:inputMask>
 
                             <h:outputLabel
-                                id="oltelefonecel"
-                                for="ittelefonecel"
-                                value="Telefone Celular: "/>
-                            <p:inputMask
-                                id="ittelefonecel"
-                                value="#{bolsistaBean.bolsista.telefoneCelular}"
-                                label="Telefone Celular"
-                                mask="(99) 9999-9999"
-                                style="width: 200px"/>
-                            <p:message id="errotelefonecel" for="ittelefonecel"/>
+                                value="Data Efetiva Conclusão: "/>
+                            <p:inputMask mask="99/99/9999" id="msk_Data4" size="15"
+                                         value="#{atividadesBean.atividades.dataEfetivaConclusao}"
+                                         required="true" requiredMessage="O campo Data Início é obrigatório.">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                            </p:inputMask>
 
                             <h:outputLabel
-                                id="olendereco"
-                                for="itendereco"
-                                value="Endereço: "/>
-                            <p:inputText
-                                id="itendereco"
-                                value="#{bolsistaBean.bolsista.endereco}"
-                                label="Endereço"
-                                style="width: 200px"/>
-                            <p:message id="erroendereco" for="itendereco"/>
+                                value="Descrição: "/>
+                            <p:inputTextarea
+                                id="idacao"
+                                value="#{atividadesBean.atividades.descricao}"
+                                /> 
 
                             <h:outputLabel
-                                id="olsituacao"
-                                for="somsituacao"
+                                value="Objetivos Gerais: "/>
+                            <p:inputTextarea
+                                id="idacao2"
+                                value="#{atividadesBean.atividades.obsGerais}"
+                                />
+
+                            <h:outputLabel
+                                value="Projeto: "/>
+                            <p:selectOneMenu
+                                id="sprj" value="#{atividadesBean.atividades.projetosID}"
+                                converter="projetoConverter"
+                                style="width: 200px">
+                                <f:selectItems value="#{atividadesBean.listaItensProjeto}"/>
+                            </p:selectOneMenu>
+
+                            <h:outputLabel
                                 value="Situação: "/>
                             <p:selectOneMenu
-                                id="somsituacao" value="#{bolsistaBean.bolsista.situacao}"
-                                label="#{bolsistaBean.situacao.toString}"
+                                id="somsituacao" value="#{atividadesBean.atividades.situacao}"
+                                label="#{atividadesBean.situacao}"
                                 style="width: 200px">
-                                <f:selectItems value="#{bolsistaBean.situacao}"/>
+                                <f:selectItems value="#{atividadesBean.situacao}"/>
                             </p:selectOneMenu>
-                            <p:message id="errosituacao" for="somsituacao"/>
-
+                            <p:message id="errosituacao2" for="somsituacao"/>
 
                             <p:commandButton 
                                 ajax="false" 
                                 id="cbsalvar"
                                 value="Salvar" 
-                                action="#{bolsistaBean.salvar}"
+                                action="#{atividadesBean.salvar}"
                                 update="Cargo">
 
 

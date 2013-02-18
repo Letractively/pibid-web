@@ -1,12 +1,83 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
 
+    <body>
+
+        <ui:composition template="/sistema/template/template.xhtml">
+
+            <ui:define name="content">
+
+                <h:form id="fprojetos">
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <p:panel header="Projetos">
+                        <p:dataTable   value="#{atividadesBean.lista}" var="atividades"
+                                       paginator="true" rows="10"
+                                       paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                       rowsPerPageTemplate="5,10,15">  
+
+                            <p:column filterBy="#{atividades.id}">
+                                <f:facet name="header">  
+                                    <h:outputText value="Cod" />  
+                                </f:facet>  
+                                <h:outputLabel value="#{atividades.id}"/>
+                            </p:column>
+
+                            <p:column filterBy="#{atividades.titulo}" headerText="Nome">
+                                <f:facet name="header">  
+                                    <h:outputText value="Nome" />  
+                                </f:facet>  
+                                <h:outputLabel value="#{atividades.titulo}"/>
+                            </p:column>
+
+                            <p:column filterBy="#{atividades.obsGerais}" headerText="Título">
+                                <f:facet name="header">  
+                                    <h:outputText value="Título" />  
+                                </f:facet>  
+                                <h:outputLabel value="#{atividades.obsGerais}"/>
+                            </p:column>
+
+                            <p:column filterBy="#{atividades.situacao}" filterOptions="#{atividadesBean.situacoes}"  
+                                      filterMatchMode="exact" headerText="Situação">
+                                <f:facet name="header">  
+                                    <h:outputText value="Situação" />  
+                                </f:facet>  
+                                <h:outputLabel value="#{atividades.situacao}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">  
+                                    <h:outputText value="Opções"/>  
+                                </f:facet>  
+                                <p:commandButton 
+                                    ajax="false" 
+                                    action="#{atividadesBean.alterar}" 
+                                    value="Alterar">
+                                    <f:setPropertyActionListener 
+                                        target="#{atividadesBean.atividades}" 
+                                        value="#{atividades}"/>
+                                </p:commandButton>
+
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                    <h3>
+                        <div align="center">
+                            <p:commandButton 
+                                ajax="false" 
+                                action="#{atividadesBean.novo}" 
+                                value="Incluir"/>
+                        </div>
+                    </h3>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
