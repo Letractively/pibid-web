@@ -51,6 +51,13 @@
                         <f:setPropertyActionListener value="#{projeto}"
                                                      target="#{projetoBean.projeto}"/>
                     </h:commandLink>
+                    <h:commandLink action="#{projetoBean.atribuir}">
+                        <h:graphicImage library="img" 
+                                        name="edit.png"
+                                        title="Atribuir Bolsista"/>
+                        <f:setPropertyActionListener value="#{projeto}"
+                                                     target="#{bolsistaBean.projeto}"/>
+                    </h:commandLink>
                 </p:column>
             </p:dataTable>
         </h:form>
