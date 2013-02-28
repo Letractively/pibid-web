@@ -98,6 +98,10 @@ public class ProjetoBean {
         return "/restrito/projeto/listagem.xhtml?faces-redirect=true";
     }
     
+    public String atribuir(){
+      return "/restrito/projeto/movimentacao/bolsista/cadastro.xhtml";  
+    }
+    
     public String salvar(){
         
         rn.salvar(projeto);
