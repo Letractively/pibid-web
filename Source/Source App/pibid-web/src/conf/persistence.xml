@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="PWPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>br.ufra.pibid.modelo.entidade.AlunoColaborador</class>
+    <class>br.ufra.pibid.modelo.entidade.Atividade</class>
+    <class>br.ufra.pibid.modelo.entidade.Bolsista</class>
+    <class>br.ufra.pibid.modelo.entidade.Cronograma</class>
+    <class>br.ufra.pibid.modelo.entidade.Discente</class>
+    <class>br.ufra.pibid.modelo.entidade.DocenteEnsBasico</class>
+    <class>br.ufra.pibid.modelo.entidade.DocenteEnsSuperior</class>
+    <class>br.ufra.pibid.modelo.entidade.Instituicao</class>
+    <class>br.ufra.pibid.modelo.entidade.InstituicaoEnsBasico</class>
+    <class>br.ufra.pibid.modelo.entidade.Papel</class>
+    <class>br.ufra.pibid.modelo.entidade.ProfessorColaborador</class>
+    <class>br.ufra.pibid.modelo.entidade.Projeto</class>
+    <class>br.ufra.pibid.modelo.entidade.ResponsavelAtividade</class>
+    <class>br.ufra.pibid.modelo.entidade.Supervisor</class>
+    <class>br.ufra.pibid.modelo.entidade.Usuario</class>
+    <class>br.ufra.pibid.modelo.entidade.Curso</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pibid?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.password" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>

@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Docente Ens. B&aacute;sico" icon="ui-icon-document">
+                <p:menuitem value="Listagem" 
+                            url="#{docenteEnsBasicoBean.listagem()}"
+                            icon="ui-icon-script"/>
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+        
+        <h:form id="cadastro">
+            <p:panel header="Formulario de Cadastro">
+                <p:messages/>
+                <h:inputHidden value="#{docenteEnsBasicoBean.docenteEnsBasico.id}"/>
+
+                <h:panelGrid columns="2" cellspacing="5">
+                    <h:outputText value="Escola: " />
+                    <p:selectOneMenu id="cbEscola" style="width: 450px;"
+                                     value="#{docenteEnsBasicoBean.docenteEnsBasico.escola}"
+                                     converter="escolaConverter"
+                                     required="true"
+                                     requiredMessage="O Escola &eacute; obrigat&oacute;rio.">
+                        <f:selectItem itemValue=""
+                                        itemLabel="-- Selecione --"
+                                        noSelectionOption="true"/>
+                        <f:selectItems value="#{docenteEnsBasicoBean.escolas}" 
+                                        var="escola" 
+                                        itemValue="#{escola}"
+                                        itemLabel="#{escola.nome}"/>
+                    </p:selectOneMenu>
+                    
+                    <h:outputText value="Nome: " />
+                    <p:inputText id="nome" style="width: 450px;"
+                                 required="true"
+                                 requiredMessage="O campo Nome &eacute; obrigat&oacute;rio."
+                                 label="Nome"
+                                 value="#{docenteEnsBasicoBean.docenteEnsBasico.nome}"/>
+                    
+                    <h:outputText value="E-mail Principal: " />
+                    <p:inputText id="emailPrincipal" style="width: 450px;"
+                                 required="true"
+                                 requiredMessage="O campo E-mail Principal &eacute; obrigat&oacute;rio."
+                                 value="#{docenteEnsBasicoBean.docenteEnsBasico.emailPrincipal}"/>
+
+                    <h:outputText value="E-mail Secund&aacute;rio: " />
+                    <p:inputText id="emailSecudario" style="width: 450px;"
+                                 value="#{docenteEnsBasicoBean.docenteEnsBasico.emailSecudario}"/>
+                    
+                    <h:outputText value="Telefone Residencial: " />
+                    <p:inputMask id="telResidencial"
+                                  mask="(99) 9999-9999"
+                                  style="width: 250px;"
+                                  value="#{docenteEnsBasicoBean.docenteEnsBasico.telResidencial}"/>
+                    
+                    <h:outputText value="Telefone Celular: " />
+                    <p:inputMask id="telCelular"
+                                  mask="(99) 9999-9999"
+                                  style="width: 250px;"
+                                  value="#{docenteEnsBasicoBean.docenteEnsBasico.telCelular}"/>
+                    
+                    <h:outputText value="Endere&ccedil;o: " />
+                    <p:inputText id="endereco" style="width: 650px;"
+                                 value="#{docenteEnsBasicoBean.docenteEnsBasico.endereco}"/>
+                    
+                    <h:outputText value="Situa&ccedil;&atilde;o: " />
+                    <p:selectOneMenu id="cbSituacao" style="width: 150px;"
+                                     value="#{docenteEnsBasicoBean.docenteEnsBasico.situacao}">
+                        <f:selectItem itemValue="Ativo" itemLabel="Ativo"/>
+                        <f:selectItem itemValue="Inativo" itemLabel="Inativo"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                
+                <f:facet name="footer">
+                    <p:commandButton 
+                        action="#{docenteEnsBasicoBean.salvar()}"
+                        value="Salvar" 
+                        title="Salvar"
+                        ajax="false"
+                        icon="ui-icon-disk"/>
+                </f:facet>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

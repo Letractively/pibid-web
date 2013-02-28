@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Projetos">
+                <p:menuitem value="Novo Projeto" 
+                            url="/restrito/projeto/cadastro.xhtml"
+                            icon="ui-icon-plusthick"/>
+
+                <p:menuitem value="Atividades" 
+                            url="/restrito/projeto/atividade/listagem.xhtml"
+                            icon="ui-icon-folder-collapsed"/>
+
+                <p:menuitem value="Cronograma" 
+                            url="/restrito/projeto/cronograma/listagem.xhtml"
+                            icon="ui-icon-folder-collapsed"/>
+
+                <p:submenu label="Acompanhamento" icon="ui-icon-folder-collapsed">
+                    <p:menuitem value="Abertos" 
+                                url="/restrito/projeto/listagem.xhtml"
+                                icon="ui-icon-document"/>
+
+                    <p:menuitem value="Inativos" 
+                                url="#"
+                                icon="ui-icon-document"/>
+                </p:submenu>
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+        <div align="center">
+            <h2>Acompanhamento</h2>
+            <form>
+                <p:lineChart value="#{chartBean.linearModel}" 
+                             legendPosition="e" 
+                             zoom="true" 
+                             animate="true"  
+                             title="Gr&aacute;fico de Desempenho" 
+                             minY="0" 
+                             maxY="10" 
+                             style="width:550px;" 
+                             widgetVar="chart"/>  
+
+                <br />
+                <br />
+                
+                <p:barChart id="basic" 
+                            value="#{chartBean.categoryModel}" 
+                            legendPosition="ne"  
+                            title="Gr&aacute;fico de Atividades" 
+                            min="0" 
+                            max="200" 
+                            style="width:550px" 
+                            animate="true"/> 
+            </form>
+        </div>
+    </ui:define>
+
+</ui:composition>
