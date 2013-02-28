@@ -1,0 +1,47 @@
+
+#page{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#header{
+    height: 100px;
+}
+
+#sidebar{
+    width: 200px;
+    float: left;
+    margin-right: 5px;
+}
+
+#content{
+    width: 750px;
+    height: 600px;
+    float: left;
+}
+
+#footer{
+    clear: both;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 12px;
+}
+
+#header_logo{
+    float: left;
+}
+
+#header_menulista{ 
+    margin-top: 35px;
+    float: right;
+}
+
+#header_menulista li{
+    float: left;
+    list-style: none;
+    margin-right: 10px;
+}
+
+#header_menulista li:hover{
+    margin-top: 5px;
+}

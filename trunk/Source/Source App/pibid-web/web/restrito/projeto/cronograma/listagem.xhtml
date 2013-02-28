@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Cronograma" icon="ui-icon-document">
+                <p:menuitem value="Novo Registro" 
+                            url="#{cronogramaBean.novo()}"
+                            icon="ui-icon-plusthick"/>
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="cadastro">
+            <p:dataTable id="tbCronograma" 
+                         var="cronograma" 
+                         value="#{cronogramaBean.cronogramas}"
+                         paginator="true" 
+                         rows="20" 
+                         emptyMessage="N&atilde;o h&aacute; dados para exibi&ccedil;&atilde;o"  
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                <p:column headerText="C&oacute;digo" style="width: 50px;">
+                    <div align="center">
+                        <h:outputText value="#{cronograma.id}"/>
+                    </div>
+                </p:column>
+
+                <p:column headerText="Projeto"
+                          filterBy="#{cronograma.projeto.titulo}">
+                    <h:outputText value="#{cronograma.projeto.titulo}"/>
+                </p:column>
+                
+                <p:column headerText="Data Inicial"
+                          filterBy="#{cronograma.dataIni}">
+                    <h:outputText value="#{cronograma.dataIni}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+                
+                <p:column headerText="Data Final (Previs&atilde;o"
+                          filterBy="#{cronograma.dataFim}">
+                    <h:outputText value="#{cronograma.dataFim}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="A&ccedil;&otilde;es" style="width: 75px;">
+                    <!--Editar Cadastro-->
+                    <h:commandLink action="#{cronogramaBean.alterar}">
+                        <h:graphicImage library="img" 
+                                        name="edit.png"
+                                        title="Editar Registro"/>
+                        <f:setPropertyActionListener value="#{cronograma}"
+                                                     target="#{cronogramaBean.cronograma}"/>
+                    </h:commandLink>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

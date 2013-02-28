@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Institui&ccedil;&atilde;o" icon="ui-icon-document">
+                <p:menuitem value="Listagem" 
+                            url="#{instituicaoEnsSuperiorBean.listagem()}"
+                            icon="ui-icon-script"/>
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+        
+        <h:form id="cadastro">
+            <p:panel header="Formulario de Cadastro">
+                <p:messages/>
+                <h:inputHidden value="#{instituicaoEnsSuperiorBean.instituicao.id}"/>
+
+                <h:panelGrid columns="2" cellspacing="5">
+                    <h:outputText value="Nome: " />
+                    <p:inputText id="nome" style="width: 350px;"
+                                 required="true"
+                                 requiredMessage="O campo Nome &eacute; obrigat&oacute;rio."
+                                 label="Nome"
+                                 value="#{instituicaoEnsSuperiorBean.instituicao.nome}"/>
+                    
+                    <h:outputText value="Sigla: " />
+                    <p:inputText id="email" style="width: 350px;"
+                                 required="true"
+                                 requiredMessage="O campo Sigla &eacute; obrigat&oacute;rio."
+                                 label="Nome"
+                                 value="#{instituicaoEnsSuperiorBean.instituicao.sigla}"/>
+                </h:panelGrid>
+                
+                <f:facet name="footer">
+                    <p:commandButton 
+                        action="#{instituicaoEnsSuperiorBean.salvar}"
+                        value="Salvar" 
+                        title="Salvar"
+                        ajax="false"
+                        icon="ui-icon-disk"/>
+                </f:facet>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

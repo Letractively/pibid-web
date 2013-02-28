@@ -1,0 +1,78 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package br.ufra.pibid.modelo.entidade;
+
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+/**
+ *
+ * @author stelio
+ */
+@Embeddable
+public class AlunoColaboradorPK implements Serializable {
+    @Basic(optional = false)
+    @Column(name = "projeto")
+    private int projeto;
+    @Basic(optional = false)
+    @Column(name = "discente")
+    private int discente;
+
+    public AlunoColaboradorPK() {
+    }
+
+    public AlunoColaboradorPK(int projeto, int discente) {
+        this.projeto = projeto;
+        this.discente = discente;
+    }
+
+    public int getProjeto() {
+        return projeto;
+    }
+
+    public void setProjeto(int projeto) {
+        this.projeto = projeto;
+    }
+
+    public int getDiscente() {
+        return discente;
+    }
+
+    public void setDiscente(int discente) {
+        this.discente = discente;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (int) projeto;
+        hash += (int) discente;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof AlunoColaboradorPK)) {
+            return false;
+        }
+        AlunoColaboradorPK other = (AlunoColaboradorPK) object;
+        if (this.projeto != other.projeto) {
+            return false;
+        }
+        if (this.discente != other.discente) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "br.ufra.pibid.modelo.entidade.AlunoColaboradorPK[ projeto=" + projeto + ", discente=" + discente + " ]";
+    }
+    
+}
