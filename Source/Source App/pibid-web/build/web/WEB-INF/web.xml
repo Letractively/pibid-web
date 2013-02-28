@@ -31,6 +31,6 @@
     </session-config>
     
     <welcome-file-list>
-        <welcome-file>publico/login.xhtml</welcome-file>
+        <welcome-file>restrito/projeto/index.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
