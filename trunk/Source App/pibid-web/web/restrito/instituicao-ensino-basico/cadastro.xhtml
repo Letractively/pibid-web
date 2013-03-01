@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Escola" icon="ui-icon-document">
+                <p:menuitem value="Home" 
+                            url="/publico/index.xhtml"
+                            icon="ui-icon-home"/>
+                
+                <p:menuitem value="Listagem" 
+                            url="#{instituicaoEnsBasicoBean.listagem()}"
+                            icon="ui-icon-script"/>
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+        
+        <h:form id="cadastro">
+            <p:panel header="Formulario de Cadastro">
+                <p:messages/>
+                <h:inputHidden value="#{instituicaoEnsBasicoBean.escola.id}"/>
+
+                <h:panelGrid columns="2" cellspacing="5">
+                    <h:outputText value="Nome: " />
+                    <p:inputText id="nome" style="width: 350px;"
+                                 required="true"
+                                 requiredMessage="O campo Nome &eacute; obrigat&oacute;rio."
+                                 value="#{instituicaoEnsBasicoBean.escola.nome}"/>
+                    
+                    <h:outputText value="Matr&iacute;cula: " />
+                    <p:inputText id="matricula" style="width: 250px;"
+                                 required="true"
+                                 requiredMessage="O campo Matr&iacute;cula &eacute; obrigat&oacute;rio."
+                                 value="#{instituicaoEnsBasicoBean.escola.matricula}"/>
+                    
+                    <h:outputText value="Esfera: " />
+                    <p:selectOneMenu id="cbEsfera" style="width: 150px;"
+                                     value="#{instituicaoEnsBasicoBean.escola.esfera}">
+                        <f:selectItem itemValue="Municipal" itemLabel="Municipal"/>
+                        <f:selectItem itemValue="Estadual" itemLabel="Estadual"/>
+                        <f:selectItem itemValue="Federal" itemLabel="Federal"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="Endere&ccedil;o: " />
+                    <p:inputText id="endereco" style="width: 450px;"
+                                 required="true"
+                                 requiredMessage="O campo Endere&ccedil;o &eacute; obrigat&oacute;rio."
+                                 value="#{instituicaoEnsBasicoBean.escola.endereco}"/>
+                    
+                    <h:outputText value="Diretor: " />
+                    <p:inputText id="diretor" style="width: 450px;"
+                                 required="true"
+                                 requiredMessage="O campo Diretor &eacute; obrigat&oacute;rio."
+                                 value="#{instituicaoEnsBasicoBean.escola.diretor}"/>
+                    
+                    <h:outputText value="Vice-Diretor Manh&atilde;: " />
+                    <p:inputText id="viceDiretorManha" style="width: 450px;"
+                                 required="true"
+                                 requiredMessage="O campo Vice-Diretor Manhã &eacute; obrigat&oacute;rio."
+                                 value="#{instituicaoEnsBasicoBean.escola.viceDiretorManha}"/>
+                    
+                    <h:outputText value="Vice-Diretor Tarde: " />
+                    <p:inputText id="viceDiretorTarde" style="width: 450px;"
+                                 required="true"
+                                 requiredMessage="O campo Vice-Diretor Tarde &eacute; obrigat&oacute;rio."
+                                 value="#{instituicaoEnsBasicoBean.escola.viceDiretorTarde}"/>
+
+                    <h:outputText value="Vice-Diretor Noite: " />
+                    <p:inputText id="viceDiretorNoite" style="width: 450px;"
+                                 required="true"
+                                 requiredMessage="O campo Vice-Diretor Noite &eacute; obrigat&oacute;rio."
+                                 value="#{instituicaoEnsBasicoBean.escola.viceDiretorNoite}"/>
+                    
+                    <h:outputText value="Telefone: " />
+                    <p:inputMask id="telefone" style="width: 150px;"
+                                 mask="(99) 9999-9999"
+                                   required="true"
+                                   requiredMessage="O campo Telefone &eacute; obrigat&oacute;rio."
+                                   value="#{instituicaoEnsBasicoBean.escola.telefone}"/>
+                    
+                    <h:outputText value="E-mail Escola: " />
+                    <p:inputText id="emailEscola" style="width: 450px;"
+                                 value="#{instituicaoEnsBasicoBean.escola.emailEscola}"/>
+                    
+                    <h:outputText value="E-mail Dire&ccedil;&atilde;o: " />
+                    <p:inputText id="emailDirecao" style="width: 250px;"
+                                 value="#{instituicaoEnsBasicoBean.escola.emailDirecao}"/>
+                    
+                    <h:outputText value="E-mail Vice-Dire&ccedil;&atilde;o: " />
+                    <p:inputText id="emailViceDirecao" style="width: 250px;"
+                                 value="#{instituicaoEnsBasicoBean.escola.emailViceDirecao}"/>
+                    
+                    <h:outputText value="Situa&ccedil;&atilde;o: " />
+                    <p:selectOneMenu id="cbSituacao" style="width: 150px;"
+                                     value="#{instituicaoEnsBasicoBean.escola.situacao}">
+                        <f:selectItem itemValue="Ativo" itemLabel="Ativo"/>
+                        <f:selectItem itemValue="Inativo" itemLabel="Inativo"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                
+                <f:facet name="footer">
+                    <p:commandButton 
+                        action="#{instituicaoEnsBasicoBean.salvar}"
+                        value="Salvar" 
+                        title="Salvar"
+                        ajax="false"
+                        icon="ui-icon-disk"/>
+                </f:facet>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

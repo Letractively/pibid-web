@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <title>Ufra :: Pibid-Web 1.0</title>
+    </h:head>
+
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="130"  >
+                <div id="header_logo">
+                    <h:graphicImage library="img" 
+                                    name="logopibid.png"
+                                    title="Projeto Acad&ecirc;mico Pibid-Web"/>
+                </div>
+                <div id="header_menulista">
+                    <h:form id="menu">
+                        <ul>
+                            <li>
+                                <p:commandLink action="/publico/index.xhtml?faces-redirect=true">
+                                    <h:graphicImage library="img" 
+                                                    name="home48.png"
+                                                    title="P&aacute;gina Inicial"/>
+                                </p:commandLink>
+                            </li>
+                            <li>
+                                <p:commandLink action="#">
+                                    <h:graphicImage library="img" 
+                                                    name="edit_profile.png"
+                                                    title="Atualizar Perfil"/>
+                                </p:commandLink>
+                            </li>
+                            <li>
+                                <p:commandLink action="#{autenticadorBean.logOut()}">
+                                    <h:graphicImage library="img" 
+                                                    name="logout.png"
+                                                    title="Sair da Aplica&ccedil;&atilde;o"/>
+                                </p:commandLink>
+                            </li>
+                            <li>
+                                <p:commandLink action="#">
+                                    <h:graphicImage library="img" 
+                                                    name="info48.png"
+                                                    title="Informa&ccedil;&otilde;es"/>
+                                </p:commandLink>
+                            </li>
+                        </ul>
+                    </h:form>
+                </div>
+            </p:layoutUnit>  
+
+            <p:layoutUnit position="west" size="300">
+                <ui:insert name="sidebar">
+                    <p:panelMenu>
+                        <p:submenu label="Projetos">
+                            <p:menuitem value="Projetos" 
+                                        url="/restrito/projeto/index.xhtml"
+                                        icon="ui-icon-folder-collapsed"/>
+                        </p:submenu>
+                        
+                        <p:submenu label="Administrador">
+                            <p:menuitem value="Usu&aacute;rios" 
+                                        url="/restrito/usuario/listagem.xhtml"
+                                        icon="ui-icon-folder-collapsed"/>
+                        </p:submenu>
+
+                        <p:submenu label="Cadastros"> 
+                            <p:submenu label="Institui&ccedil;&otilde;es de Ensino" icon="ui-icon-folder-collapsed">
+                                <p:menuitem value="B&aacute;sico" 
+                                        url="/restrito/instituicao-ensino-basico/listagem.xhtml"
+                                        icon="ui-icon-document"/>
+                                
+                                <p:menuitem value="Superior" 
+                                        url="/restrito/instituicao-ensino-superior/listagem.xhtml"
+                                        icon="ui-icon-document"/>
+                            </p:submenu>
+                             
+                            <p:submenu label="Docentes" icon="ui-icon-folder-collapsed">
+                                <p:menuitem value="Ensino B&aacute;sico" 
+                                        url="/restrito/docente-ensino-basico/listagem.xhtml"
+                                        icon="ui-icon-document"/>
+                                
+                                <p:menuitem value="Ensino Superior" 
+                                        url="/restrito/docente-ensino-superior/listagem.xhtml"
+                                        icon="ui-icon-document"/>
+                            </p:submenu>
+
+                            <p:menuitem value="Discente" 
+                                        url="/restrito/discente/listagem.xhtml"
+                                        icon="ui-icon-document"/>
+                        </p:submenu>
+
+                        <p:submenu label="Relat&oacute;rios">
+                            <p:menuitem value="Projetos" 
+                                        url="#"
+                                        icon="ui-icon-document"/>
+
+                            <p:menuitem value="Bolsistas" 
+                                        url="#"
+                                        icon="ui-icon-document"/> 
+
+                            <p:menuitem value="Escolas Parceiras" 
+                                        url="#"
+                                        icon="ui-icon-document"/>
+
+                            <p:menuitem value="Supervisores" 
+                                        url="#"
+                                        icon="ui-icon-document"/>
+
+                            <p:submenu label="Colaboradores" icon="ui-icon-folder-collapsed">
+                                <p:menuitem value="Professores" 
+                                            url="#"
+                                            icon="ui-icon-document"/>
+
+                                <p:menuitem value="Alunos" 
+                                            url="#"
+                                            icon="ui-icon-document"/>
+                            </p:submenu> 
+                        </p:submenu>  
+                    </p:panelMenu>
+                </ui:insert>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="content"  />
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+
+</html>

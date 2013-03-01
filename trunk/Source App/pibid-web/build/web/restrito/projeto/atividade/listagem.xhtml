@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Atividade" icon="ui-icon-document">
+                <p:menuitem value="Voltar" 
+                            url="/restrito/projeto/index.xhtml"
+                            icon="ui-icon-arrowreturnthick-1-w"/>
+                
+                <p:menuitem value="Novo Registro" 
+                            url="#{atividadeBean.novo()}"
+                            icon="ui-icon-plusthick"/>
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="cadastro">
+            <p:dataTable id="tbAtividades" 
+                         var="atividade" 
+                         value="#{atividadeBean.atividades}"
+                         paginator="true" 
+                         rows="20" 
+                         emptyMessage="N&atilde;o h&aacute; dados para exibi&ccedil;&atilde;o"  
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                <p:column headerText="C&oacute;digo" style="width: 50px;">
+                    <div align="center">
+                        <h:outputText value="#{atividade.id}"/>
+                    </div>
+                </p:column>
+
+                <p:column headerText="T&iacute;tulo"
+                          filterBy="#{atividade.titulo}">
+                    <h:outputText value="#{atividade.titulo}"/>
+                </p:column>
+                
+                <p:column headerText="Data Inicial"
+                          filterBy="#{atividade.dataIni}">
+                    <h:outputText value="#{atividade.dataIni}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+                
+                <p:column headerText="Data Final (Previs&atilde;o"
+                          filterBy="#{atividade.dataFim}">
+                    <h:outputText value="#{atividade.dataFim}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="A&ccedil;&otilde;es" style="width: 75px;">
+                    <!--Editar Cadastro-->
+                    <h:commandLink action="#{atividadeBean.alterar}">
+                        <h:graphicImage library="img" 
+                                        name="edit.png"
+                                        title="Editar Registro"/>
+                        <f:setPropertyActionListener value="#{atividade}"
+                                                     target="#{atividadeBean.atividade}"/>
+                    </h:commandLink>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

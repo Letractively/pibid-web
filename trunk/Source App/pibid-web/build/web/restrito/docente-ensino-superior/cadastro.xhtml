@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Prof. Ens. Superior" icon="ui-icon-document">
+                <p:menuitem value="Home" 
+                            url="/publico/index.xhtml"
+                            icon="ui-icon-home"/>
+                
+                <p:menuitem value="Listagem" 
+                            url="#{docenteEnsSuperiorBean.listagem()}"
+                            icon="ui-icon-script"/>
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+        
+        <h:form id="cadastro">
+            <p:panel header="Formulario de Cadastro">
+                <p:messages/>
+                <h:inputHidden value="#{docenteEnsSuperiorBean.docente.id}"/>
+
+                <h:panelGrid columns="2" cellspacing="5">
+                    <h:outputText value="Institui&ccedil;&atilde;o: " />
+                    <p:selectOneMenu id="cbInstituicao" style="width: 250px;"
+                                     value="#{docenteEnsSuperiorBean.docente.instituicao}"
+                                     converter="instituicaoConverter"
+                                     required="true"
+                                     requiredMessage="O campo Institui&ccedil;&atilde;o &eacute; obrigat&oacute;rio.">
+                        <f:selectItems value="#{docenteEnsSuperiorBean.instituicoes}" 
+                                         var="instituicao" 
+                                         itemValue="#{instituicao}"
+                                         itemLabel="#{instituicao.sigla}"/>
+                    </p:selectOneMenu>
+                    
+                    <h:outputText value="Nome: " />
+                    <p:inputText id="nome" style="width: 350px;"
+                                 required="true"
+                                 requiredMessage="O campo Nome &eacute; obrigat&oacute;rio."
+                                 value="#{docenteEnsSuperiorBean.docente.nome}"/>
+                    
+                    <h:outputText value="E-mail Principal: " />
+                    <p:inputText id="emailPrincipal" style="width: 350px;"
+                                 required="true"
+                                 requiredMessage="O campo E-mail Principal &eacute; obrigat&oacute;rio."
+                                 value="#{docenteEnsSuperiorBean.docente.emailPrincipal}"/>
+                    
+                    <h:outputText value="E-mail Secund&aacute;rio: " />
+                    <p:inputText id="emailSecudario" style="width: 350px;"
+                                 value="#{docenteEnsSuperiorBean.docente.emailSecudario}"/>
+                    
+                    <h:outputText value="Telefone Residencial: " />
+                    <p:inputMask id="telResidencial" style="width: 350px;"
+                                 mask="(99) 9999-9999"
+                                 value="#{docenteEnsSuperiorBean.docente.telResidencial}"/>
+
+                    <h:outputText value="Telefone Ceular: " />
+                    <p:inputMask id="telCelular" style="width: 350px;"
+                                 mask="(99) 9999-9999"
+                                 value="#{docenteEnsSuperiorBean.docente.telCelular}"/>
+                    
+                    <h:outputText value="Endere&ccedil;o: " />
+                    <p:inputText id="endereco" style="width: 450px;"
+                                 value="#{docenteEnsSuperiorBean.docente.endereco}"/>
+                    
+                    <h:outputText value="Link Lattes: " />
+                    <p:inputText id="lattes" style="width: 450px;"
+                                 value="#{docenteEnsSuperiorBean.docente.lattes}"/>
+                    
+                    <h:outputText value="Situa&ccedil;&atilde;o: " />
+                    <p:selectOneMenu id="cbSituacao" style="width: 150px;"
+                                     value="#{docenteEnsSuperiorBean.docente.situacao}">
+                        <f:selectItem itemValue="Ativo"
+                                        itemLabel="Ativo"/>
+                        <f:selectItem itemValue="Inativo"
+                                        itemLabel="Inativo"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                
+                <f:facet name="footer">
+                    <p:commandButton 
+                        action="#{docenteEnsSuperiorBean.salvar}"
+                        value="Salvar" 
+                        title="Salvar"
+                        ajax="false"
+                        icon="ui-icon-disk"/>
+                </f:facet>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

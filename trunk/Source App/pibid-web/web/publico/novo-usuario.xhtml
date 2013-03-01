@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Ufra :: Pibid-Web</title>
+    </h:head>
+    <h:body>
+        
+        <h:form id="cadastro">
+            <p:panel header="Formulario de Cadastro">
+                <p:messages/>
+                <h:inputHidden value="#{usuarioBean.usuario.id}"/>
+
+                <h:panelGrid columns="2" cellspacing="5">
+                    <h:outputText value="Nome: " />
+                    <p:inputText id="nome" style="width: 350px;"
+                                 required="true"
+                                 requiredMessage="O campo Nome &eacute; obrigat&oacute;rio."
+                                 label="Nome"
+                                 value="#{usuarioBean.usuario.nome}"/>
+
+                    <h:outputText value="E-mail: " />
+                    <p:inputText id="email" style="width: 350px;"
+                                 required="true"
+                                 requiredMessage="O campo E-mail &eacute; obrigat&oacute;rio."
+                                 label="Nome"
+                                 value="#{usuarioBean.usuario.email}"/>
+
+                    <h:outputText value="Senha: " />
+                    <p:password id="senha" style="width: 350px;"
+                                required="true"
+                                requiredMessage="O campo Senha &eacute; obrigat&oacute;rio."
+                                label="Senha"
+                                value="#{usuarioBean.usuario.senha}"/>
+                </h:panelGrid>
+
+                <f:facet name="footer">
+                    <p:commandButton 
+                        action="#{usuarioBean.salvar}"
+                        value="Salvar" 
+                        title="Salvar"
+                        ajax="false"
+                        icon="ui-icon-disk"/>
+                </f:facet>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

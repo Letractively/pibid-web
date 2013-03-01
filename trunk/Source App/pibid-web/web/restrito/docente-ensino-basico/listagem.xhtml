@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Docente Ens. B&aacute;sico" icon="ui-icon-document">
+                <p:menuitem value="Home" 
+                            url="/publico/index.xhtml"
+                            icon="ui-icon-home"/>
+                
+                <p:menuitem value="Novo Registro" 
+                             url="#{docenteEnsBasicoBean.novo()}"
+                             icon="ui-icon-plusthick"/>
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="cadastro">
+            <p:growl />
+
+            <p:dataTable id="tbDocentes" 
+                         var="docente" 
+                         value="#{docenteEnsBasicoBean.docentesEnsBasico}"
+                         paginator="true" 
+                         rows="20" 
+                         emptyMessage="N&atilde;o h&aacute; dados para exibi&ccedil;&atilde;o"  
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                <p:column headerText="C&oacute;digo" style="width: 50px;">
+                    <div align="center">
+                        <h:outputText value="#{docente.id}"/>
+                    </div>
+                </p:column>
+
+                <p:column headerText="Nome"
+                          filterBy="#{docente.nome}">
+                    <h:outputText value="#{docente.nome}"/>
+                </p:column>
+
+                <p:column headerText="E-mail Princiapl"
+                          filterBy="#{docente.emailPrincipal}">
+                    <h:outputText value="#{docente.emailPrincipal}"/>
+                </p:column>
+
+                <p:column headerText="Celular"
+                          filterBy="#{docente.telCelular}">
+                    <h:outputText value="#{docente.telCelular}"/>
+                </p:column>
+                
+                <p:column headerText="Escola"
+                          filterBy="#{docente.escola.nome}">
+                    <h:outputText value="#{docente.escola.nome}"/>
+                </p:column>
+
+                <p:column headerText="A&ccedil;&otilde;es" style="width: 75px;">
+                    <!--Editar Cadastro-->
+                    <h:commandLink action="#{docenteEnsBasicoBean.alterar}">
+                        <h:graphicImage library="img" 
+                                        name="edit.png"
+                                        title="Editar Registro"/>
+                        <f:setPropertyActionListener value="#{docente}"
+                                                     target="#{docenteEnsBasicoBean.docenteEnsBasico}"/>
+                    </h:commandLink>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

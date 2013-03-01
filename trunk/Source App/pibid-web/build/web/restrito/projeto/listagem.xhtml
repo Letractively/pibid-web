@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Projeto" icon="ui-icon-document">
+                <p:menuitem value="Listagem" 
+                            url="/restrito/projeto/index.xhtml"
+                            icon="ui-icon-arrowreturnthick-1-w"/>
+
+                <p:menuitem value="Novo Registro" 
+                            url="#{projetoBean.novo()}"
+                            icon="ui-icon-plusthick"/>
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="cadastro">
+            <p:dataTable id="tbProjetos" 
+                         var="projeto" 
+                         value="#{projetoBean.projetos}"
+                         paginator="true" 
+                         rows="20" 
+                         emptyMessage="N&atilde;o h&aacute; dados para exibi&ccedil;&atilde;o"  
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                <p:column headerText="C&oacute;digo" style="width: 50px;">
+                    <div align="center">
+                        <h:outputText value="#{projeto.id}"/>
+                    </div>
+                </p:column>
+
+                <p:column headerText="T&iacute;tulo"
+                          filterBy="#{projeto.titulo}">
+                    <h:outputText value="#{projeto.titulo}"/>
+                </p:column>
+
+                <p:column headerText="Institui&ccedil;&atilde;o:"
+                          filterBy="#{projeto.instituicao.sigla}">
+                    <h:outputText value="#{projeto.instituicao.sigla}"/>
+                </p:column>
+
+                <p:column headerText="A&ccedil;&otilde;es" style="width: 75px;">
+                    <!--Editar Cadastro-->
+                    <h:commandLink action="#{projetoBean.alterar}">
+                        <h:graphicImage library="img" 
+                                        name="edit.png"
+                                        title="Editar Registro"/>
+                        <f:setPropertyActionListener value="#{projeto}"
+                                                     target="#{projetoBean.projeto}"/>
+                    </h:commandLink>
+                    <h:commandLink action="#{projetoBean.atribuir}">
+                        <h:graphicImage library="img" 
+                                        name="edit.png"
+                                        title="Atribuir Bolsista"/>
+                        <f:setPropertyActionListener value="#{projeto}"
+                                                     target="#{bolsistaBean.projeto}"/>
+                    </h:commandLink>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

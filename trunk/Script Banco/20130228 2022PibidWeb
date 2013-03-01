@@ -1,0 +1,424 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.5.27
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema pibid
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ pibid;
+USE pibid;
+
+--
+-- Table structure for table `pibid`.`aluno_colaborador`
+--
+
+DROP TABLE IF EXISTS `aluno_colaborador`;
+CREATE TABLE `aluno_colaborador` (
+  `projeto` int(11) NOT NULL,
+  `discente` int(11) NOT NULL,
+  `data_entrada` date DEFAULT NULL,
+  `data_saida` date DEFAULT NULL,
+  `descricao` text,
+  PRIMARY KEY (`projeto`,`discente`),
+  KEY `fk_projeto_has_discente_discente1_idx` (`discente`),
+  KEY `fk_projeto_has_discente_projeto1_idx` (`projeto`),
+  CONSTRAINT `fk_projeto_has_discente_discente1` FOREIGN KEY (`discente`) REFERENCES `discente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_projeto_has_discente_projeto1` FOREIGN KEY (`projeto`) REFERENCES `projeto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`aluno_colaborador`
+--
+
+/*!40000 ALTER TABLE `aluno_colaborador` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aluno_colaborador` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`atividade`
+--
+
+DROP TABLE IF EXISTS `atividade`;
+CREATE TABLE `atividade` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `projeto` int(11) NOT NULL,
+  `titulo` varchar(100) NOT NULL,
+  `descricao` text NOT NULL,
+  `cadastro` date NOT NULL,
+  `data_ini` date NOT NULL,
+  `data_fim` date DEFAULT NULL,
+  `data_conclusao` date DEFAULT NULL,
+  `obs_gerais` text,
+  PRIMARY KEY (`id`),
+  KEY `fk_atividade_projeto_idx` (`projeto`),
+  CONSTRAINT `fk_atividade_projeto` FOREIGN KEY (`projeto`) REFERENCES `projeto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`atividade`
+--
+
+/*!40000 ALTER TABLE `atividade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `atividade` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`curso`
+--
+
+DROP TABLE IF EXISTS `curso`;
+CREATE TABLE `curso` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `curso` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`curso`
+--
+
+/*!40000 ALTER TABLE `curso` DISABLE KEYS */;
+/*!40000 ALTER TABLE `curso` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`discente`
+--
+
+DROP TABLE IF EXISTS `discente`;
+CREATE TABLE `discente` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `instituicao` int(11) NOT NULL,
+  `matricula` varchar(25) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `email_principal` varchar(100) NOT NULL,
+  `email_secudario` varchar(100) DEFAULT NULL,
+  `tel_residencial` varchar(15) NOT NULL,
+  `tel_celular` varchar(15) NOT NULL,
+  `endereco` varchar(200) NOT NULL,
+  `lattes` varchar(100) DEFAULT NULL,
+  `situacao` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_discente_instituicao1_idx` (`instituicao`),
+  CONSTRAINT `fk_discente_instituicao1` FOREIGN KEY (`instituicao`) REFERENCES `instituicao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`discente`
+--
+
+/*!40000 ALTER TABLE `discente` DISABLE KEYS */;
+INSERT INTO `discente` (`id`,`instituicao`,`matricula`,`nome`,`email_principal`,`email_secudario`,`tel_residencial`,`tel_celular`,`endereco`,`lattes`,`situacao`) VALUES 
+ (1,1,'123456','ADRIANA DAS NEVES MAIA','adryannamaya@gmail.com','','(91) 3228-3126','(91) 8281-8456','Tv. Do Chaco 1364 casa 32 entre Duque e Visconde. Marco','','Ativo'),
+ (2,1,'123456','ALBERTO ALAN DA COSTA RAID','alanraiol@yahoo.com.br','','(91) 3253-3225','(91) 8852-0476','Pass. Santa Helena, entre São Pedro e 1ª de Maio, Casa 13B. Terra Firme','','Ativo'),
+ (3,1,'123456','ALESSANDRA BATISTA SANTOS','alessandra_santos22@hotmail.com','','(91) 3269-6491','(91) 8157-2111','Pass. Albi Miranda, 24, entre Mucajás e Bugarim. Guamá','','Ativo'),
+ (4,1,'123456','ALINE COSTA FERREIRA','aline_ufra@yahoo.com.br','','(91) 3275-4230','(91) 8395-3873','Tv. São Francisco no 540 (Casa do Estudante). Batista Campos','','Ativo'),
+ (5,1,'123456','ALINE CRISTINA LIMA FARIAS DE SOUSA','sousa_alineh@yahoo.com.br','','(91) 3276-2203','(91) 9161-0587','Rua do Utinga, Pass Matilde, numero 251. Souza','','Ativo'),
+ (6,1,'123456','ALIX RIBEIRO DA SILVA','alix.ufra@yahoo.com.br','','','(91) 8383-7861','Rua do Acampamento, 1212. Telégrafo','','Ativo');
+INSERT INTO `discente` (`id`,`instituicao`,`matricula`,`nome`,`email_principal`,`email_secudario`,`tel_residencial`,`tel_celular`,`endereco`,`lattes`,`situacao`) VALUES 
+ (7,1,'123456','BRENDA DA LUZ SANTOS','brendaluz.belo@gmail.com','','(91) 3721-4793','(91) 8175-1523','Rua Antonio Freire (Castanhal). Sta Lídia','','Ativo');
+/*!40000 ALTER TABLE `discente` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`docente_ens_basico`
+--
+
+DROP TABLE IF EXISTS `docente_ens_basico`;
+CREATE TABLE `docente_ens_basico` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `email_principal` varchar(100) NOT NULL,
+  `email_secudario` varchar(100) DEFAULT NULL,
+  `tel_residencial` varchar(15) DEFAULT NULL,
+  `tel_celular` varchar(15) DEFAULT NULL,
+  `endereco` varchar(200) DEFAULT NULL,
+  `escola` int(11) NOT NULL,
+  `situacao` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_supervisor_escola1_idx` (`escola`),
+  CONSTRAINT `fk_supervisor_escola1` FOREIGN KEY (`escola`) REFERENCES `instituicao_ens_basico` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`docente_ens_basico`
+--
+
+/*!40000 ALTER TABLE `docente_ens_basico` DISABLE KEYS */;
+INSERT INTO `docente_ens_basico` (`id`,`nome`,`email_principal`,`email_secudario`,`tel_residencial`,`tel_celular`,`endereco`,`escola`,`situacao`) VALUES 
+ (1,'FÃ¡bio costa de Oliveira  Neves','fconeves11@gmail.com','fconeves11@gmail.com','(91) 3228-0919','(91) 8831-8131','Avenida 16 de Novembro S/N',1,'Ativo');
+/*!40000 ALTER TABLE `docente_ens_basico` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`docente_ens_superior`
+--
+
+DROP TABLE IF EXISTS `docente_ens_superior`;
+CREATE TABLE `docente_ens_superior` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `instituicao` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `email_principal` varchar(100) NOT NULL,
+  `email_secudario` varchar(100) DEFAULT NULL,
+  `tel_residencial` varchar(15) NOT NULL,
+  `tel_celular` varchar(15) NOT NULL,
+  `endereco` varchar(200) NOT NULL,
+  `lattes` varchar(100) DEFAULT NULL,
+  `situacao` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_docente_instituicao1_idx` (`instituicao`),
+  CONSTRAINT `fk_docente_instituicao1` FOREIGN KEY (`instituicao`) REFERENCES `instituicao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`docente_ens_superior`
+--
+
+/*!40000 ALTER TABLE `docente_ens_superior` DISABLE KEYS */;
+/*!40000 ALTER TABLE `docente_ens_superior` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`instituicao`
+--
+
+DROP TABLE IF EXISTS `instituicao`;
+CREATE TABLE `instituicao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `sigla` varchar(35) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`instituicao`
+--
+
+/*!40000 ALTER TABLE `instituicao` DISABLE KEYS */;
+INSERT INTO `instituicao` (`id`,`nome`,`sigla`) VALUES 
+ (1,'Universidade Federal Rural da Amazônia','UFRA');
+/*!40000 ALTER TABLE `instituicao` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`instituicao_ens_basico`
+--
+
+DROP TABLE IF EXISTS `instituicao_ens_basico`;
+CREATE TABLE `instituicao_ens_basico` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `matricula` varchar(25) NOT NULL,
+  `esfera` varchar(50) NOT NULL,
+  `endereco` varchar(200) NOT NULL,
+  `diretor` varchar(100) NOT NULL,
+  `vice_diretor_manha` varchar(100) NOT NULL,
+  `vice_diretor_tarde` varchar(100) NOT NULL,
+  `vice_diretor_noite` varchar(100) NOT NULL,
+  `telefone` varchar(15) NOT NULL,
+  `email_escola` varchar(100) DEFAULT NULL,
+  `email_direcao` varchar(100) DEFAULT NULL,
+  `email_vice_direcao` varchar(100) DEFAULT NULL,
+  `situacao` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`instituicao_ens_basico`
+--
+
+/*!40000 ALTER TABLE `instituicao_ens_basico` DISABLE KEYS */;
+INSERT INTO `instituicao_ens_basico` (`id`,`nome`,`matricula`,`esfera`,`endereco`,`diretor`,`vice_diretor_manha`,`vice_diretor_tarde`,`vice_diretor_noite`,`telefone`,`email_escola`,`email_direcao`,`email_vice_direcao`,`situacao`) VALUES 
+ (1,'Escola Estadual de Ensino Fundamental e Médio Doutor Ulysses Guimaraes','15040380 ','Estadual','Avenida Governador José Malcher, Nº 1670, Nazaré',' EMERSON ANDION SOUZA SOARES','EMERSON ANDION SOUZA SOARES','EMERSON ANDION SOUZA SOARES','EMERSON ANDION SOUZA SOARES','(91) 3246-8619',' ulyssesguimaraes@hotmail.com','andionemerson@gmail.com','EMERSON ANDION SOUZA SOARES','Ativo'),
+ (2,'UEES ASTÉRIO CAMPOS','15042073','Estadual','Avenida Almirante Barroso, Nº 2800, Souza','Lena Selma Bezerra do Nasciment','Lena Selma Bezerra do Nasciment','Lena Selma Bezerra do Nasciment','Lena Selma Bezerra do Nasciment','(91) 3276-2744','escola.asteriocampo@gmail.com','escola.asteriocampo@gmail.com','escola.asteriocampo@gmail.com','Ativo'),
+ (3,'Escola Estadual de Ensino Fundamental e Médio Mario Brabosa','15140711','Estadual','Avenida Tancredo Neves S/N, Terra Firme','MIGUEL ARNAUD MARQUES','Luciléia','Edilena','MIGUEL ARNAUD MARQUES','(91) 3274-1510','escolamariobarbosa@yahoo.com.br','miguellucas02@yahoo.com.br','escolamariobarbosa@yahoo.com.br','Ativo');
+/*!40000 ALTER TABLE `instituicao_ens_basico` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`papel`
+--
+
+DROP TABLE IF EXISTS `papel`;
+CREATE TABLE `papel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`papel`
+--
+
+/*!40000 ALTER TABLE `papel` DISABLE KEYS */;
+INSERT INTO `papel` (`id`,`descricao`) VALUES 
+ (1,'Administrador'),
+ (2,'Operador');
+/*!40000 ALTER TABLE `papel` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`professor_colaborador`
+--
+
+DROP TABLE IF EXISTS `professor_colaborador`;
+CREATE TABLE `professor_colaborador` (
+  `projeto` int(11) NOT NULL,
+  `docente` int(11) NOT NULL,
+  `data_entrada` date DEFAULT NULL,
+  `data_saida` date DEFAULT NULL,
+  `descricao` text,
+  PRIMARY KEY (`projeto`,`docente`),
+  KEY `fk_projeto_has_docente_docente1_idx` (`docente`),
+  KEY `fk_projeto_has_docente_projeto1_idx` (`projeto`),
+  CONSTRAINT `fk_projeto_has_docente_docente1` FOREIGN KEY (`docente`) REFERENCES `docente_ens_superior` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_projeto_has_docente_projeto1` FOREIGN KEY (`projeto`) REFERENCES `projeto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`professor_colaborador`
+--
+
+/*!40000 ALTER TABLE `professor_colaborador` DISABLE KEYS */;
+/*!40000 ALTER TABLE `professor_colaborador` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`projeto`
+--
+
+DROP TABLE IF EXISTS `projeto`;
+CREATE TABLE `projeto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `instituicao` int(11) NOT NULL,
+  `curso` int(11) NOT NULL,
+  `coordenador` int(11) NOT NULL,
+  `titulo` varchar(100) DEFAULT NULL,
+  `data_ini` date DEFAULT NULL,
+  `data_fim` date DEFAULT NULL,
+  `apresentacao_proposta` text,
+  `acoes_prevista` text,
+  `resultados_pretendido` text,
+  `situacao` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_projeto_docente1_idx` (`coordenador`),
+  KEY `fk_projeto_instituicao1_idx` (`instituicao`),
+  KEY `fk_projeto_curso1_idx` (`curso`),
+  CONSTRAINT `fk_projeto_curso1` FOREIGN KEY (`curso`) REFERENCES `curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_projeto_docente1` FOREIGN KEY (`coordenador`) REFERENCES `docente_ens_superior` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_projeto_instituicao1` FOREIGN KEY (`instituicao`) REFERENCES `instituicao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`projeto`
+--
+
+/*!40000 ALTER TABLE `projeto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `projeto` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`responsavel_atividade`
+--
+
+DROP TABLE IF EXISTS `responsavel_atividade`;
+CREATE TABLE `responsavel_atividade` (
+  `atividade` int(11) NOT NULL,
+  `discente` int(11) NOT NULL DEFAULT '0',
+  `bolsista` int(11) NOT NULL DEFAULT '0',
+  `docente` int(11) NOT NULL DEFAULT '0',
+  `supervisor` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`atividade`,`discente`,`bolsista`,`docente`,`supervisor`),
+  KEY `fk_discente_has_atividade_atividade1_idx` (`atividade`),
+  KEY `fk_discente_has_atividade_discente1_idx` (`discente`),
+  KEY `fk_responsavel_atividade_discente1_idx` (`bolsista`),
+  KEY `fk_responsavel_atividade_docente1_idx` (`docente`),
+  KEY `fk_responsavel_atividade_supervisor1_idx` (`supervisor`),
+  CONSTRAINT `fk_discente_has_atividade_atividade1` FOREIGN KEY (`atividade`) REFERENCES `atividade` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_discente_has_atividade_discente1` FOREIGN KEY (`discente`) REFERENCES `discente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_responsavel_atividade_discente1` FOREIGN KEY (`bolsista`) REFERENCES `discente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_responsavel_atividade_docente1` FOREIGN KEY (`docente`) REFERENCES `docente_ens_superior` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_responsavel_atividade_supervisor1` FOREIGN KEY (`supervisor`) REFERENCES `docente_ens_basico` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`responsavel_atividade`
+--
+
+/*!40000 ALTER TABLE `responsavel_atividade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `responsavel_atividade` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`supervisor`
+--
+
+DROP TABLE IF EXISTS `supervisor`;
+CREATE TABLE `supervisor` (
+  `supervisor` int(11) NOT NULL,
+  `projeto` int(11) NOT NULL,
+  `data_ini` date NOT NULL,
+  `date_fim` date DEFAULT NULL,
+  `descricao` text,
+  PRIMARY KEY (`supervisor`,`projeto`),
+  KEY `fk_supervisor_has_projeto_projeto1_idx` (`projeto`),
+  KEY `fk_supervisor_has_projeto_supervisor1_idx` (`supervisor`),
+  CONSTRAINT `fk_supervisor_has_projeto_projeto1` FOREIGN KEY (`projeto`) REFERENCES `projeto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_supervisor_has_projeto_supervisor1` FOREIGN KEY (`supervisor`) REFERENCES `docente_ens_basico` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`supervisor`
+--
+
+/*!40000 ALTER TABLE `supervisor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supervisor` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pibid`.`usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `senha` varchar(100) NOT NULL,
+  `papel` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  KEY `fk_usuario_papel1_idx` (`papel`),
+  CONSTRAINT `fk_usuario_papel1` FOREIGN KEY (`papel`) REFERENCES `papel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pibid`.`usuario`
+--
+
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` (`id`,`nome`,`email`,`senha`,`papel`) VALUES 
+ (1,'Administrador do Sistema','pibid-web@ufra.edu.br','admin',1);
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

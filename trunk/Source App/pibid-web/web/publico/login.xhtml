@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Ufra :: Pibid-Web</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:dialog header="Controle de Acesso" 
+                      visible="true"
+                      resizable="false"
+                      closable="false"
+                      width="450">
+
+                <div align="center">
+                    <h:graphicImage library="img" name="logopibid.png"/>
+                </div>
+                <p:messages />
+                <br />
+                <div align="center">
+                    <h:panelGrid columns="2" cellpadding="3">
+                        <h:outputLabel for="email" 
+                                       value="E-mail: " /> 
+                        <p:inputText id="email" 
+                                     value="#{autenticadorBean.email}"
+                                     required="true" 
+                                     requiredMessage="Informe e-mail de acesso."
+                                     size="25"/>
+
+                        <h:outputLabel for="senha"
+                                       value="Senha: " />
+                        <p:password id="senha" 
+                                    value="#{autenticadorBean.senha}"
+                                    required="true" 
+                                    requiredMessage="Informe sua senha de acesso"
+                                    size="25"/>
+                    </h:panelGrid>
+                </div>
+                <f:facet name="footer">
+                    <p:commandButton ajax="false"
+                                     value="Entrar"
+                                     action="#{autenticadorBean.logIn()}"/>
+                </f:facet>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+
