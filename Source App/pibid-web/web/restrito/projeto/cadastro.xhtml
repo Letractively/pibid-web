@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Projeto" icon="ui-icon-document">
+                <p:menuitem value="Voltar" 
+                            url="/restrito/projeto/index.xhtml"
+                            icon="ui-icon-arrowreturnthick-1-w"/>
+
+                <p:menuitem value="Listagem" 
+                            url="#{projetoBean.listagem()}"
+                            icon="ui-icon-script"/>
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="cadastro">
+            <p:panel header="Formulario de Cadastro">
+                <p:messages/>
+                <h:inputHidden value="#{projetoBean.projeto.id}"/>
+                
+                <h:panelGrid columns="2" cellspacing="5">
+                    <h:outputText value="Institui&ccedil;&atilde;o: " />
+                    <p:selectOneMenu id="cbInstituicao" style="width: 455px;"
+                                     value="#{projetoBean.projeto.instituicao}"
+                                     converter="instituicaoConverter"
+                                     required="true"
+                                     requiredMessage="O campo Institui&ccedil;&atilde;o &eacute; obrigat&oacute;rio.">
+                        <f:selectItems value="#{projetoBean.instituicoes}" 
+                                       var="instituicao" 
+                                       itemValue="#{instituicao}"
+                                       itemLabel="#{instituicao.sigla}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="Curso: " />
+                    <p:selectOneMenu id="cbCurso" style="width: 455px;"
+                                     value="#{projetoBean.projeto.curso}"
+                                     converter="cursoConverter"
+                                     required="true"
+                                     requiredMessage="O campo Curso &eacute; obrigat&oacute;rio.">
+                        <f:selectItem itemValue=""
+                                      itemLabel="-- Selecione --"
+                                      noSelectionOption="true"/>
+                        <f:selectItems value="#{projetoBean.cursos}" 
+                                       var="curso" 
+                                       itemValue="#{curso}"
+                                       itemLabel="#{curso.curso}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="Professor Coordenador: " />
+                    <p:selectOneMenu id="cbCoordenador" style="width: 455px;"
+                                     value="#{projetoBean.projeto.coordenador}"
+                                     converter="docenteEnsSuperiorConverter"
+                                     required="true"
+                                     requiredMessage="O campo Professor Coordenador &eacute; obrigat&oacute;rio.">
+                        <f:selectItem itemValue=""
+                                      itemLabel="-- Selecione --"
+                                      noSelectionOption="true"/>
+                        <f:selectItems value="#{projetoBean.professores}" 
+                                       var="professor" 
+                                       itemValue="#{professor}"
+                                       itemLabel="#{professor.nome}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="T&iacute;tulo do Projeto: " />
+                    <p:inputText id="titulo" style="width: 450px;"
+                                 required="true"
+                                 requiredMessage="O campo T&iacute;tulo do Projeto &eacute; obrigat&oacute;rio."
+                                 value="#{projetoBean.projeto.titulo}"/>
+
+                    <h:outputText value="Apresenta&ccedil;&atilde;o Proposta: " />
+                    <p:inputTextarea id="apresentacaoProposta"
+                                     rows="3" 
+                                     cols="43"
+                                     required="true"
+                                     requiredMessage="O campo Apresenta&ccedil;&atilde;o Proposta do Projeto &eacute; obrigat&oacute;rio."
+                                     value="#{projetoBean.projeto.apresentacaoProposta}"/>
+                    
+                    <h:outputText value="A&ccedil;&otilde;es Prevista: " />
+                    <p:inputTextarea id="acoesPrevista"
+                                     rows="3" 
+                                     cols="43"
+                                     required="true"
+                                     requiredMessage="O campo A&ccedil;&otilde;es Prevista do Projeto &eacute; obrigat&oacute;rio."
+                                     value="#{projetoBean.projeto.acoesPrevista}"/>
+                    
+                    <h:outputText value="Resultados Pretendidos: " />
+                    <p:inputTextarea id="resultadosPretendido"
+                                     rows="3" 
+                                     cols="43"
+                                     required="true"
+                                     requiredMessage="O campo Resultados Pretendidos Proposta do Projeto &eacute; obrigat&oacute;rio."
+                                     value="#{projetoBean.projeto.resultadosPretendido}"/>
+                    
+                    <h:outputText value="Data Inicial: " />
+                    <p:inputMask id="dataIni" style="width: 150px;"
+                                 mask="99/99/9999"
+                                 required="true"
+                                 requiredMessage="O campo Data Inicial &eacute; obrigat&oacute;rio."
+                                 value="#{projetoBean.projeto.dataIni}">
+                        <f:convertDateTime timeZone="GMT-03:00" />
+                    </p:inputMask>
+                    
+                    <h:outputText value="Data Final: " />
+                    <p:inputMask id="dataFim" style="width: 150px;"
+                                 mask="99/99/9999"
+                                 required="true"
+                                 requiredMessage="O campo Data Final &eacute; obrigat&oacute;rio."
+                                 value="#{projetoBean.projeto.dataFim}">
+                            <f:convertDateTime timeZone="GMT-03:00" />
+                    </p:inputMask>
+                    
+                    <h:outputText value="Situa&ccedil;&atilde;o: " />
+                    <p:selectOneMenu id="cbSituacao" style="width: 150px;"
+                                     value="#{projetoBean.projeto.situacao}">
+                        <f:selectItem itemValue="Ativo"
+                                        itemLabel="Ativo"/>
+                        <f:selectItem itemValue="Inativo"
+                                        itemLabel="Inativo"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+
+                <f:facet name="footer">
+                    <p:commandButton 
+                        action="#{projetoBean.salvar}"
+                        value="Salvar" 
+                        title="Salvar"
+                        ajax="false"
+                        icon="ui-icon-disk"/>
+                </f:facet>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
