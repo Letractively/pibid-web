@@ -7,7 +7,17 @@
                 xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="sidebar">
-        sidebar
+        <p:panelMenu>
+            <p:submenu label="Atribuir Bolsista" icon="ui-icon-document">
+                <p:menuitem value="Home" 
+                            url="/publico/index.xhtml"
+                            icon="ui-icon-home"/>
+
+                <p:menuitem value="Menu de Participantes" 
+                            url="#{bolsistaBean.atribuir()}"
+                            icon="ui-icon-script"/>
+            </p:submenu>
+        </p:panelMenu>
     </ui:define>
 
     <ui:define name="content">
@@ -16,10 +26,14 @@
                            converter="projetoConverter"/>
             <p:growl id="msg" showDetail="true" escape="false" />  
 
-            <h3 style="margin-top:0">Cadastro de Projetos</h3>  
+            <h3 style="margin-top:0">Cadastro de Bolsistas</h3>  
 
             <p:pickList id="pickList" value="#{bolsistaBean.discentes}" var="discente"   
-                        itemLabel="#{discente.nome}" itemValue="#{discente}" /> 
+                        itemLabel="#{discente.nome}" itemValue="#{discente}"
+                        converter="discenteConverter">
+                <f:facet name="sourceCaption">Discentes</f:facet>
+                <f:facet name="targetCaption">Bolsistas</f:facet>
+            </p:pickList>
             <h:panelGrid columns="2" cellpadding="5">
                 <h:outputText value="Data Inicial: " />
                 <p:inputMask id="dataIni" style="width: 150px;"
@@ -51,6 +65,7 @@
                     value="Salvar" 
                     title="Salvar"
                     ajax="false"
+                    update="pickList"
                     icon="ui-icon-disk"/>
 
             </h:panelGrid>

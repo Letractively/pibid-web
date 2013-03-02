@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author stelio
+ * @author marcos
  */
 @Entity
 @Table(name = "aluno_colaborador")
@@ -45,12 +45,12 @@ public class AlunoColaborador implements Serializable {
     @Lob
     @Column(name = "descricao")
     private String descricao;
-    @JoinColumn(name = "discente", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Discente discente1;
     @JoinColumn(name = "projeto", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Projeto projeto1;
+    @JoinColumn(name = "discente", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Discente discente1;
 
     public AlunoColaborador() {
     }
@@ -95,20 +95,20 @@ public class AlunoColaborador implements Serializable {
         this.descricao = descricao;
     }
 
-    public Discente getDiscente1() {
-        return discente1;
-    }
-
-    public void setDiscente1(Discente discente1) {
-        this.discente1 = discente1;
-    }
-
     public Projeto getProjeto1() {
         return projeto1;
     }
 
     public void setProjeto1(Projeto projeto1) {
         this.projeto1 = projeto1;
+    }
+
+    public Discente getDiscente1() {
+        return discente1;
+    }
+
+    public void setDiscente1(Discente discente1) {
+        this.discente1 = discente1;
     }
 
     @Override

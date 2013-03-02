@@ -57,10 +57,10 @@
                     </h:commandLink>
                     <h:commandLink action="#{projetoBean.atribuir}">
                         <h:graphicImage library="img" 
-                                        name="edit.png"
-                                        title="Atribuir Bolsista"/>
+                                        name="add.png"
+                                        title="Atribuir Participante"/>
                         <f:setPropertyActionListener value="#{projeto}"
-                                                     target="#{bolsistaBean.projeto}"/>
+                                                     target="#{atribuicaoBean.projeto}"/>
                     </h:commandLink>
                 </p:column>
             </p:dataTable>

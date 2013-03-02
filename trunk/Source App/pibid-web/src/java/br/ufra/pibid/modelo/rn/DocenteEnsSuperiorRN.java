@@ -47,4 +47,8 @@ public class DocenteEnsSuperiorRN {
     public List<DocenteEnsSuperior> buscarPorInstituicao(String instituicao){
         return dao.findByInstituicao(instituicao);
     }
+    
+    public List<DocenteEnsSuperior> buscarPorStatus(Integer status){
+        return dao.findByStatus(status);
+    }
 }

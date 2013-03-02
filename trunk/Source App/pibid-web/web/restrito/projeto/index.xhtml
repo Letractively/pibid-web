@@ -11,10 +11,14 @@
                 <p:menuitem value="Home" 
                             url="/publico/index.xhtml"
                             icon="ui-icon-home"/>
-                
+
                 <p:menuitem value="Novo Projeto" 
                             url="/restrito/projeto/cadastro.xhtml"
                             icon="ui-icon-plusthick"/>
+
+                <p:menuitem value="Listagem" 
+                            url="#{projetoBean.listagem()}"
+                            icon="ui-icon-script"/>
 
                 <p:menuitem value="Atividades" 
                             url="/restrito/projeto/atividade/listagem.xhtml"
@@ -53,7 +57,7 @@
 
                 <br />
                 <br />
-                
+
                 <p:barChart id="basic" 
                             value="#{chartBean.categoryModel}" 
                             legendPosition="ne"  

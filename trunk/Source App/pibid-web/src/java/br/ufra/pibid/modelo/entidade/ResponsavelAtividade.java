@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author stelio
+ * @author marcos
  */
 @Entity
 @Table(name = "responsavel_atividade")
@@ -29,9 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ResponsavelAtividade.findByDocente", query = "SELECT r FROM ResponsavelAtividade r WHERE r.responsavelAtividadePK.docente = :docente"),
     @NamedQuery(name = "ResponsavelAtividade.findBySupervisor", query = "SELECT r FROM ResponsavelAtividade r WHERE r.responsavelAtividadePK.supervisor = :supervisor")})
 public class ResponsavelAtividade implements Serializable {
-    @JoinColumn(name = "discente", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Discente discente1;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ResponsavelAtividadePK responsavelAtividadePK;
@@ -89,14 +86,6 @@ public class ResponsavelAtividade implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.pibid.modelo.entidade.ResponsavelAtividade[ responsavelAtividadePK=" + responsavelAtividadePK + " ]";
-    }
-
-    public Discente getDiscente1() {
-        return discente1;
-    }
-
-    public void setDiscente1(Discente discente1) {
-        this.discente1 = discente1;
     }
     
 }

@@ -22,4 +22,16 @@ public class DocenteEnsSuperiorDAOImpl extends GenericDAOImpl<DocenteEnsSuperior
             return null;
         }
     }
+    
+    @Override
+    public List<DocenteEnsSuperior> findByStatus(Integer status) {
+        String query = "Docente.findByStatus";
+        final Query q = getEm().createNamedQuery(query);
+        try {
+            return q.setParameter("status", status).getResultList();
+        } catch (Exception e) {
+            System.out.println("Excessão findByStatus: " + e);
+            return null;
+        }
+    }
 }

@@ -99,7 +99,7 @@ public class ProjetoBean {
     }
     
     public String atribuir(){
-      return "/restrito/projeto/movimentacao/bolsista/cadastro.xhtml";  
+      return "/restrito/projeto/movimentacao/cadastro.xhtml";  
     }
     
     public String salvar(){

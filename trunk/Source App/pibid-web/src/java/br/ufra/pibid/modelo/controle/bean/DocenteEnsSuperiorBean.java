@@ -74,6 +74,7 @@ public class DocenteEnsSuperiorBean {
         
         Instituicao inst = new InstituicaoRN().buscar(1);
         docente.setInstituicao(inst);
+        docente.setStatus(0);
         rn.salvar(docente);
         
         docente  = null;

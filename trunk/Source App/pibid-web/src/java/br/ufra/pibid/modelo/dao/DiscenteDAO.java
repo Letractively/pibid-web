@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface DiscenteDAO extends GenericDAO<Discente> {
     List<Discente> findByInstituicao(String instituicao);
+    List<Discente> findByStatus(Integer status);
 }
