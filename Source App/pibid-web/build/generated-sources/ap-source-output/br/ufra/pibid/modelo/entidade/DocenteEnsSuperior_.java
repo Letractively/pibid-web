@@ -8,15 +8,16 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-02-28T19:52:52")
+@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-03-02T00:35:56")
 @StaticMetamodel(DocenteEnsSuperior.class)
 public class DocenteEnsSuperior_ { 
 
     public static volatile SingularAttribute<DocenteEnsSuperior, Integer> id;
-    public static volatile ListAttribute<DocenteEnsSuperior, Projeto> projetoList;
     public static volatile SingularAttribute<DocenteEnsSuperior, String> emailSecudario;
-    public static volatile ListAttribute<DocenteEnsSuperior, ProfessorColaborador> professorColaboradorList;
+    public static volatile ListAttribute<DocenteEnsSuperior, Projeto> projetoList;
     public static volatile SingularAttribute<DocenteEnsSuperior, String> lattes;
+    public static volatile ListAttribute<DocenteEnsSuperior, ProfessorColaborador> professorColaboradorList;
+    public static volatile SingularAttribute<DocenteEnsSuperior, Integer> status;
     public static volatile SingularAttribute<DocenteEnsSuperior, Instituicao> instituicao;
     public static volatile SingularAttribute<DocenteEnsSuperior, String> telResidencial;
     public static volatile SingularAttribute<DocenteEnsSuperior, String> situacao;

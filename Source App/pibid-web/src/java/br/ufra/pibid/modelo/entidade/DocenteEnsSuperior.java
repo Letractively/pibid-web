@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author stelio
+ * @author marcos
  */
 @Entity
 @Table(name = "docente_ens_superior")
@@ -39,8 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "DocenteEnsSuperior.findByTelCelular", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.telCelular = :telCelular"),
     @NamedQuery(name = "DocenteEnsSuperior.findByEndereco", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.endereco = :endereco"),
     @NamedQuery(name = "DocenteEnsSuperior.findByLattes", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.lattes = :lattes"),
-    @NamedQuery(name = "DocenteEnsSuperior.findByInstituicao", query = "SELECT d FROM Discente d WHERE d.instituicao = :instituicao"),
-    @NamedQuery(name = "DocenteEnsSuperior.findBySituacao", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.situacao = :situacao")})
+    @NamedQuery(name = "DocenteEnsSuperior.findBySituacao", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.situacao = :situacao"),
+    @NamedQuery(name = "Docente.findByStatus", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.status = :status")})
 public class DocenteEnsSuperior implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -70,6 +70,9 @@ public class DocenteEnsSuperior implements Serializable {
     @Basic(optional = false)
     @Column(name = "situacao")
     private String situacao;
+    @Basic(optional = false)
+    @Column(name = "status")
+    private int status;
     @JoinColumn(name = "instituicao", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Instituicao instituicao;
@@ -85,7 +88,7 @@ public class DocenteEnsSuperior implements Serializable {
         this.id = id;
     }
 
-    public DocenteEnsSuperior(Integer id, String nome, String emailPrincipal, String telResidencial, String telCelular, String endereco, String situacao) {
+    public DocenteEnsSuperior(Integer id, String nome, String emailPrincipal, String telResidencial, String telCelular, String endereco, String situacao, int status) {
         this.id = id;
         this.nome = nome;
         this.emailPrincipal = emailPrincipal;
@@ -93,6 +96,7 @@ public class DocenteEnsSuperior implements Serializable {
         this.telCelular = telCelular;
         this.endereco = endereco;
         this.situacao = situacao;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -165,6 +169,14 @@ public class DocenteEnsSuperior implements Serializable {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Instituicao getInstituicao() {

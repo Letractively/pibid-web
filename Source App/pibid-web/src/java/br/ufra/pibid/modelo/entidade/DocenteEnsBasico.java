@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author stelio
+ * @author marcos
  */
 @Entity
 @Table(name = "docente_ens_basico")
@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "DocenteEnsBasico.findByTelResidencial", query = "SELECT d FROM DocenteEnsBasico d WHERE d.telResidencial = :telResidencial"),
     @NamedQuery(name = "DocenteEnsBasico.findByTelCelular", query = "SELECT d FROM DocenteEnsBasico d WHERE d.telCelular = :telCelular"),
     @NamedQuery(name = "DocenteEnsBasico.findByEndereco", query = "SELECT d FROM DocenteEnsBasico d WHERE d.endereco = :endereco"),
-    @NamedQuery(name = "DocenteEnsBasico.findBySituacao", query = "SELECT d FROM DocenteEnsBasico d WHERE d.situacao = :situacao")})
+    @NamedQuery(name = "DocenteEnsBasico.findBySituacao", query = "SELECT d FROM DocenteEnsBasico d WHERE d.situacao = :situacao"),
+    @NamedQuery(name = "DocenteEnsBasico.findByStatus", query = "SELECT d FROM DocenteEnsBasico d WHERE d.status = :status")})
 public class DocenteEnsBasico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,6 +64,9 @@ public class DocenteEnsBasico implements Serializable {
     @Basic(optional = false)
     @Column(name = "situacao")
     private String situacao;
+    @Basic(optional = false)
+    @Column(name = "status")
+    private int status;
     @JoinColumn(name = "escola", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private InstituicaoEnsBasico escola;
@@ -76,11 +80,12 @@ public class DocenteEnsBasico implements Serializable {
         this.id = id;
     }
 
-    public DocenteEnsBasico(Integer id, String nome, String emailPrincipal, String situacao) {
+    public DocenteEnsBasico(Integer id, String nome, String emailPrincipal, String situacao, int status) {
         this.id = id;
         this.nome = nome;
         this.emailPrincipal = emailPrincipal;
         this.situacao = situacao;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -145,6 +150,14 @@ public class DocenteEnsBasico implements Serializable {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public InstituicaoEnsBasico getEscola() {

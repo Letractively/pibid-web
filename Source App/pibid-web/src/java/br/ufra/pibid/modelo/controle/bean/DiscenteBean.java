@@ -15,66 +15,64 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class DiscenteBean {
-
-    private static final DiscenteRN rn = new DiscenteRN();
     
+    private static final DiscenteRN rn = new DiscenteRN();
     private Discente discente = new Discente();
     private List<Discente> discentes;
     private List<Instituicao> instituicoes;
     
     public DiscenteBean() {
     }
-
+    
     public Discente getDiscente() {
         return discente;
     }
-
+    
     public void setDiscente(Discente discente) {
         this.discente = discente;
     }
-
+    
     public List<Discente> getDiscentes() {
-        if (discentes == null){
+        if (discentes == null) {
             discentes = rn.listar();
         }
         return discentes;
     }
-
+    
     public void setDiscentes(List<Discente> discentes) {
         this.discentes = discentes;
     }
-
+    
     public List<Instituicao> getInstituicoes() {
-        if (instituicoes == null){
+        if (instituicoes == null) {
             instituicoes = new InstituicaoRN().listar();
         }
         return instituicoes;
     }
-
+    
     public void setInstituicoes(List<Instituicao> instituicoes) {
         this.instituicoes = instituicoes;
     }
     
-    
-    public String novo(){
+    public String novo() {
         discente = null;
-        discente =  rn.novo();
+        discente = rn.novo();
         return "/restrito/discente/cadastro.xhtml?faces-redirect=true";
     }
     
-    public String alterar(){
+    public String alterar() {
         return "/restrito/discente/cadastro.xhtml";
     }
     
-    public String listagem(){
+    public String listagem() {
         return "/restrito/discente/listagem.xhtml?faces-redirect=true";
     }
     
-    public String salvar(){
-        
+    public String salvar() {
+        discente.setStatus(0);
         rn.salvar(discente);
         
-        discente  = null;
+        discente = null;
         discentes = null;
         
         return listagem();

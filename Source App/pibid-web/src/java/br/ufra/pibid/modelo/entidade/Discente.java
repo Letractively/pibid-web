@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author stelio
+ * @author marcos
  */
 @Entity
 @Table(name = "discente")
@@ -40,11 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Discente.findByTelCelular", query = "SELECT d FROM Discente d WHERE d.telCelular = :telCelular"),
     @NamedQuery(name = "Discente.findByEndereco", query = "SELECT d FROM Discente d WHERE d.endereco = :endereco"),
     @NamedQuery(name = "Discente.findByLattes", query = "SELECT d FROM Discente d WHERE d.lattes = :lattes"),
-    @NamedQuery(name = "Discente.findByInstituicao", query = "SELECT d FROM Discente d WHERE d.instituicao = :instituicao"),
-    @NamedQuery(name = "Discente.findBySituacao", query = "SELECT d FROM Discente d WHERE d.situacao = :situacao")})
+    @NamedQuery(name = "Discente.findBySituacao", query = "SELECT d FROM Discente d WHERE d.situacao = :situacao"),
+    @NamedQuery(name = "Discente.findByStatus", query = "SELECT d FROM Discente d WHERE d.status = :status")})
 public class Discente implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "discente1")
-    private List<ResponsavelAtividade> responsavelAtividadeList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,6 +74,9 @@ public class Discente implements Serializable {
     @Basic(optional = false)
     @Column(name = "situacao")
     private String situacao;
+    @Basic(optional = false)
+    @Column(name = "status")
+    private int status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discente1")
     private List<AlunoColaborador> alunoColaboradorList;
     @JoinColumn(name = "instituicao", referencedColumnName = "id")
@@ -91,7 +92,7 @@ public class Discente implements Serializable {
         this.id = id;
     }
 
-    public Discente(Integer id, String matricula, String nome, String emailPrincipal, String telResidencial, String telCelular, String endereco, String situacao) {
+    public Discente(Integer id, String matricula, String nome, String emailPrincipal, String telResidencial, String telCelular, String endereco, String situacao, int status) {
         this.id = id;
         this.matricula = matricula;
         this.nome = nome;
@@ -100,6 +101,7 @@ public class Discente implements Serializable {
         this.telCelular = telCelular;
         this.endereco = endereco;
         this.situacao = situacao;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -182,6 +184,14 @@ public class Discente implements Serializable {
         this.situacao = situacao;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @XmlTransient
     public List<AlunoColaborador> getAlunoColaboradorList() {
         return alunoColaboradorList;
@@ -231,15 +241,6 @@ public class Discente implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.pibid.modelo.entidade.Discente[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public List<ResponsavelAtividade> getResponsavelAtividadeList() {
-        return responsavelAtividadeList;
-    }
-
-    public void setResponsavelAtividadeList(List<ResponsavelAtividade> responsavelAtividadeList) {
-        this.responsavelAtividadeList = responsavelAtividadeList;
     }
     
 }

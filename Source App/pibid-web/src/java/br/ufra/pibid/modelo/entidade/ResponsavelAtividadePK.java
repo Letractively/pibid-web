@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author stelio
+ * @author marcos
  */
 @Embeddable
 public class ResponsavelAtividadePK implements Serializable {
