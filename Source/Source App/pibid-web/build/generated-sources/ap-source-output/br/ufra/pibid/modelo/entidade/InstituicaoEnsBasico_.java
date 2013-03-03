@@ -6,7 +6,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-02-28T17:23:42")
+@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-03-03T09:34:20")
 @StaticMetamodel(InstituicaoEnsBasico.class)
 public class InstituicaoEnsBasico_ { 
 
@@ -21,8 +21,8 @@ public class InstituicaoEnsBasico_ {
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> emailEscola;
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> telefone;
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> esfera;
-    public static volatile SingularAttribute<InstituicaoEnsBasico, String> situacao;
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> nome;
+    public static volatile SingularAttribute<InstituicaoEnsBasico, String> situacao;
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> endereco;
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> viceDiretorNoite;
 
