@@ -49,33 +49,34 @@
                                      required="true"
                                      requiredMessage="O campo Apresenta&ccedil;&atilde;o Proposta do Projeto &eacute; obrigat&oacute;rio."
                                      value="#{atividadeBean.atividade.descricao}"/>
-                    
+
                     <h:outputText value="Data Inicial: " />
-                    <p:inputMask id="dataIni" style="width: 150px;"
-                                 mask="99/99/9999"
-                                 required="true"
-                                 requiredMessage="O campo Data Inicial &eacute; obrigat&oacute;rio."
-                                 value="#{atividadeBean.atividade.dataIni}">
-                        <f:convertDateTime timeZone="GMT-03:00"/>
-                    </p:inputMask>
+                    <p:calendar locale="pt_BR" 
+                                pattern="dd/MM/yyyy"
+                                effect="slade"
+                                value="#{atividadeBean.atividade.dataIni}"
+                                required="true"
+                                requiredMessage="O campo Data Inicial &eacute; obrigat&oacute;rio.">
+                        <f:convertDateTime timeZone="GMT-03:00" />
+                    </p:calendar>
                     
                     <h:outputText value="Data Final (Prevista): " />
-                    <p:inputMask id="dataFim" style="width: 150px;"
-                                 mask="99/99/9999"
-                                 required="true"
-                                 requiredMessage="O campo Data Final &eacute; obrigat&oacute;rio."
-                                 value="#{atividadeBean.atividade.dataFim}">
-                            <f:convertDateTime timeZone="GMT-03:00"/>
-                    </p:inputMask>
+                    <p:calendar locale="pt_BR" 
+                                pattern="dd/MM/yyyy"
+                                effect="slade"
+                                value="#{atividadeBean.atividade.dataFim}"
+                                required="true"
+                                requiredMessage="O campo Data Final &eacute; obrigat&oacute;rio.">
+                        <f:convertDateTime timeZone="GMT-03:00" />
+                    </p:calendar>
                     
                     <h:outputText value="Data Conclus&atilde;o: " />
-                    <p:inputMask id="dataConclusao" style="width: 150px;"
-                                 mask="99/99/9999"
-                                 required="true"
-                                 requiredMessage="O campo Data Final &eacute; obrigat&oacute;rio."
-                                 value="#{atividadeBean.atividade.dataConclusao}">
-                            <f:convertDateTime timeZone="GMT-03:00"/>
-                    </p:inputMask>
+                    <p:calendar locale="pt_BR" 
+                                pattern="dd/MM/yyyy"
+                                effect="slade"
+                                value="#{atividadeBean.atividade.dataConclusao}">
+                        <f:convertDateTime timeZone="GMT-03:00" />
+                    </p:calendar>
                     
                     <h:outputText value="Observa&ccedil;&otilde;es Gerais: " />
                     <p:inputTextarea id="obsGerais"
