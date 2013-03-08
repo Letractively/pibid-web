@@ -40,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "DocenteEnsSuperior.findByEndereco", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.endereco = :endereco"),
     @NamedQuery(name = "DocenteEnsSuperior.findByLattes", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.lattes = :lattes"),
     @NamedQuery(name = "DocenteEnsSuperior.findBySituacao", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.situacao = :situacao"),
-    @NamedQuery(name = "Docente.findByStatus", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.status = :status")})
+    @NamedQuery(name = "DocenteEnsSuperior.findByStatus", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.status = :status"),
+    @NamedQuery(name = "DocenteEnsSuperior.findByStatusAtividade", query = "SELECT d FROM DocenteEnsSuperior d WHERE d.statusAtividade = :statusAtividade")})
 public class DocenteEnsSuperior implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -73,13 +74,18 @@ public class DocenteEnsSuperior implements Serializable {
     @Basic(optional = false)
     @Column(name = "status")
     private int status;
+    @Basic(optional = false)
+    @Column(name = "status_atividade")
+    private int statusAtividade;
     @JoinColumn(name = "instituicao", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Instituicao instituicao;
+    private InstituicaoEnsSuperior instituicao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "coordenador")
     private List<Projeto> projetoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "docenteEnsSuperior")
     private List<ProfessorColaborador> professorColaboradorList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "docenteEnsSuperior")
+    private List<ResponsavelAtividade> responsavelAtividadeList;
 
     public DocenteEnsSuperior() {
     }
@@ -88,7 +94,7 @@ public class DocenteEnsSuperior implements Serializable {
         this.id = id;
     }
 
-    public DocenteEnsSuperior(Integer id, String nome, String emailPrincipal, String telResidencial, String telCelular, String endereco, String situacao, int status) {
+    public DocenteEnsSuperior(Integer id, String nome, String emailPrincipal, String telResidencial, String telCelular, String endereco, String situacao, int status, int statusAtividade) {
         this.id = id;
         this.nome = nome;
         this.emailPrincipal = emailPrincipal;
@@ -97,6 +103,7 @@ public class DocenteEnsSuperior implements Serializable {
         this.endereco = endereco;
         this.situacao = situacao;
         this.status = status;
+        this.statusAtividade = statusAtividade;
     }
 
     public Integer getId() {
@@ -179,11 +186,19 @@ public class DocenteEnsSuperior implements Serializable {
         this.status = status;
     }
 
-    public Instituicao getInstituicao() {
+    public int getStatusAtividade() {
+        return statusAtividade;
+    }
+
+    public void setStatusAtividade(int statusAtividade) {
+        this.statusAtividade = statusAtividade;
+    }
+
+    public InstituicaoEnsSuperior getInstituicao() {
         return instituicao;
     }
 
-    public void setInstituicao(Instituicao instituicao) {
+    public void setInstituicao(InstituicaoEnsSuperior instituicao) {
         this.instituicao = instituicao;
     }
 
@@ -203,6 +218,15 @@ public class DocenteEnsSuperior implements Serializable {
 
     public void setProfessorColaboradorList(List<ProfessorColaborador> professorColaboradorList) {
         this.professorColaboradorList = professorColaboradorList;
+    }
+
+    @XmlTransient
+    public List<ResponsavelAtividade> getResponsavelAtividadeList() {
+        return responsavelAtividadeList;
+    }
+
+    public void setResponsavelAtividadeList(List<ResponsavelAtividade> responsavelAtividadeList) {
+        this.responsavelAtividadeList = responsavelAtividadeList;
     }
 
     @Override

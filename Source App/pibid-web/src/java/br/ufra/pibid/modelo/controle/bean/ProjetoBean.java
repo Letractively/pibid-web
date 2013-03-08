@@ -2,11 +2,11 @@ package br.ufra.pibid.modelo.controle.bean;
 
 import br.ufra.pibid.modelo.entidade.Curso;
 import br.ufra.pibid.modelo.entidade.DocenteEnsSuperior;
-import br.ufra.pibid.modelo.entidade.Instituicao;
+import br.ufra.pibid.modelo.entidade.InstituicaoEnsSuperior;
 import br.ufra.pibid.modelo.entidade.Projeto;
 import br.ufra.pibid.modelo.rn.CursoRN;
 import br.ufra.pibid.modelo.rn.DocenteEnsSuperiorRN;
-import br.ufra.pibid.modelo.rn.InstituicaoRN;
+import br.ufra.pibid.modelo.rn.InstituicaoEnsSuperiorRN;
 import br.ufra.pibid.modelo.rn.ProjetoRN;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -24,7 +24,7 @@ public class ProjetoBean {
     
     private Projeto projeto = new Projeto();
     private List<Projeto> projetos;
-    private List<Instituicao> instituicoes;
+    private List<InstituicaoEnsSuperior> instituicoes;
     private List<DocenteEnsSuperior> professores;
     private List<Curso> cursos;
     
@@ -61,14 +61,14 @@ public class ProjetoBean {
         this.cursos = cursos;
     }
 
-    public List<Instituicao> getInstituicoes() {
+    public List<InstituicaoEnsSuperior> getInstituicoes() {
         if (instituicoes == null){
-            instituicoes = new InstituicaoRN().listar();
+            instituicoes = new InstituicaoEnsSuperiorRN().listar();
         }
         return instituicoes;
     }
 
-    public void setInstituicoes(List<Instituicao> instituicoes) {
+    public void setInstituicoes(List<InstituicaoEnsSuperior> instituicoes) {
         this.instituicoes = instituicoes;
     }
 

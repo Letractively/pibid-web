@@ -18,11 +18,10 @@ import javax.faces.bean.RequestScoped;
 public class AtividadeBean {
 
     private static final AtividadeRN rn = new AtividadeRN();
-    
     private Atividade atividade = new Atividade();
     private List<Atividade> atividades;
     private List<Projeto> projetos;
-    
+
     public AtividadeBean() {
     }
 
@@ -35,7 +34,7 @@ public class AtividadeBean {
     }
 
     public List<Atividade> getAtividades() {
-        if (atividades == null){
+        if (atividades == null) {
             atividades = rn.listar();
         }
         return atividades;
@@ -46,7 +45,7 @@ public class AtividadeBean {
     }
 
     public List<Projeto> getProjetos() {
-        if (projetos == null){
+        if (projetos == null) {
             projetos = new ProjetoRN().listar();
         }
         return projetos;
@@ -56,29 +55,32 @@ public class AtividadeBean {
         this.projetos = projetos;
     }
 
-    
-    public String novo(){
+    public String novo() {
         atividade = null;
-        atividade =  rn.novo();
+        atividade = rn.novo();
         return "/restrito/projeto/atividade/cadastro.xhtml?faces-redirect=true";
     }
-    
-    public String alterar(){
+
+    public String alterar() {
         return "/restrito/projeto/atividade/cadastro.xhtml";
     }
-    
-    public String listagem(){
+
+    public String listagem() {
         return "/restrito/projeto/atividade/listagem.xhtml?faces-redirect=true";
     }
-    
-    public String salvar(){
-        
+
+    public String atribuir() {
+        return "/restrito/projeto/movimentacao/cadastroAtividade.xhtml";
+    }
+
+    public String salvar() {
+
         atividade.setCadastro(new Date());
         rn.salvar(atividade);
-        
-        atividade  = null;
+
+        atividade = null;
         atividades = null;
-        
+
         return listagem();
     }
 }

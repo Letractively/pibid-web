@@ -33,6 +33,19 @@ public class DiscenteDAOImpl extends GenericDAOImpl<Discente> implements Discent
             System.out.println("Excessão findByStatus: " + e);
             return null;
         }
-
     }
+
+    @Override
+    public List<Discente> findByStatusAtividade(Integer statusAtividade) {
+        String query = "Discente.findByStatusAtividade";
+        final Query q = getEm().createNamedQuery(query);
+        try {
+            return q.setParameter("statusAtividade", statusAtividade).getResultList();
+        } catch (Exception e) {
+            System.out.println("Excessão findByStatus: " + e);
+            return null;
+        }
+    }
+    
+    
 }

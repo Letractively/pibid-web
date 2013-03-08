@@ -1,7 +1,7 @@
 package br.ufra.pibid.modelo.controle.conversor;
 
-import br.ufra.pibid.modelo.entidade.Instituicao;
-import br.ufra.pibid.modelo.rn.InstituicaoRN;
+import br.ufra.pibid.modelo.entidade.InstituicaoEnsSuperior;
+import br.ufra.pibid.modelo.rn.InstituicaoEnsSuperiorRN;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -14,11 +14,11 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter("instituicaoConverter")
 public class InstituicaoConverter implements Converter {
 
-    private InstituicaoRN rn = new InstituicaoRN();
+    private InstituicaoEnsSuperiorRN rn = new InstituicaoEnsSuperiorRN();
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        Instituicao instituicao = null;
+        InstituicaoEnsSuperior instituicao = null;
         try {
             instituicao = rn.buscar(Integer.valueOf(string));
         } catch (Exception e) {
@@ -31,9 +31,9 @@ public class InstituicaoConverter implements Converter {
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
         String resultado = "";
 
-        if (o != null && o instanceof Instituicao) {
-            if (((Instituicao) o).getId() != null) {
-                resultado = ((Instituicao) o).getId().toString();
+        if (o != null && o instanceof InstituicaoEnsSuperior) {
+            if (((InstituicaoEnsSuperior) o).getId() != null) {
+                resultado = ((InstituicaoEnsSuperior) o).getId().toString();
             }
         }
         return resultado;

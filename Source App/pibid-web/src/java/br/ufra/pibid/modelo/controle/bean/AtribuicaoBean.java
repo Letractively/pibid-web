@@ -4,9 +4,9 @@
  */
 package br.ufra.pibid.modelo.controle.bean;
 
+import br.ufra.pibid.modelo.entidade.Atividade;
 import br.ufra.pibid.modelo.entidade.Projeto;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -18,6 +18,7 @@ import javax.faces.bean.SessionScoped;
 public class AtribuicaoBean {
 
     private Projeto projeto = new Projeto();
+    private Atividade atividade = new Atividade();
 
     public Projeto getProjeto() {
         return projeto;
@@ -27,7 +28,16 @@ public class AtribuicaoBean {
         this.projeto = projeto;
     }
 
-    public String atribuir() {
+    public Atividade getAtividade() {
+        return atividade;
+    }
+
+    public void setAtividade(Atividade atividade) {
+        this.atividade = atividade;
+    }
+
+
+    public String atribuirParticipante() {
         return "/restrito/projeto/movimentacao/cadastro.xhtml";
     }
 }

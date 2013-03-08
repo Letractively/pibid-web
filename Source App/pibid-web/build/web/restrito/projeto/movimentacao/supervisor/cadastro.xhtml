@@ -1,14 +1,74 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./../../../../WEB-INF/modelos/layoutUnit.xhtml">
+                template="./../../../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="sidebar">
-        sidebar
+        <p:panelMenu>
+            <p:submenu label="Atribuir Supervisor" icon="ui-icon-document">
+                <p:menuitem value="Home" 
+                            url="/publico/index.xhtml"
+                            icon="ui-icon-home"/>
+
+                <p:menuitem value="Menu de Participantes" 
+                            url="#{supervisorBean.atribuir()}"
+                            icon="ui-icon-script"/>
+            </p:submenu>
+        </p:panelMenu>
     </ui:define>
 
     <ui:define name="content">
-        content
+        <h:form>  
+            <h:inputHidden value="#{supervisorBean.projeto}"
+                           converter="projetoConverter"/>
+            <p:growl id="msg" showDetail="true" escape="false" />  
+
+            <h3 style="margin-top:0">Cadastro de Supervisores</h3>  
+
+            <p:pickList id="pickList" value="#{supervisorBean.docentes}" var="discente"   
+                        itemLabel="#{discente.nome}" itemValue="#{discente}"
+                        converter="docenteEnsBasicoConverter">
+                <f:facet name="sourceCaption">Docente</f:facet>
+                <f:facet name="targetCaption">Supervisor</f:facet>
+            </p:pickList> 
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputText value="Data Inicial: " />
+                <p:inputMask id="dataIni" style="width: 150px;"
+                             mask="99/99/9999"
+                             required="true"
+                             requiredMessage="O campo Data Inicial &eacute; obrigat&oacute;rio."
+                             value="#{supervisorBean.supervisor.dataIni}">
+                    <f:convertDateTime timeZone="GMT-03:00" />
+                </p:inputMask>
+
+                <h:outputText value="Data Final: " />
+                <p:inputMask id="dataFim" style="width: 150px;"
+                             mask="99/99/9999"
+                             required="true"
+                             requiredMessage="O campo Data Final &eacute; obrigat&oacute;rio."
+                             value="#{supervisorBean.supervisor.dateFim}">
+                    <f:convertDateTime timeZone="GMT-03:00" />
+                </p:inputMask>
+
+                <h:outputText value="Descrição: " />
+                <p:inputTextarea id="resultadosPretendido"
+                                 rows="3" 
+                                 cols="43"
+                                 required="true"
+                                 requiredMessage="O campo Descricao &eacute; obrigat&oacute;rio."
+                                 value="#{supervisorBean.supervisor.descricao}"/>
+                <p:commandButton 
+                    action="#{supervisorBean.salvar}"
+                    value="Salvar" 
+                    title="Salvar"
+                    ajax="false"
+                    icon="ui-icon-disk"/>
+
+            </h:panelGrid>
+        </h:form>
     </ui:define>
 
 </ui:composition>

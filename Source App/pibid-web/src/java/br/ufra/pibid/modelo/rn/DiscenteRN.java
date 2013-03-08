@@ -43,8 +43,12 @@ public class DiscenteRN {
     public List<Discente> buscarPorInstituicao(String instituicao){
         return dao.findByInstituicao(instituicao);
     }
-    public List<Discente> buscarPorStatus(Integer status){
+    public List<Discente> buscarStatusProjeto(Integer status){
         return dao.findByStatus(status);
+    }
+    
+    public List<Discente> buscarStatusAtividade(Integer status){
+        return dao.findByStatusAtividade(status);
     }
     
     public Discente buscar(Integer id){

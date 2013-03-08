@@ -32,6 +32,18 @@ public class ResponsavelAtividade implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ResponsavelAtividadePK responsavelAtividadePK;
+    @JoinColumn(name = "supervisor", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private DocenteEnsBasico docenteEnsBasico;
+    @JoinColumn(name = "docente", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private DocenteEnsSuperior docenteEnsSuperior;
+    @JoinColumn(name = "bolsista", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Discente discente1;
+    @JoinColumn(name = "discente", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Discente discente2;
     @JoinColumn(name = "atividade", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Atividade atividade1;
@@ -53,6 +65,38 @@ public class ResponsavelAtividade implements Serializable {
 
     public void setResponsavelAtividadePK(ResponsavelAtividadePK responsavelAtividadePK) {
         this.responsavelAtividadePK = responsavelAtividadePK;
+    }
+
+    public DocenteEnsBasico getDocenteEnsBasico() {
+        return docenteEnsBasico;
+    }
+
+    public void setDocenteEnsBasico(DocenteEnsBasico docenteEnsBasico) {
+        this.docenteEnsBasico = docenteEnsBasico;
+    }
+
+    public DocenteEnsSuperior getDocenteEnsSuperior() {
+        return docenteEnsSuperior;
+    }
+
+    public void setDocenteEnsSuperior(DocenteEnsSuperior docenteEnsSuperior) {
+        this.docenteEnsSuperior = docenteEnsSuperior;
+    }
+
+    public Discente getDiscente1() {
+        return discente1;
+    }
+
+    public void setDiscente1(Discente discente1) {
+        this.discente1 = discente1;
+    }
+
+    public Discente getDiscente2() {
+        return discente2;
+    }
+
+    public void setDiscente2(Discente discente2) {
+        this.discente2 = discente2;
     }
 
     public Atividade getAtividade1() {

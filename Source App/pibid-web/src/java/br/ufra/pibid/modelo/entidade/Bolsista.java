@@ -30,18 +30,18 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Bolsista.findAll", query = "SELECT b FROM Bolsista b"),
     @NamedQuery(name = "Bolsista.findByProjeto", query = "SELECT b FROM Bolsista b WHERE b.bolsistaPK.projeto = :projeto"),
     @NamedQuery(name = "Bolsista.findByDiscente", query = "SELECT b FROM Bolsista b WHERE b.bolsistaPK.discente = :discente"),
-    @NamedQuery(name = "Bolsista.findByDataEntrada", query = "SELECT b FROM Bolsista b WHERE b.dataEntrada = :dataEntrada"),
-    @NamedQuery(name = "Bolsista.findByDataSaida", query = "SELECT b FROM Bolsista b WHERE b.dataSaida = :dataSaida")})
+    @NamedQuery(name = "Bolsista.findByDataIni", query = "SELECT b FROM Bolsista b WHERE b.dataIni = :dataIni"),
+    @NamedQuery(name = "Bolsista.findByDataFim", query = "SELECT b FROM Bolsista b WHERE b.dataFim = :dataFim")})
 public class Bolsista implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected BolsistaPK bolsistaPK;
-    @Column(name = "data_entrada")
+    @Column(name = "data_ini")
     @Temporal(TemporalType.DATE)
-    private Date dataEntrada;
-    @Column(name = "data_saida")
+    private Date dataIni;
+    @Column(name = "data_fim")
     @Temporal(TemporalType.DATE)
-    private Date dataSaida;
+    private Date dataFim;
     @Lob
     @Column(name = "descricao")
     private String descricao;
@@ -71,20 +71,20 @@ public class Bolsista implements Serializable {
         this.bolsistaPK = bolsistaPK;
     }
 
-    public Date getDataEntrada() {
-        return dataEntrada;
+    public Date getDataIni() {
+        return dataIni;
     }
 
-    public void setDataEntrada(Date dataEntrada) {
-        this.dataEntrada = dataEntrada;
+    public void setDataIni(Date dataIni) {
+        this.dataIni = dataIni;
     }
 
-    public Date getDataSaida() {
-        return dataSaida;
+    public Date getDataFim() {
+        return dataFim;
     }
 
-    public void setDataSaida(Date dataSaida) {
-        this.dataSaida = dataSaida;
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
     }
 
     public String getDescricao() {

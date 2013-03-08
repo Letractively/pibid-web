@@ -1,5 +1,6 @@
 package br.ufra.pibid.modelo.rn;
 
+import br.ufra.pibid.modelo.dao.implementacao.DocenteEnsBasicoDAOImpl;
 import br.ufra.pibid.modelo.dao.implementacao.GenericDAOImpl;
 import br.ufra.pibid.modelo.entidade.DocenteEnsBasico;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public class DocenteEnsBasicoRN {
 
-    private static final GenericDAOImpl<DocenteEnsBasico> dao = new GenericDAOImpl<DocenteEnsBasico>();
+    private static final DocenteEnsBasicoDAOImpl dao = new DocenteEnsBasicoDAOImpl();
 
     public DocenteEnsBasicoRN() {
     }
@@ -42,5 +43,9 @@ public class DocenteEnsBasicoRN {
     
     public List<DocenteEnsBasico> listar() {
         return dao.listar(DocenteEnsBasico.class);
+    }
+
+    public List<DocenteEnsBasico> buscarPorStatus(Integer status) {
+        return dao.findByStatus(status);
     }
 }

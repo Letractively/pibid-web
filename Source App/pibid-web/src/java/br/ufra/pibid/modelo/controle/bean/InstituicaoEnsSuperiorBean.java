@@ -1,7 +1,7 @@
 package br.ufra.pibid.modelo.controle.bean;
 
-import br.ufra.pibid.modelo.entidade.Instituicao;
-import br.ufra.pibid.modelo.rn.InstituicaoRN;
+import br.ufra.pibid.modelo.entidade.InstituicaoEnsSuperior;
+import br.ufra.pibid.modelo.rn.InstituicaoEnsSuperiorRN;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -14,30 +14,30 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class InstituicaoEnsSuperiorBean {
 
-    private static final InstituicaoRN rn = new InstituicaoRN();
+    private static final InstituicaoEnsSuperiorRN rn = new InstituicaoEnsSuperiorRN();
     
-    private Instituicao instituicao = new Instituicao();
-    private List<Instituicao> instituicoes;
+    private InstituicaoEnsSuperior instituicao = new InstituicaoEnsSuperior();
+    private List<InstituicaoEnsSuperior> instituicoes;
     
     public InstituicaoEnsSuperiorBean() {
     }
 
-    public Instituicao getInstituicao() {
+    public InstituicaoEnsSuperior getInstituicao() {
         return instituicao;
     }
 
-    public void setInstituicao(Instituicao instituicao) {
+    public void setInstituicao(InstituicaoEnsSuperior instituicao) {
         this.instituicao = instituicao;
     }
 
-    public List<Instituicao> getInstituicoes() {
+    public List<InstituicaoEnsSuperior> getInstituicoes() {
         if (instituicoes == null){
             instituicoes = rn.listar();
         }
         return instituicoes;
     }
 
-    public void setInstituicoes(List<Instituicao> instituicoes) {
+    public void setInstituicoes(List<InstituicaoEnsSuperior> instituicoes) {
         this.instituicoes = instituicoes;
     }
     

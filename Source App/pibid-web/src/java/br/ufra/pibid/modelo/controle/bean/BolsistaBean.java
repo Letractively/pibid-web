@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufra.pibid.modelo.controle.bean;
 
 import br.ufra.pibid.modelo.entidade.Bolsista;
@@ -108,9 +104,9 @@ public class BolsistaBean {
     }
 
     public BolsistaBean() {
-        estaonoprojeto = rn.buscarPorStatus(1);
+        estaonoprojeto = rn.buscarStatusProjeto(1);
         System.out.println(estaonoprojeto.size());
-        naoestaonoprojeto = rn.buscarPorStatus(0);
+        naoestaonoprojeto = rn.buscarStatusProjeto(0);
         discentes = new DualListModel<Discente>(naoestaonoprojeto, estaonoprojeto);
     }
 }

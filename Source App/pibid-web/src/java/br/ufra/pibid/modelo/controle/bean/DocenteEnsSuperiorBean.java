@@ -1,9 +1,9 @@
 package br.ufra.pibid.modelo.controle.bean;
 
 import br.ufra.pibid.modelo.entidade.DocenteEnsSuperior;
-import br.ufra.pibid.modelo.entidade.Instituicao;
+import br.ufra.pibid.modelo.entidade.InstituicaoEnsSuperior;
 import br.ufra.pibid.modelo.rn.DocenteEnsSuperiorRN;
-import br.ufra.pibid.modelo.rn.InstituicaoRN;
+import br.ufra.pibid.modelo.rn.InstituicaoEnsSuperiorRN;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -20,7 +20,7 @@ public class DocenteEnsSuperiorBean {
     
     private DocenteEnsSuperior docente = new DocenteEnsSuperior();
     private List<DocenteEnsSuperior> docentes;
-    private List<Instituicao> instituicoes;
+    private List<InstituicaoEnsSuperior> instituicoes;
     
     public DocenteEnsSuperiorBean() {
     }
@@ -44,14 +44,14 @@ public class DocenteEnsSuperiorBean {
         this.docentes = docentes;
     }
 
-    public List<Instituicao> getInstituicoes() {
+    public List<InstituicaoEnsSuperior> getInstituicoes() {
         if (instituicoes == null){
-            instituicoes = new InstituicaoRN().listar();
+            instituicoes = new InstituicaoEnsSuperiorRN().listar();
         }
         return instituicoes;
     }
 
-    public void setInstituicoes(List<Instituicao> instituicoes) {
+    public void setInstituicoes(List<InstituicaoEnsSuperior> instituicoes) {
         this.instituicoes = instituicoes;
     }
     
@@ -72,9 +72,10 @@ public class DocenteEnsSuperiorBean {
     
     public String salvar(){
         
-        Instituicao inst = new InstituicaoRN().buscar(1);
+        InstituicaoEnsSuperior inst = new InstituicaoEnsSuperiorRN().buscar(1);
         docente.setInstituicao(inst);
         docente.setStatus(0);
+        docente.setStatusAtividade(0);
         rn.salvar(docente);
         
         docente  = null;

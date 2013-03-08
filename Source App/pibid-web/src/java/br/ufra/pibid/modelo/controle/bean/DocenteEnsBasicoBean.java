@@ -77,6 +77,7 @@ public class DocenteEnsBasicoBean {
     
     public String salvar(){
         docenteEnsBasico.setStatus(0);
+        docenteEnsBasico.setStatusAtividade(0);
         rn.salvar(docenteEnsBasico);
         
         docenteEnsBasico  = null;

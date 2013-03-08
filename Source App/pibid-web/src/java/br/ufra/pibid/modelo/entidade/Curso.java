@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
     @NamedQuery(name = "Curso.findById", query = "SELECT c FROM Curso c WHERE c.id = :id"),
-    @NamedQuery(name = "Curso.findByCurso", query = "SELECT c FROM Curso c WHERE c.curso = :curso")})
+    @NamedQuery(name = "Curso.findByNome", query = "SELECT c FROM Curso c WHERE c.nome = :nome")})
 public class Curso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,8 +39,8 @@ public class Curso implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "curso")
-    private String curso;
+    @Column(name = "nome")
+    private String nome;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
     private List<Projeto> projetoList;
 
@@ -51,9 +51,9 @@ public class Curso implements Serializable {
         this.id = id;
     }
 
-    public Curso(Integer id, String curso) {
+    public Curso(Integer id, String nome) {
         this.id = id;
-        this.curso = curso;
+        this.nome = nome;
     }
 
     public Integer getId() {
@@ -64,12 +64,12 @@ public class Curso implements Serializable {
         this.id = id;
     }
 
-    public String getCurso() {
-        return curso;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCurso(String curso) {
-        this.curso = curso;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @XmlTransient

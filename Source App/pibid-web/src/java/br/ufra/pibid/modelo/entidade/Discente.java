@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufra.pibid.modelo.entidade;
 
 import java.io.Serializable;
@@ -41,7 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Discente.findByEndereco", query = "SELECT d FROM Discente d WHERE d.endereco = :endereco"),
     @NamedQuery(name = "Discente.findByLattes", query = "SELECT d FROM Discente d WHERE d.lattes = :lattes"),
     @NamedQuery(name = "Discente.findBySituacao", query = "SELECT d FROM Discente d WHERE d.situacao = :situacao"),
-    @NamedQuery(name = "Discente.findByStatus", query = "SELECT d FROM Discente d WHERE d.status = :status")})
+    @NamedQuery(name = "Discente.findByStatus", query = "SELECT d FROM Discente d WHERE d.status = :status"),
+    @NamedQuery(name = "Discente.findByStatusAtividade", query = "SELECT d FROM Discente d WHERE d.statusAtividade = :statusAtividade")})
 public class Discente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -77,13 +74,20 @@ public class Discente implements Serializable {
     @Basic(optional = false)
     @Column(name = "status")
     private int status;
+    @Basic(optional = false)
+    @Column(name = "status_atividade")
+    private int statusAtividade;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discente1")
     private List<AlunoColaborador> alunoColaboradorList;
     @JoinColumn(name = "instituicao", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Instituicao instituicao;
+    private InstituicaoEnsSuperior instituicao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discente1")
     private List<Bolsista> bolsistaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "discente1")
+    private List<ResponsavelAtividade> responsavelAtividadeList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "discente2")
+    private List<ResponsavelAtividade> responsavelAtividadeList1;
 
     public Discente() {
     }
@@ -92,7 +96,7 @@ public class Discente implements Serializable {
         this.id = id;
     }
 
-    public Discente(Integer id, String matricula, String nome, String emailPrincipal, String telResidencial, String telCelular, String endereco, String situacao, int status) {
+    public Discente(Integer id, String matricula, String nome, String emailPrincipal, String telResidencial, String telCelular, String endereco, String situacao, int status, int statusAtividade) {
         this.id = id;
         this.matricula = matricula;
         this.nome = nome;
@@ -102,6 +106,7 @@ public class Discente implements Serializable {
         this.endereco = endereco;
         this.situacao = situacao;
         this.status = status;
+        this.statusAtividade = statusAtividade;
     }
 
     public Integer getId() {
@@ -192,6 +197,14 @@ public class Discente implements Serializable {
         this.status = status;
     }
 
+    public int getStatusAtividade() {
+        return statusAtividade;
+    }
+
+    public void setStatusAtividade(int statusAtividade) {
+        this.statusAtividade = statusAtividade;
+    }
+
     @XmlTransient
     public List<AlunoColaborador> getAlunoColaboradorList() {
         return alunoColaboradorList;
@@ -201,11 +214,11 @@ public class Discente implements Serializable {
         this.alunoColaboradorList = alunoColaboradorList;
     }
 
-    public Instituicao getInstituicao() {
+    public InstituicaoEnsSuperior getInstituicao() {
         return instituicao;
     }
 
-    public void setInstituicao(Instituicao instituicao) {
+    public void setInstituicao(InstituicaoEnsSuperior instituicao) {
         this.instituicao = instituicao;
     }
 
@@ -216,6 +229,24 @@ public class Discente implements Serializable {
 
     public void setBolsistaList(List<Bolsista> bolsistaList) {
         this.bolsistaList = bolsistaList;
+    }
+
+    @XmlTransient
+    public List<ResponsavelAtividade> getResponsavelAtividadeList() {
+        return responsavelAtividadeList;
+    }
+
+    public void setResponsavelAtividadeList(List<ResponsavelAtividade> responsavelAtividadeList) {
+        this.responsavelAtividadeList = responsavelAtividadeList;
+    }
+
+    @XmlTransient
+    public List<ResponsavelAtividade> getResponsavelAtividadeList1() {
+        return responsavelAtividadeList1;
+    }
+
+    public void setResponsavelAtividadeList1(List<ResponsavelAtividade> responsavelAtividadeList1) {
+        this.responsavelAtividadeList1 = responsavelAtividadeList1;
     }
 
     @Override

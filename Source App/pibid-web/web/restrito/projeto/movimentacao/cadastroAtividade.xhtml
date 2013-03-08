@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <p:panelMenu>
+            <p:submenu label="Atribuir atividades" icon="ui-icon-document">
+                <p:menuitem value="Home" 
+                            url="/publico/index.xhtml"
+                            icon="ui-icon-home"/>
+
+                <p:menuitem value="Projeto" 
+                            url="/restrito/projeto/index.xhtml"
+                            icon="ui-icon-home"/>
+
+            </p:submenu>
+        </p:panelMenu>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:inputHidden value="#{atribuicaoBean.atividade}"
+                           converter="atividadeConverter"/>
+            <h:outputLabel value="#{atribuicaoBean.atividade}"/>
+            <h:panelGrid columns="4">
+                <p:commandButton 
+                    action="#{bolsistaBean.novo}"
+                    value="Bolsista" 
+                    ajax="false"
+                    icon="ui-icon-disk">
+                    <f:setPropertyActionListener value="#{atribuicaoBean.projeto}"
+                                                 target="#{bolsistaBean.projeto}"/>
+                </p:commandButton>
+
+                <p:commandButton 
+                    action="#{atividadeAlunoColaboradorBean.novo}"
+                    value="Discente Colaborador" 
+                    ajax="false"
+                    icon="ui-icon-disk">
+                    <f:setPropertyActionListener value="#{atribuicaoBean.atividade}"
+                                                 target="#{atividadeAlunoColaboradorBean.atividade}"/>
+                </p:commandButton>
+
+                <p:commandButton 
+                    action="#{professorColaboradorBean.novo}"
+                    value="Docente Colaborador" 
+                    ajax="false"
+                    update="pickList"
+                    icon="ui-icon-disk">
+                    <f:setPropertyActionListener value="#{atribuicaoBean.projeto}"
+                                                 target="#{professorColaboradorBean.projeto}"/>
+                </p:commandButton>
+
+                <p:commandButton 
+                    action="#{escolaParceiraBean.novo}"
+                    value="Escola Parceira" 
+                    ajax="false"
+                    update="pickList"
+                    icon="ui-icon-disk">
+                    <f:setPropertyActionListener value="#{atribuicaoBean.projeto}"
+                                                 target="#{escolaParceiraBean.projeto}"/>
+                </p:commandButton>
+
+                <p:commandButton 
+                    action="#{supervisorBean.novo}"
+                    value="Supervisor" 
+                    ajax="false"
+                    update="pickList"
+                    icon="ui-icon-disk">
+                    <f:setPropertyActionListener value="#{atribuicaoBean.projeto}"
+                                                 target="#{supervisorBean.projeto}"/>
+                </p:commandButton>
+
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

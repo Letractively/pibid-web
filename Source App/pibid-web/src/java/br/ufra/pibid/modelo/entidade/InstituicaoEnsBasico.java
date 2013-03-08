@@ -42,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "InstituicaoEnsBasico.findByEmailEscola", query = "SELECT i FROM InstituicaoEnsBasico i WHERE i.emailEscola = :emailEscola"),
     @NamedQuery(name = "InstituicaoEnsBasico.findByEmailDirecao", query = "SELECT i FROM InstituicaoEnsBasico i WHERE i.emailDirecao = :emailDirecao"),
     @NamedQuery(name = "InstituicaoEnsBasico.findByEmailViceDirecao", query = "SELECT i FROM InstituicaoEnsBasico i WHERE i.emailViceDirecao = :emailViceDirecao"),
-    @NamedQuery(name = "InstituicaoEnsBasico.findBySituacao", query = "SELECT i FROM InstituicaoEnsBasico i WHERE i.situacao = :situacao")})
+    @NamedQuery(name = "InstituicaoEnsBasico.findBySituacao", query = "SELECT i FROM InstituicaoEnsBasico i WHERE i.situacao = :situacao"),
+    @NamedQuery(name = "InstituicaoEnsBasico.findByStatus", query = "SELECT i FROM InstituicaoEnsBasico i WHERE i.status = :status")})
 public class InstituicaoEnsBasico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -86,8 +87,13 @@ public class InstituicaoEnsBasico implements Serializable {
     @Basic(optional = false)
     @Column(name = "situacao")
     private String situacao;
+    @Basic(optional = false)
+    @Column(name = "status")
+    private int status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "escola")
     private List<DocenteEnsBasico> docenteEnsBasicoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "instituicaoEnsBasico1")
+    private List<EscolaParceira> escolaParceiraList;
 
     public InstituicaoEnsBasico() {
     }
@@ -96,7 +102,7 @@ public class InstituicaoEnsBasico implements Serializable {
         this.id = id;
     }
 
-    public InstituicaoEnsBasico(Integer id, String nome, String matricula, String esfera, String endereco, String diretor, String viceDiretorManha, String viceDiretorTarde, String viceDiretorNoite, String telefone, String situacao) {
+    public InstituicaoEnsBasico(Integer id, String nome, String matricula, String esfera, String endereco, String diretor, String viceDiretorManha, String viceDiretorTarde, String viceDiretorNoite, String telefone, String situacao, int status) {
         this.id = id;
         this.nome = nome;
         this.matricula = matricula;
@@ -108,6 +114,7 @@ public class InstituicaoEnsBasico implements Serializable {
         this.viceDiretorNoite = viceDiretorNoite;
         this.telefone = telefone;
         this.situacao = situacao;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -222,6 +229,14 @@ public class InstituicaoEnsBasico implements Serializable {
         this.situacao = situacao;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @XmlTransient
     public List<DocenteEnsBasico> getDocenteEnsBasicoList() {
         return docenteEnsBasicoList;
@@ -229,6 +244,15 @@ public class InstituicaoEnsBasico implements Serializable {
 
     public void setDocenteEnsBasicoList(List<DocenteEnsBasico> docenteEnsBasicoList) {
         this.docenteEnsBasicoList = docenteEnsBasicoList;
+    }
+
+    @XmlTransient
+    public List<EscolaParceira> getEscolaParceiraList() {
+        return escolaParceiraList;
+    }
+
+    public void setEscolaParceiraList(List<EscolaParceira> escolaParceiraList) {
+        this.escolaParceiraList = escolaParceiraList;
     }
 
     @Override

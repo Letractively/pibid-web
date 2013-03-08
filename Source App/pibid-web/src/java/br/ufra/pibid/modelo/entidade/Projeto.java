@@ -68,9 +68,12 @@ public class Projeto implements Serializable {
     private String situacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projeto")
     private List<Cronograma> cronogramaList;
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Usuario usuario;
     @JoinColumn(name = "instituicao", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Instituicao instituicao;
+    private InstituicaoEnsSuperior instituicao;
     @JoinColumn(name = "coordenador", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private DocenteEnsSuperior coordenador;
@@ -81,6 +84,8 @@ public class Projeto implements Serializable {
     private List<AlunoColaborador> alunoColaboradorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projeto1")
     private List<ProfessorColaborador> professorColaboradorList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projeto1")
+    private List<EscolaParceira> escolaParceiraList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projeto1")
     private List<Bolsista> bolsistaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projeto1")
@@ -168,11 +173,19 @@ public class Projeto implements Serializable {
         this.cronogramaList = cronogramaList;
     }
 
-    public Instituicao getInstituicao() {
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public InstituicaoEnsSuperior getInstituicao() {
         return instituicao;
     }
 
-    public void setInstituicao(Instituicao instituicao) {
+    public void setInstituicao(InstituicaoEnsSuperior instituicao) {
         this.instituicao = instituicao;
     }
 
@@ -208,6 +221,15 @@ public class Projeto implements Serializable {
 
     public void setProfessorColaboradorList(List<ProfessorColaborador> professorColaboradorList) {
         this.professorColaboradorList = professorColaboradorList;
+    }
+
+    @XmlTransient
+    public List<EscolaParceira> getEscolaParceiraList() {
+        return escolaParceiraList;
+    }
+
+    public void setEscolaParceiraList(List<EscolaParceira> escolaParceiraList) {
+        this.escolaParceiraList = escolaParceiraList;
     }
 
     @XmlTransient

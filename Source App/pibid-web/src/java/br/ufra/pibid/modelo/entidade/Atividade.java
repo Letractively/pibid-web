@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -34,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Atividade.findAll", query = "SELECT a FROM Atividade a"),
     @NamedQuery(name = "Atividade.findById", query = "SELECT a FROM Atividade a WHERE a.id = :id"),
+    @NamedQuery(name = "Atividade.findByCodigo", query = "SELECT a FROM Atividade a WHERE a.codigo = :codigo"),
     @NamedQuery(name = "Atividade.findByTitulo", query = "SELECT a FROM Atividade a WHERE a.titulo = :titulo"),
     @NamedQuery(name = "Atividade.findByCadastro", query = "SELECT a FROM Atividade a WHERE a.cadastro = :cadastro"),
     @NamedQuery(name = "Atividade.findByDataIni", query = "SELECT a FROM Atividade a WHERE a.dataIni = :dataIni"),
@@ -42,9 +45,12 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Atividade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "codigo")
+    private String codigo;
     @Basic(optional = false)
     @Column(name = "titulo")
     private String titulo;
@@ -60,15 +66,12 @@ public class Atividade implements Serializable {
     @Column(name = "data_ini")
     @Temporal(TemporalType.DATE)
     private Date dataIni;
-    @Basic(optional = false)
     @Column(name = "data_fim")
     @Temporal(TemporalType.DATE)
     private Date dataFim;
-    @Basic(optional = false)
     @Column(name = "data_conclusao")
     @Temporal(TemporalType.DATE)
     private Date dataConclusao;
-    @Basic(optional = false)
     @Lob
     @Column(name = "obs_gerais")
     private String obsGerais;
@@ -85,15 +88,12 @@ public class Atividade implements Serializable {
         this.id = id;
     }
 
-    public Atividade(Integer id, String titulo, String descricao, Date cadastro, Date dataIni, Date dataFim, Date dataConclusao, String obsGerais) {
+    public Atividade(Integer id, String titulo, String descricao, Date cadastro, Date dataIni) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
         this.cadastro = cadastro;
         this.dataIni = dataIni;
-        this.dataFim = dataFim;
-        this.dataConclusao = dataConclusao;
-        this.obsGerais = obsGerais;
     }
 
     public Integer getId() {
@@ -102,6 +102,14 @@ public class Atividade implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getTitulo() {
