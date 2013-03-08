@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Cronograma.findByCodigo", query = "SELECT c FROM Cronograma c WHERE c.codigo = :codigo"),
     @NamedQuery(name = "Cronograma.findByAtividade", query = "SELECT c FROM Cronograma c WHERE c.atividade = :atividade"),
     @NamedQuery(name = "Cronograma.findByDataIni", query = "SELECT c FROM Cronograma c WHERE c.dataIni = :dataIni"),
-    @NamedQuery(name = "Cronograma.findByDataFim", query = "SELECT c FROM Cronograma c WHERE c.dataFim = :dataFim")})
+    @NamedQuery(name = "Cronograma.findByDataFim", query = "SELECT c FROM Cronograma c WHERE c.dataFim = :dataFim"),
+    @NamedQuery(name = "Cronograma.findBySituacao", query = "SELECT c FROM Cronograma c WHERE c.situacao = :situacao")})
 public class Cronograma implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,6 +55,9 @@ public class Cronograma implements Serializable {
     @Column(name = "data_fim")
     @Temporal(TemporalType.DATE)
     private Date dataFim;
+    @Basic(optional = false)
+    @Column(name = "situacao")
+    private String situacao;
     @JoinColumn(name = "projeto", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Projeto projeto;
@@ -65,10 +69,11 @@ public class Cronograma implements Serializable {
         this.id = id;
     }
 
-    public Cronograma(Integer id, String codigo, String atividade) {
+    public Cronograma(Integer id, String codigo, String atividade, String situacao) {
         this.id = id;
         this.codigo = codigo;
         this.atividade = atividade;
+        this.situacao = situacao;
     }
 
     public Integer getId() {
@@ -109,6 +114,14 @@ public class Cronograma implements Serializable {
 
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 
     public Projeto getProjeto() {

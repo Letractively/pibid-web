@@ -1,6 +1,6 @@
 package br.ufra.pibid.modelo.rn;
 
-import br.ufra.pibid.modelo.dao.implementacao.GenericDAOImpl;
+import br.ufra.pibid.modelo.dao.implementacao.InstituicaoEnsBasicoDaoImpl;
 import br.ufra.pibid.modelo.entidade.InstituicaoEnsBasico;
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class InstituicaoEnsBasicoRN {
 
-    private static final GenericDAOImpl<InstituicaoEnsBasico> dao = new GenericDAOImpl<InstituicaoEnsBasico>();
+    private static final InstituicaoEnsBasicoDaoImpl dao = new InstituicaoEnsBasicoDaoImpl();
 
     public InstituicaoEnsBasicoRN() {
     }
@@ -42,5 +42,9 @@ public class InstituicaoEnsBasicoRN {
     
     public List<InstituicaoEnsBasico> listar() {
         return dao.listar(InstituicaoEnsBasico.class);
+    }
+
+    public List<InstituicaoEnsBasico> buscarPorStatus(Integer status) {
+      return dao.findByStatus(status);
     }
 }

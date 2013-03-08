@@ -12,7 +12,7 @@
                 <p:menuitem value="Voltar" 
                             url="/restrito/projeto/index.xhtml"
                             icon="ui-icon-arrowreturnthick-1-w"/>
-                
+
                 <p:menuitem value="Novo Registro" 
                             url="#{atividadeBean.novo()}"
                             icon="ui-icon-plusthick"/>
@@ -40,14 +40,14 @@
                           filterBy="#{atividade.titulo}">
                     <h:outputText value="#{atividade.titulo}"/>
                 </p:column>
-                
+
                 <p:column headerText="Data Inicial"
                           filterBy="#{atividade.dataIni}">
                     <h:outputText value="#{atividade.dataIni}">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </h:outputText>
                 </p:column>
-                
+
                 <p:column headerText="Data Final (Previs&atilde;o"
                           filterBy="#{atividade.dataFim}">
                     <h:outputText value="#{atividade.dataFim}">
@@ -63,6 +63,14 @@
                                         title="Editar Registro"/>
                         <f:setPropertyActionListener value="#{atividade}"
                                                      target="#{atividadeBean.atividade}"/>
+                    </h:commandLink>
+
+                    <h:commandLink action="#{atividadeBean.atribuir}">
+                        <h:graphicImage library="img" 
+                                        name="add.png"
+                                        title="Editar Registro"/>
+                        <f:setPropertyActionListener value="#{atividade}"
+                                                     target="#{atribuicaoBean.atividade}"/>
                     </h:commandLink>
                 </p:column>
             </p:dataTable>

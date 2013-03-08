@@ -1,9 +1,9 @@
 package br.ufra.pibid.modelo.controle.bean;
 
 import br.ufra.pibid.modelo.entidade.Discente;
-import br.ufra.pibid.modelo.entidade.Instituicao;
+import br.ufra.pibid.modelo.entidade.InstituicaoEnsSuperior;
 import br.ufra.pibid.modelo.rn.DiscenteRN;
-import br.ufra.pibid.modelo.rn.InstituicaoRN;
+import br.ufra.pibid.modelo.rn.InstituicaoEnsSuperiorRN;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -19,7 +19,7 @@ public class DiscenteBean {
     private static final DiscenteRN rn = new DiscenteRN();
     private Discente discente = new Discente();
     private List<Discente> discentes;
-    private List<Instituicao> instituicoes;
+    private List<InstituicaoEnsSuperior> instituicoes;
     
     public DiscenteBean() {
     }
@@ -43,14 +43,14 @@ public class DiscenteBean {
         this.discentes = discentes;
     }
     
-    public List<Instituicao> getInstituicoes() {
+    public List<InstituicaoEnsSuperior> getInstituicoes() {
         if (instituicoes == null) {
-            instituicoes = new InstituicaoRN().listar();
+            instituicoes = new InstituicaoEnsSuperiorRN().listar();
         }
         return instituicoes;
     }
     
-    public void setInstituicoes(List<Instituicao> instituicoes) {
+    public void setInstituicoes(List<InstituicaoEnsSuperior> instituicoes) {
         this.instituicoes = instituicoes;
     }
     
@@ -70,6 +70,7 @@ public class DiscenteBean {
     
     public String salvar() {
         discente.setStatus(0);
+        discente.setStatusAtividade(0);
         rn.salvar(discente);
         
         discente = null;

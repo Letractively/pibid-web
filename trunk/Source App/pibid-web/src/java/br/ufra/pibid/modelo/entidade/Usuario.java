@@ -5,7 +5,9 @@
 package br.ufra.pibid.modelo.entidade;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,8 +34,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
     @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome"),
     @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
-    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")})
+    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
+    @NamedQuery(name = "Usuario.findByCredencial", query = "SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha")})
+
 public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +54,8 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "senha")
     private String senha;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Projeto> projetoList;
     @JoinColumn(name = "papel", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Papel papel;
@@ -97,6 +106,15 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    @XmlTransient
+    public List<Projeto> getProjetoList() {
+        return projetoList;
+    }
+
+    public void setProjetoList(List<Projeto> projetoList) {
+        this.projetoList = projetoList;
+    }
+
     public Papel getPapel() {
         return papel;
     }
@@ -129,5 +147,4 @@ public class Usuario implements Serializable {
     public String toString() {
         return "br.ufra.pibid.modelo.entidade.Usuario[ id=" + id + " ]";
     }
-    
 }

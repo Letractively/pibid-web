@@ -57,6 +57,7 @@ public class InstituicaoEnsBasicoBean {
     }
     
     public String salvar(){
+        escola.setStatus(0);
         rn.salvar(escola);
         
         escola  = null;

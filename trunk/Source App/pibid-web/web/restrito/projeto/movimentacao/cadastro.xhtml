@@ -55,13 +55,23 @@
                 </p:commandButton>
 
                 <p:commandButton 
-                    action="#{bolsistaBean.novo}"
+                    action="#{escolaParceiraBean.novo}"
+                    value="Escola Parceira" 
+                    ajax="false"
+                    update="pickList"
+                    icon="ui-icon-disk">
+                    <f:setPropertyActionListener value="#{atribuicaoBean.projeto}"
+                                                 target="#{escolaParceiraBean.projeto}"/>
+                </p:commandButton>
+
+                <p:commandButton 
+                    action="#{supervisorBean.novo}"
                     value="Supervisor" 
                     ajax="false"
                     update="pickList"
                     icon="ui-icon-disk">
                     <f:setPropertyActionListener value="#{atribuicaoBean.projeto}"
-                                                 target="#{bolsistaBean.projeto}"/>
+                                                 target="#{supervisorBean.projeto}"/>
                 </p:commandButton>
 
             </h:panelGrid>

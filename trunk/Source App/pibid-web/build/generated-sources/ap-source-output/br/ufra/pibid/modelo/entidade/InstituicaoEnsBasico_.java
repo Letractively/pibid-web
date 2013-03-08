@@ -1,20 +1,23 @@
 package br.ufra.pibid.modelo.entidade;
 
 import br.ufra.pibid.modelo.entidade.DocenteEnsBasico;
+import br.ufra.pibid.modelo.entidade.EscolaParceira;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-03-02T00:35:56")
+@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-03-07T19:17:52")
 @StaticMetamodel(InstituicaoEnsBasico.class)
 public class InstituicaoEnsBasico_ { 
 
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> emailDirecao;
     public static volatile ListAttribute<InstituicaoEnsBasico, DocenteEnsBasico> docenteEnsBasicoList;
+    public static volatile SingularAttribute<InstituicaoEnsBasico, Integer> status;
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> diretor;
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> viceDiretorTarde;
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> emailViceDirecao;
+    public static volatile ListAttribute<InstituicaoEnsBasico, EscolaParceira> escolaParceiraList;
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> viceDiretorManha;
     public static volatile SingularAttribute<InstituicaoEnsBasico, String> matricula;
     public static volatile SingularAttribute<InstituicaoEnsBasico, Integer> id;

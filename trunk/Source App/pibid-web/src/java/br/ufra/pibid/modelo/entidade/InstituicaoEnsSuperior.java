@@ -25,14 +25,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author marcos
  */
 @Entity
-@Table(name = "instituicao")
+@Table(name = "instituicao_ens_superior")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Instituicao.findAll", query = "SELECT i FROM Instituicao i"),
-    @NamedQuery(name = "Instituicao.findById", query = "SELECT i FROM Instituicao i WHERE i.id = :id"),
-    @NamedQuery(name = "Instituicao.findByNome", query = "SELECT i FROM Instituicao i WHERE i.nome = :nome"),
-    @NamedQuery(name = "Instituicao.findBySigla", query = "SELECT i FROM Instituicao i WHERE i.sigla = :sigla")})
-public class Instituicao implements Serializable {
+    @NamedQuery(name = "InstituicaoEnsSuperior.findAll", query = "SELECT i FROM InstituicaoEnsSuperior i"),
+    @NamedQuery(name = "InstituicaoEnsSuperior.findById", query = "SELECT i FROM InstituicaoEnsSuperior i WHERE i.id = :id"),
+    @NamedQuery(name = "InstituicaoEnsSuperior.findByNome", query = "SELECT i FROM InstituicaoEnsSuperior i WHERE i.nome = :nome"),
+    @NamedQuery(name = "InstituicaoEnsSuperior.findBySigla", query = "SELECT i FROM InstituicaoEnsSuperior i WHERE i.sigla = :sigla")})
+public class InstituicaoEnsSuperior implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,14 +52,14 @@ public class Instituicao implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "instituicao")
     private List<Discente> discenteList;
 
-    public Instituicao() {
+    public InstituicaoEnsSuperior() {
     }
 
-    public Instituicao(Integer id) {
+    public InstituicaoEnsSuperior(Integer id) {
         this.id = id;
     }
 
-    public Instituicao(Integer id, String nome, String sigla) {
+    public InstituicaoEnsSuperior(Integer id, String nome, String sigla) {
         this.id = id;
         this.nome = nome;
         this.sigla = sigla;
@@ -126,10 +126,10 @@ public class Instituicao implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Instituicao)) {
+        if (!(object instanceof InstituicaoEnsSuperior)) {
             return false;
         }
-        Instituicao other = (Instituicao) object;
+        InstituicaoEnsSuperior other = (InstituicaoEnsSuperior) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -138,7 +138,7 @@ public class Instituicao implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.pibid.modelo.entidade.Instituicao[ id=" + id + " ]";
+        return "br.ufra.pibid.modelo.entidade.InstituicaoEnsSuperior[ id=" + id + " ]";
     }
     
 }

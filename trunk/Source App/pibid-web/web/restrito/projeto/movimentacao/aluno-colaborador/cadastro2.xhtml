@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../../../WEB-INF/modelos/layoutUnit.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <h:form>
+        <p:panelMenu>
+            <p:submenu label="Atribuir Discente Colaborador" icon="ui-icon-document">
+                <p:menuitem value="Home" 
+                            url="/publico/index.xhtml"
+                            icon="ui-icon-home"/>
+
+                <p:menuitem value="Menu de Participantes" 
+                            icon="ui-icon-script"/>
+            </p:submenu>
+        </p:panelMenu>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>  
+            <p:growl id="msg" showDetail="true" escape="false" />  
+            <h:inputHidden value="#{atividadeAlunoColaboradorBean.responsavelatividade.atividade1}"
+                           converter="atividadeConverter"/>
+
+            <h3 style="margin-top:0">Atrobuir Atividade a Discente Colaborador</h3>  
+
+            <p:pickList id="ListaDragDrop" 
+                        value="#{atividadeAlunoColaboradorBean.alunosColaboradores}" 
+                        var="discente"   
+                        itemLabel="#{discente.nome}" 
+                        itemValue="#{discente}"
+                        converter="discenteConverter">
+                <f:facet name="sourceCaption">Discentes</f:facet>
+                <f:facet name="targetCaption">Atividade</f:facet>
+            </p:pickList> 
+
+            <p:commandButton 
+                action="#{atividadeAlunoColaboradorBean.salvar}"
+                value="Salvar" 
+                title="Salvar"
+                ajax="false"
+                icon="ui-icon-disk"/>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

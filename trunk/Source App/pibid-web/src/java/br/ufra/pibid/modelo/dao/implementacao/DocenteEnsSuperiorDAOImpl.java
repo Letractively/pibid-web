@@ -13,7 +13,7 @@ public class DocenteEnsSuperiorDAOImpl extends GenericDAOImpl<DocenteEnsSuperior
 
     @Override
     public List<DocenteEnsSuperior> findByInstituicao(String instituicao) {
-        String query = "Docente.findByInstituicao";
+        String query = "DocenteEnsSuperior.findByInstituicao";
         final Query q = getEm().createNamedQuery(query);
         try {
             return q.setParameter("instituicao", instituicao).getResultList();
@@ -25,7 +25,7 @@ public class DocenteEnsSuperiorDAOImpl extends GenericDAOImpl<DocenteEnsSuperior
     
     @Override
     public List<DocenteEnsSuperior> findByStatus(Integer status) {
-        String query = "Docente.findByStatus";
+        String query = "DocenteEnsSuperior.findByStatus";
         final Query q = getEm().createNamedQuery(query);
         try {
             return q.setParameter("status", status).getResultList();

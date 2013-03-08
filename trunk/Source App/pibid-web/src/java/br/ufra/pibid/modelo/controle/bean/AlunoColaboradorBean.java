@@ -109,9 +109,9 @@ public class AlunoColaboradorBean {
     }
 
     public AlunoColaboradorBean() {
-        estaonoprojeto = rn.buscarPorStatus(2);
+        estaonoprojeto = rn.buscarStatusProjeto(2);
         System.out.println(estaonoprojeto.size());
-        naoestaonoprojeto = rn.buscarPorStatus(0);
+        naoestaonoprojeto = rn.buscarStatusProjeto(0);
         discentes = new DualListModel<Discente>(naoestaonoprojeto, estaonoprojeto);
     }
 }

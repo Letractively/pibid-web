@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface DiscenteDAO extends GenericDAO<Discente> {
     List<Discente> findByInstituicao(String instituicao);
-    List<Discente> findByStatus(Integer status);
+    List<Discente> findByStatus(Integer status);                    //CÓDIGO 0 NÃO PERTENCE A PROJETO, 1 BOLSISTA, 2 COLABORADOR
+    List<Discente> findByStatusAtividade(Integer statusAtividade);  //CÓDIGO 0 NÃO ESTÁ VINCULADO A UMA ATIVIDADE, 1 ESTÁ VINCULADO A UMA ATIVIDADE
 }

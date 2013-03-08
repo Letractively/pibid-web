@@ -6,24 +6,28 @@ import br.ufra.pibid.modelo.entidade.Bolsista;
 import br.ufra.pibid.modelo.entidade.Cronograma;
 import br.ufra.pibid.modelo.entidade.Curso;
 import br.ufra.pibid.modelo.entidade.DocenteEnsSuperior;
-import br.ufra.pibid.modelo.entidade.Instituicao;
+import br.ufra.pibid.modelo.entidade.EscolaParceira;
+import br.ufra.pibid.modelo.entidade.InstituicaoEnsSuperior;
 import br.ufra.pibid.modelo.entidade.ProfessorColaborador;
 import br.ufra.pibid.modelo.entidade.Supervisor;
+import br.ufra.pibid.modelo.entidade.Usuario;
 import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-03-02T00:35:56")
+@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-03-07T19:17:52")
 @StaticMetamodel(Projeto.class)
 public class Projeto_ { 
 
     public static volatile SingularAttribute<Projeto, Date> dataIni;
     public static volatile ListAttribute<Projeto, Supervisor> supervisorList;
+    public static volatile SingularAttribute<Projeto, Usuario> usuario;
     public static volatile ListAttribute<Projeto, Bolsista> bolsistaList;
     public static volatile SingularAttribute<Projeto, DocenteEnsSuperior> coordenador;
-    public static volatile SingularAttribute<Projeto, Instituicao> instituicao;
+    public static volatile SingularAttribute<Projeto, InstituicaoEnsSuperior> instituicao;
+    public static volatile ListAttribute<Projeto, EscolaParceira> escolaParceiraList;
     public static volatile SingularAttribute<Projeto, String> acoesPrevista;
     public static volatile ListAttribute<Projeto, AlunoColaborador> alunoColaboradorList;
     public static volatile SingularAttribute<Projeto, Integer> id;
