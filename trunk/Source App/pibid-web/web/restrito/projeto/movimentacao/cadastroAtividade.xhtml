@@ -25,15 +25,14 @@
         <h:form>
             <h:inputHidden value="#{atribuicaoBean.atividade}"
                            converter="atividadeConverter"/>
-            <h:outputLabel value="#{atribuicaoBean.atividade}"/>
             <h:panelGrid columns="4">
                 <p:commandButton 
-                    action="#{bolsistaBean.novo}"
+                    action="#{atividadeAlunoBolsistaBean.novo}"
                     value="Bolsista" 
                     ajax="false"
                     icon="ui-icon-disk">
-                    <f:setPropertyActionListener value="#{atribuicaoBean.projeto}"
-                                                 target="#{bolsistaBean.projeto}"/>
+                    <f:setPropertyActionListener value="#{atribuicaoBean.atividade}"
+                                                 target="#{atividadeAlunoBolsistaBean.atividade}"/>
                 </p:commandButton>
 
                 <p:commandButton 
