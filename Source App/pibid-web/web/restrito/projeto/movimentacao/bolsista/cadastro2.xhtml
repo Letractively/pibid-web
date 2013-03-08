@@ -8,7 +8,7 @@
 
     <ui:define name="sidebar">
         <p:panelMenu>
-            <p:submenu label="Atribuir Atividade Aluno Colaborador" icon="ui-icon-document">
+            <p:submenu label="Atribuir Atividade Bolsista" icon="ui-icon-document">
                 <p:menuitem value="Home" 
                             url="/publico/index.xhtml"
                             icon="ui-icon-home"/>
@@ -22,13 +22,13 @@
 
     <ui:define name="content">
         <h:form>  
-            <h:inputHidden value="#{atividadeAlunoColaboradorBean.atividade}"
+            <h:inputHidden value="#{atividadeAlunoBolsistaBean.atividade}"
                            converter="atividadeConverter"/>
             <p:growl id="msg" showDetail="true" escape="false" />  
 
-            <h3 style="margin-top:0">Cadastro de Colaboradores atividade</h3>  
+            <h3 style="margin-top:0">Cadastro de Bolsistas atividade</h3>  
 
-            <p:pickList id="pickList" value="#{atividadeAlunoColaboradorBean.discentes}" var="discente"   
+            <p:pickList id="pickList" value="#{atividadeAlunoBolsistaBean.discentes}" var="discente"   
                         itemLabel="#{discente.nome}" itemValue="#{discente}"
                         converter="discenteConverter">
                 <f:facet name="sourceCaption">Discentes</f:facet>
@@ -36,7 +36,7 @@
             </p:pickList>
             <h:panelGrid cellpadding="5">
                 <p:commandButton 
-                    action="#{atividadeAlunoColaboradorBean.salvar}"
+                    action="#{atividadeAlunoBolsistaBean.salvar}"
                     value="Salvar" 
                     title="Salvar"
                     ajax="false"
