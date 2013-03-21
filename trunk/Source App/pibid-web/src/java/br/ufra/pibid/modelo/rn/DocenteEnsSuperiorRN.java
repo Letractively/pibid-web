@@ -1,6 +1,7 @@
 package br.ufra.pibid.modelo.rn;
 
 import br.ufra.pibid.modelo.dao.implementacao.DocenteEnsSuperiorDAOImpl;
+import br.ufra.pibid.modelo.entidade.Discente;
 import br.ufra.pibid.modelo.entidade.DocenteEnsSuperior;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class DocenteEnsSuperiorRN {
             try {
                 return dao.registrar(x);
             } catch (Exception e) {
-                System.out.println("Exception: "+e.getMessage());
+                System.out.println("Exception: " + e.getMessage());
                 return false;
             }
         } else {
@@ -39,16 +40,20 @@ public class DocenteEnsSuperiorRN {
     public List<DocenteEnsSuperior> listar() {
         return dao.listar(DocenteEnsSuperior.class);
     }
-    
+
     public DocenteEnsSuperior buscar(Integer id) {
         return dao.recuperar(DocenteEnsSuperior.class, id);
     }
-    
-    public List<DocenteEnsSuperior> buscarPorInstituicao(String instituicao){
+
+    public List<DocenteEnsSuperior> buscarPorInstituicao(String instituicao) {
         return dao.findByInstituicao(instituicao);
     }
-    
-    public List<DocenteEnsSuperior> buscarPorStatus(Integer status){
+
+    public List<DocenteEnsSuperior> buscarPorStatus(Integer status) {
         return dao.findByStatus(status);
+    }
+
+    public List<DocenteEnsSuperior> buscarStatusAtividade(Integer status) {
+        return dao.findByStatusAtividade(status);
     }
 }

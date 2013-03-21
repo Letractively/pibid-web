@@ -45,33 +45,23 @@
                 </p:commandButton>
 
                 <p:commandButton 
-                    action="#{professorColaboradorBean.novo}"
+                    action="#{atividadeProfessorColaboradorBean.novo}"
                     value="Docente Colaborador" 
                     ajax="false"
                     update="pickList"
                     icon="ui-icon-disk">
-                    <f:setPropertyActionListener value="#{atribuicaoBean.projeto}"
-                                                 target="#{professorColaboradorBean.projeto}"/>
+                    <f:setPropertyActionListener value="#{atribuicaoBean.atividade}"
+                                                 target="#{atividadeProfessorColaboradorBean.atividade}"/>
                 </p:commandButton>
 
                 <p:commandButton 
-                    action="#{escolaParceiraBean.novo}"
-                    value="Escola Parceira" 
-                    ajax="false"
-                    update="pickList"
-                    icon="ui-icon-disk">
-                    <f:setPropertyActionListener value="#{atribuicaoBean.projeto}"
-                                                 target="#{escolaParceiraBean.projeto}"/>
-                </p:commandButton>
-
-                <p:commandButton 
-                    action="#{supervisorBean.novo}"
+                    action="#{atividadeSupervisorBean.novo}"
                     value="Supervisor" 
                     ajax="false"
                     update="pickList"
                     icon="ui-icon-disk">
-                    <f:setPropertyActionListener value="#{atribuicaoBean.projeto}"
-                                                 target="#{supervisorBean.projeto}"/>
+                    <f:setPropertyActionListener value="#{atribuicaoBean.atividade}"
+                                                 target="#{atividadeSupervisorBean.atividade}"/>
                 </p:commandButton>
 
             </h:panelGrid>
