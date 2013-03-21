@@ -14,7 +14,7 @@
                             icon="ui-icon-home"/>
 
                 <p:menuitem value="Menu de Participantes" 
-                            url="#{atividadeProfessorColaboradorBean.atribuir()}"
+                            url="#{atividadeSupervisorBean.atribuir()}"
                             icon="ui-icon-script"/>
             </p:submenu>
         </p:panelMenu>
@@ -22,13 +22,13 @@
 
     <ui:define name="content">
         <h:form>  
-            <h:inputHidden value="#{atividadeProfessorColaboradorBean.atividade}"
+            <h:inputHidden value="#{atividadeSupervisorBean.atividade}"
                            converter="atividadeConverter"/>
             <p:growl id="msg" showDetail="true" escape="false" />  
 
             <h3 style="margin-top:0">Cadastro de Colaboradores atividade</h3>  
 
-            <p:pickList id="pickList" value="#{atividadeProfessorColaboradorBean.docentes}" var="discente"   
+            <p:pickList id="pickList" value="#{atividadeSupervisorBean.docentes}" var="discente"   
                         itemLabel="#{discente.nome}" itemValue="#{discente}"
                         converter="discenteConverter">
                 <f:facet name="sourceCaption">Docentes</f:facet>
@@ -36,7 +36,7 @@
             </p:pickList>
             <h:panelGrid cellpadding="5">
                 <p:commandButton 
-                    action="#{atividadeProfessorColaboradorBean.salvar}"
+                    action="#{atividadeSupervisorBean.salvar}"
                     value="Salvar" 
                     title="Salvar"
                     ajax="false"

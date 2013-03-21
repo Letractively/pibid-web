@@ -3,6 +3,7 @@ package br.ufra.pibid.modelo.rn;
 import br.ufra.pibid.modelo.dao.implementacao.DocenteEnsBasicoDAOImpl;
 import br.ufra.pibid.modelo.dao.implementacao.GenericDAOImpl;
 import br.ufra.pibid.modelo.entidade.DocenteEnsBasico;
+import br.ufra.pibid.modelo.entidade.DocenteEnsSuperior;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class DocenteEnsBasicoRN {
             try {
                 return dao.registrar(x);
             } catch (Exception e) {
-                System.out.println("Exception: "+e.getMessage());
+                System.out.println("Exception: " + e.getMessage());
                 return false;
             }
         } else {
@@ -37,15 +38,19 @@ public class DocenteEnsBasicoRN {
         return dao.deletar(x);
     }
 
-    public DocenteEnsBasico buscar(Integer id){
+    public DocenteEnsBasico buscar(Integer id) {
         return dao.recuperar(DocenteEnsBasico.class, id);
     }
-    
+
     public List<DocenteEnsBasico> listar() {
         return dao.listar(DocenteEnsBasico.class);
     }
 
     public List<DocenteEnsBasico> buscarPorStatus(Integer status) {
         return dao.findByStatus(status);
+    }
+
+    public List<DocenteEnsBasico> buscarStatusAtividade(Integer status) {
+        return dao.findByStatusAtividade(status);
     }
 }

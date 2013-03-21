@@ -10,4 +10,5 @@ import java.util.List;
 public interface DocenteEnsSuperiorDAO extends GenericDAO<DocenteEnsSuperior> {
     List<DocenteEnsSuperior> findByInstituicao(String instituicao);
     List<DocenteEnsSuperior> findByStatus(Integer status);
+    List<DocenteEnsSuperior> findByStatusAtividade(Integer status);
 }
